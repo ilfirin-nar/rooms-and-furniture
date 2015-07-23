@@ -139,6 +139,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\ServiceInstaller.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\FurnitureController.cs" />
     <Compile Include="Controllers\HistoryController.cs" />
@@ -150,18 +151,27 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\CommonInterfaces\IClientDataMapper.cs" />
+    <Compile Include="Infrastructure\CommonInterfaces\IService.cs" />
+    <Compile Include="Infrastructure\CommonInterfaces\IValidator.cs" />
+    <Compile Include="Infrastructure\CommonInterfaces\IWebHandler.cs" />
+    <Compile Include="Infrastructure\DependencyInjection\LifettimeFactory.cs" />
+    <Compile Include="Infrastructure\DependencyInjection\ServiceRegistrationFilter.cs" />
+    <Compile Include="Infrastructure\DependencyInjection\ServiceRegistryExtensions.cs" />
+    <Compile Include="Infrastructure\Extensions\TypeExtensions.cs" />
     <Compile Include="Models\FurnitureClientModel.cs" />
     <Compile Include="Models\HistoryClientModel.cs" />
     <Compile Include="Models\HomeClientModel.cs" />
     <Compile Include="Models\RoomClientModel.cs" />
     <Compile Include="Models\RoomEventClientData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebHandlers\HomeWebHandler.cs" />
+    <Compile Include="WebHandlers\IHomeWebHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Business\" />
     <Folder Include="DataAccess\" />
     <Folder Include="ErrorsHandling\" />
-    <Folder Include="WebHandlers\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

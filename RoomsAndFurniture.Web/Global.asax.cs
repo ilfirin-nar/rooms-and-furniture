@@ -11,6 +11,7 @@ namespace RoomsAndFurniture.Web
         {
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            ServiceInstaller.Install();
         }
 
         void Application_Error(object sender, EventArgs e)
