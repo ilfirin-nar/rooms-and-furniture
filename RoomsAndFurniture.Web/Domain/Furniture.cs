@@ -1,12 +1,10 @@
-﻿using RoomsAndFurniture.Web.Enums;
-
-namespace RoomsAndFurniture.Web.Domain
+﻿namespace RoomsAndFurniture.Web.Domain
 {
     public class Furniture
     {
         public int Id { get; set; }
 
-        public FurnitureType Type { get; set; }
+        public string Type { get; set; }
 
         public int Count { get; set; }
 

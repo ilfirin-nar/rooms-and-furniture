@@ -6,17 +6,17 @@ namespace RoomsAndFurniture.Web.Controllers
 {
     public class FurnitureController : Controller
     {
-        public ActionResult Create(FurnitureType type, string roomName, DateTime date)
+        public ActionResult Create(string type, string roomName, DateTime date)
         {
             throw new NotImplementedException();
         }
 
-        public ActionResult Move(FurnitureType type, string roomNameFrom, string roomNameTo, DateTime date)
+        public ActionResult Move(string type, string roomNameFrom, string roomNameTo, DateTime date)
         {
             throw new NotImplementedException();
         }
 
-        public ActionResult Remove(FurnitureType type, string roomName, DateTime date)
+        public ActionResult Remove(string type, string roomName, DateTime date)
         {
             throw new NotImplementedException();
         }

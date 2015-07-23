@@ -1,0 +1,23 @@
+﻿@using System.Web.Optimization
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Комнаты и мебель — @ViewBag.Title</title>
+        <link rel="shortcut icon" type="image/ico" href="~/Content/Images/favicon.ico">
+        @Styles.Render("~/Content/Styles")
+    </head>
+    <body>
+        <h1>@ViewBag.Title</h1>
+        <div class="menu">
+            <div class="menuItem">
+                @Html.ActionLink("Главная", "Index", "Home")
+            </div>
+            <div class="menuItem">
+                @Html.ActionLink("История", "Index", "History")
+            </div>
+        </div>
+        @RenderBody()
+    </body>
+</html>

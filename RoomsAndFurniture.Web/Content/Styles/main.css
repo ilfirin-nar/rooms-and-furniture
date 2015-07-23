@@ -1,0 +1,34 @@
+﻿body {
+    font-family: monospace;
+    color: #040404;
+    line-height: 18px;
+}
+
+a {
+    cursor: pointer;
+    color: #166ba2;
+    text-decoration: none;
+    border-bottom: solid 1px rgba(22, 107, 162, 0);
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+a:hover {
+    border-bottom: solid 1px #166ba2;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.menu {
+    margin-bottom: 20px;
+}
+
+.menu .menuItem {
+    display: inline-block;
+    margin: 20px 20px;
+    font-size: large;
+}

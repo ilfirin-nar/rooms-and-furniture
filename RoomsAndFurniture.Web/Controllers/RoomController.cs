@@ -5,7 +5,7 @@ namespace RoomsAndFurniture.Web.Controllers
 {
     public class RoomController : Controller
     {
-        public ActionResult Get()
+        public ActionResult Get(DateTime date)
         {
             throw new NotImplementedException();
         }

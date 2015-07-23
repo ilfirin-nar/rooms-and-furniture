@@ -1,0 +1,11 @@
+﻿.roomsContent .roomsTable tbody ul {
+    list-style-type: none;
+}
+
+.roomsContent .roomsTable tbody .createFurnitureLink {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    display: block;
+    float: right;
+}

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web;
+using System.Web.Optimization;
 using System.Web.Routing;
 
 namespace RoomsAndFurniture.Web
@@ -9,6 +10,7 @@ namespace RoomsAndFurniture.Web
         protected void Application_Start()
         {
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 
         void Application_Error(object sender, EventArgs e)

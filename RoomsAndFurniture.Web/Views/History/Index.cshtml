@@ -1,0 +1,28 @@
+﻿@{
+    Layout = "~/Views/_Layout.cshtml";
+    ViewBag.Title = "История";
+}
+
+<div class="historyContent content">
+    <div>
+        @Html.CheckBox("Сокращённая история")
+    </div>
+    <table class="eventsTable contentTable">
+        <thead>
+            <tr>
+                <td class="itemDate">Дата</td>
+                <td>Описание</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var roomEvent in Model.Events)
+            {
+                <tr>
+                    <td class="itemDate">@roomEvent.Date.ToString("dd'.'MM'.'yyyy")</td>
+                    <td>@roomEvent.Description</td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
