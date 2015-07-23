@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomsAndFurniture.Web", "RoomsAndFurniture.Web\RoomsAndFurniture.Web.csproj", "{13D45C37-A17B-4B61-8809-B6E1C4FF045B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomsAndFurniture.Web.Tests", "RoomsAndFurniture.Web.Tests\RoomsAndFurniture.Web.Tests.csproj", "{EB51C476-C506-4A41-A304-3B6527831212}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{13D45C37-A17B-4B61-8809-B6E1C4FF045B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13D45C37-A17B-4B61-8809-B6E1C4FF045B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13D45C37-A17B-4B61-8809-B6E1C4FF045B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13D45C37-A17B-4B61-8809-B6E1C4FF045B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB51C476-C506-4A41-A304-3B6527831212}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB51C476-C506-4A41-A304-3B6527831212}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB51C476-C506-4A41-A304-3B6527831212}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB51C476-C506-4A41-A304-3B6527831212}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
