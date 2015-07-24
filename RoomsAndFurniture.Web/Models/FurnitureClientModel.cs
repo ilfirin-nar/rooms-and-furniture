@@ -4,8 +4,10 @@
     {
         public int Id { get; set; }
 
-        public string FurnitureType { get; set; }
+        public string Type { get; set; }
 
         public int Count { get; set; }
+
+        public int RoomId { get; set; }
     }
 }

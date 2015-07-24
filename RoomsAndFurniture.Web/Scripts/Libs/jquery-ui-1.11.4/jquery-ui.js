@@ -329,7 +329,7 @@ $.cleanData = (function( orig ) {
 		for ( i = 0; (elem = elems[i]) != null; i++ ) {
 			try {
 
-				// Only trigger remove when necessary to save time
+				// Only trigger remove when necessary to Save time
 				events = $._data( elem, "events" );
 				if ( events && events.remove ) {
 					$( elem ).triggerHandler( "remove" );
