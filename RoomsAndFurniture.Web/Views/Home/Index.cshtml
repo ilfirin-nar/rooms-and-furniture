@@ -6,35 +6,40 @@
 <div class="roomsContent content">
     <table class="roomsTable contentTable">
         <thead>
-            <tr>
-                <td class="itemName">Комната</td>
-                <td class="itemDate">Дата создания</td>
-                <td>Мебель</td>
-                <td class="itemDelete">Удалить</td>
-            </tr>
+        <tr>
+            <td class="itemName">Комната</td>
+            <td class="itemDate">Дата создания</td>
+            <td>Мебель</td>
+            <td class="itemDelete">Удалить</td>
+        </tr>
         </thead>
         <tbody>
-            @foreach (var room in Model.Rooms)
-            {
-                <tr>
-                    <td class="itemName">@room.Name</td>
-                    <td class="itemDate">@room.CreateDate.ToString("dd'.'MM'.'yyyy")</td>
-                    <td>
-                        <ul>
-                            @foreach (var item in room.Furniture)
-                            {
-                                <li>@item.FurnitureType (@item.Count шт) (+1 / -1)</li>
-                            }
-                            <li>
-                                <a class="createFurnitureLink">+ Добавить мебель</a>
-                            </li>
-                        </ul>
-                    </td>
-                    <td class="itemDelete">
-                        <a class="removeRoomLink">Удалить</a>
-                    </td>
-                </tr>
-            }
+        @foreach (var room in Model.Rooms)
+        {
+            <tr>
+                <td class="itemName">@room.Name</td>
+                <td class="itemDate">@room.CreateDate.ToString("dd'.'MM'.'yyyy")</td>
+                <td>
+                    <ul>
+                        @foreach (var item in room.Furniture)
+                        {
+                            <li>@item.FurnitureType (@item.Count шт) (+1 / -1)</li>
+                        }
+                        <li>
+                            <a class="createFurnitureLink">+ Добавить мебель</a>
+                        </li>
+                    </ul>
+                </td>
+                <td class="itemDelete">
+                    <a class="removeRoomLink">Удалить комнату от</a>
+                    <input type="text" class="deleteRoomDatepicker">
+                </td>
+            </tr>
+        }
         </tbody>
     </table>
+    <div class="buttonPanel">
+        @Html.ActionLink("+ Создать комнату на", "Create", "Room")
+        <input type="text" id="createRoomDatepicker">
+    </div>
 </div>

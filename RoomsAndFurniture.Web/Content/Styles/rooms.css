@@ -1,4 +1,11 @@
-﻿.roomsContent .roomsTable tbody ul {
+﻿.buttonPanel {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    padding: 10px;
+}
+
+.roomsContent .roomsTable tbody ul {
     list-style-type: none;
 }
 
