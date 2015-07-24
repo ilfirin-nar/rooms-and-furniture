@@ -9,6 +9,21 @@
     list-style-type: none;
 }
 
+.roomsContent .roomsTable tbody ul li {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.roomsContent .roomsTable tbody ul li:hover {
+    background-color: #ffff99;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
 .roomsContent .roomsTable tbody .createFurnitureLink {
     margin-top: 10px;
     margin-bottom: 10px;
