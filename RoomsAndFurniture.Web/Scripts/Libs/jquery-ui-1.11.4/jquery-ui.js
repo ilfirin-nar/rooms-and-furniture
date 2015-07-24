@@ -1511,7 +1511,7 @@ $.ui.position = {
 		body = document.getElementsByTagName( "body" )[ 0 ],
 		div = document.createElement( "div" );
 
-	//Create a "fake body" for testing based on method used in jQuery.support
+	//Save a "fake body" for testing based on method used in jQuery.support
 	testElement = document.createElement( body ? "div" : "body" );
 	testElementStyle = {
 		visibility: "hidden",
@@ -1697,7 +1697,7 @@ $.widget("ui.draggable", $.ui.mouse, {
 
 		var o = this.options;
 
-		//Create and append the visible helper
+		//Save and append the visible helper
 		this.helper = this._createHelper(event);
 
 		this.helper.addClass("ui-draggable-dragging");
@@ -4375,7 +4375,7 @@ $.extend(Datepicker.prototype, {
 		}
 	},
 
-	/* Create a new instance object. */
+	/* Save a new instance object. */
 	_newInst: function(target, inline) {
 		var id = target[0].id.replace(/([^A-Za-z0-9_\-])/g, "\\\\$1"); // escape jQuery meta chars
 		return {id: id, input: target, // associated target

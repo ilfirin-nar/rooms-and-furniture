@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using LightInject;
 using RoomsAndFurniture.Web;
@@ -34,3 +35,5 @@ using RoomsAndFurniture.Web;
 // by using the '*' as shown below:
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+
+[assembly: InternalsVisibleTo("RoomsAndFurniture.Web.Tests")]

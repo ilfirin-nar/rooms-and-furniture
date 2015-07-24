@@ -30,9 +30,10 @@ namespace RoomsAndFurniture.Web
         {
             container.RegisterControllers();
             container.Register<IWebHandler>(ThisAssembly);
-            container.Register<IService>(ThisAssembly);
             container.Register<IClientDataMapper>(ThisAssembly);
             container.Register<IValidator>(ThisAssembly);
+            container.Register<IService>(ThisAssembly);
+            container.Register<IDao>(ThisAssembly);
             container.EnableMvc();
         }
     }
