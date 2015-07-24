@@ -16,3 +16,25 @@
     display: block;
     float: right;
 }
+
+.roomsContent .furnitureControls {
+    display: block;
+    float: right;
+}
+
+.roomsContent .furnitureControls a {
+    margin-left: 3px;
+    margin-right: 3px;
+}
+    
+.roomsContent .furnitureControls .addFurniture {
+    background-color: greenyellow;
+}   
+
+.roomsContent .furnitureControls .removeFurniture {
+    background-color: pink;
+}
+
+.roomsContent .furnitureControls .moveFurniture {
+    background-color: lightblue;
+}

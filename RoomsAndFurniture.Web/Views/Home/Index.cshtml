@@ -23,7 +23,12 @@
                     <ul>
                         @foreach (var item in room.Furniture)
                         {
-                            <li>@item.FurnitureType (@item.Count шт) (+1 / -1)</li>
+                            <li>
+                                @item.FurnitureType (@item.Count шт)
+                                <div class="furnitureControls">
+                                    <a class="addFurniture" href="/Furniture/Create">+1</a> <a class="removeFurniture" href="/Furniture/Remove">-1</a> <a class="moveFurniture" href="/Furniture/Move">Переместить</a>
+                                </div>
+                            </li>
                         }
                         <li>
                             <a class="createFurnitureLink">+ Добавить мебель</a>
