@@ -135,7 +135,9 @@
     <Content Include="Content\Styles\tables.css" />
     <Content Include="Content\Styles\rooms.css" />
     <Content Include="Content\Styles\main.css" />
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Scripts\Libs\jquery-ui-1.11.4\external\jquery\jquery.js" />
     <Content Include="Scripts\Libs\jquery-ui-1.11.4\images\ui-bg_diagonals-small_40_db4865_40x40.png" />
     <Content Include="Scripts\Libs\jquery-ui-1.11.4\images\ui-bg_diagonals-small_50_93c3cd_40x40.png" />
@@ -191,6 +193,9 @@
     <Compile Include="DataAccess\RoomDao.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Infrastructure\ClientModels\ClientData.cs" />
+    <Compile Include="Infrastructure\ClientModels\FailResult.cs" />
+    <Compile Include="Infrastructure\ClientModels\SuccessResult.cs" />
     <Compile Include="Infrastructure\CommonInterfaces\ICriterion.cs" />
     <Compile Include="Infrastructure\CommonInterfaces\IQuery.cs" />
     <Compile Include="Infrastructure\CommonInterfaces\IQueryBuilder.cs" />
@@ -241,6 +246,7 @@
     <Compile Include="Models\FurnitureClientModel.cs" />
     <Compile Include="Models\HistoryClientModel.cs" />
     <Compile Include="Models\HomeClientModel.cs" />
+    <Compile Include="Models\Results\NonUniqueRoomNameResult.cs" />
     <Compile Include="Models\RoomClientModel.cs" />
     <Compile Include="Models\RoomEventClientData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,7 +1,10 @@
 ﻿using System;
 using RoomsAndFurniture.Web.Business;
+using RoomsAndFurniture.Web.Business.Exceptions;
+using RoomsAndFurniture.Web.Infrastructure.ClientModels;
 using RoomsAndFurniture.Web.Infrastructure.Extensions;
 using RoomsAndFurniture.Web.Models;
+using RoomsAndFurniture.Web.Models.Results;
 using RoomsAndFurniture.Web.WebHandlers.Mappers;
 
 namespace RoomsAndFurniture.Web.WebHandlers
@@ -19,11 +22,18 @@ namespace RoomsAndFurniture.Web.WebHandlers
             this.saver = saver;
         }
 
-        public RoomClientModel Create(string name, DateTime date)
+        public ClientData<RoomClientModel> Create(string name, DateTime date)
         {
             var room = mapper.Map(name, date);
-            saver.Save(room);
-            return room.MapTo<RoomClientModel>();
+            try
+            {
+                saver.Save(room);
+            }
+            catch (NotUniqueRoomNameException exception)
+            {
+                return new NonUniqueRoomNameResult(exception.RoomName);
+            }
+            return new SuccessResult<RoomClientModel>(room.MapTo<RoomClientModel>());
         }
     }
 }
