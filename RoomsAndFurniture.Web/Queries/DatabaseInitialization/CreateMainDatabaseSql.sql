@@ -1,7 +1,7 @@
 create table if not exists Room (
     Id integer not null,
-    CreateDate datetime not null,
-    RemoveDate datetime null,
+    CreateDate date not null,
+    RemoveDate date null,
     Name varchar(20) not null,
     IsDeleted bit not null default 0,
     constraint PF_Room primary key (Id)
@@ -9,7 +9,7 @@ create table if not exists Room (
 
 create table if not exists Furniture (
     Id integer not null,
-    Date datetime not null,
+    Date date not null,
     Type varchar(20) not null,
     Count integer not null,
     RoomId integer not null,

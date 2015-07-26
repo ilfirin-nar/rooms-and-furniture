@@ -5,6 +5,6 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
 {
     public interface IFurnitureUpdater : IBusinessService
     {
-        int Update(Furniture furniture);
+        Furniture Update(Furniture furniture);
     }
 }

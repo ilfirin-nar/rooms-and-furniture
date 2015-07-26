@@ -11,7 +11,8 @@ namespace RoomsAndFurniture.Web.Tests.Room
         {
             var roomName = string.Format("Test Room {0}", Timestamp);
             var handler = Container.GetInstance<IRoomWebHandler>();
-            var result = handler.Create(roomName, DateForTest);
+            var date = DateForTest;
+            var result = handler.Create(roomName, date);
             Assert.AreNotEqual(null, result);
             var resultData = result.Data;
             Assert.AreNotEqual(null, resultData);

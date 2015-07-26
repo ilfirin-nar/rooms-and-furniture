@@ -3,7 +3,7 @@ using RoomsAndFurniture.Web.Infrastructure.ClientModels;
 
 namespace RoomsAndFurniture.Web.Models.Results.Rooms
 {
-    public class RoomNotFoundResult : FailResult<RoomClientModel>
+    public class RoomNotFoundResult : FailResult<FurnitureClientModel>
     {
         private const string MessageTemplate = "Комната с именем {0} не существует на дату {1}";
 

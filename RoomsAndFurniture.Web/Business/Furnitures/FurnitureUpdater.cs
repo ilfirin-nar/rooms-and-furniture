@@ -13,10 +13,11 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
             this.queryBuilder = queryBuilder;
         }
 
-        public int Update(Furniture furniture)
+        public Furniture Update(Furniture furniture)
         {
             var critreion = new UpdateFurnitureCriterion(furniture);
-            return queryBuilder.Query<UpdateFurnitureCriterion, int>().Proceed(critreion);
+            queryBuilder.Query<UpdateFurnitureCriterion, int>().Proceed(critreion);
+            return furniture;
         }
     }
 }

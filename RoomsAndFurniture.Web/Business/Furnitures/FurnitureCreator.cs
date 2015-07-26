@@ -17,7 +17,7 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
             this.queryBuilder = queryBuilder;
         }
 
-        public int Create(string type, DateTime date, string roomName, int count)
+        public Furniture Create(string type, DateTime date, string roomName, int count)
         {
             var room = roomReader.Get(roomName, date);
             var furniture = new Furniture
@@ -28,7 +28,8 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
                 Count = count
             };
             var critreion = new CreateFurnitureCriterion(furniture);
-            return queryBuilder.Query<CreateFurnitureCriterion, int>().Proceed(critreion);
+            furniture.Id = queryBuilder.Query<CreateFurnitureCriterion, int>().Proceed(critreion);
+            return furniture;
         }
     }
 }

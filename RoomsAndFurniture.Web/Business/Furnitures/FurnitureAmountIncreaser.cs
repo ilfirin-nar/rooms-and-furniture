@@ -1,4 +1,5 @@
 ﻿using System;
+using RoomsAndFurniture.Web.Domain;
 
 namespace RoomsAndFurniture.Web.Business.Furnitures
 {
@@ -18,7 +19,7 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
             this.updater = updater;
         }
 
-        public int Increase(string type, DateTime date, string roomName, int increaseBy)
+        public Furniture Increase(string type, DateTime date, string roomName, int increaseBy)
         {
             var furniture = reader.Get(type, date, roomName);
             if (furniture == null)

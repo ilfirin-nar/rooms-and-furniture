@@ -4,6 +4,7 @@ using Dapper;
 using RoomsAndFurniture.Web.Criterions.FurnitureCriterions;
 using RoomsAndFurniture.Web.Domain;
 using RoomsAndFurniture.Web.Infrastructure.CommonInterfaces;
+using RoomsAndFurniture.Web.Queries.FurnitureQueries.Sql;
 
 namespace RoomsAndFurniture.Web.Queries.FurnitureQueries
 {
@@ -12,7 +13,9 @@ namespace RoomsAndFurniture.Web.Queries.FurnitureQueries
     {
         public Furniture Proceed(IDbConnection connection, GetFurnitureByTypeAndDateAndRoomNameCriterion criterion)
         {
-            return connection.Query<Furniture>("", criterion).FirstOrDefault();
+            return connection
+                .Query<Furniture>(FurnitureQueriesSql.GetFurnitureByTypeAndDateAndRoomNameQuery, criterion)
+                .FirstOrDefault();
         }
     }
 }

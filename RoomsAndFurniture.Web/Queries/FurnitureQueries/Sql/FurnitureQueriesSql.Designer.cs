@@ -61,11 +61,27 @@ namespace RoomsAndFurniture.Web.Queries.FurnitureQueries.Sql {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to insert into Furniture (Date, Type, Count, RoomId) values (@Date, @Type, @Count, @RoomId).
+        ///   Looks up a localized string similar to insert into Furniture (Date, Type, Count, RoomId) values (@Date, @Type, @Count, @RoomId);
+        ///select last_insert_rowid();.
         /// </summary>
         internal static string CreateRoomQuery {
             get {
                 return ResourceManager.GetString("CreateRoomQuery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to select *
+        ///    from Furniture as f
+        ///    inner join Room as r on r.Id = f.RoomId
+        ///    where
+        ///        f.Type = @Type and
+        ///        f.Date = @Date and
+        ///        r.Name = @RoomName.
+        /// </summary>
+        internal static string GetFurnitureByTypeAndDateAndRoomNameQuery {
+            get {
+                return ResourceManager.GetString("GetFurnitureByTypeAndDateAndRoomNameQuery", resourceCulture);
             }
         }
         
@@ -75,7 +91,8 @@ namespace RoomsAndFurniture.Web.Queries.FurnitureQueries.Sql {
         ///        Type = @Type,
         ///        Date = @Date,
         ///        Count = @Count,
-        ///        RoomId = @RoomId.
+        ///        RoomId = @RoomId
+        ///    where Id = @Id.
         /// </summary>
         internal static string UpdateRoomQuery {
             get {

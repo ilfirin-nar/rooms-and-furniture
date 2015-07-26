@@ -2,6 +2,8 @@
 using RoomsAndFurniture.Web.Business.Furnitures;
 using RoomsAndFurniture.Web.Business.Rooms.Exceptions;
 using RoomsAndFurniture.Web.Infrastructure.ClientModels;
+using RoomsAndFurniture.Web.Infrastructure.Extensions;
+using RoomsAndFurniture.Web.Models;
 using RoomsAndFurniture.Web.Models.Results.Rooms;
 
 namespace RoomsAndFurniture.Web.WebHandlers
@@ -15,17 +17,17 @@ namespace RoomsAndFurniture.Web.WebHandlers
             this.amountIncreaser = amountIncreaser;
         }
 
-        public ResultBase Create(string type, string roomName, DateTime date)
+        public ResultBase<FurnitureClientModel> Create(string type, string roomName, DateTime date)
         {
             try
             {
-                amountIncreaser.Increase(type, date, roomName, 1);
+                var furniture = amountIncreaser.Increase(type, date, roomName, 1);
+                return new SuccessResult<FurnitureClientModel>(furniture.MapTo<FurnitureClientModel>());
             }
             catch (RoomNotFoundException exception)
             {
                 return new RoomNotFoundResult(exception.RoomName, exception.Date);
             }
-            return new SuccessResult();
         }
     }
 }

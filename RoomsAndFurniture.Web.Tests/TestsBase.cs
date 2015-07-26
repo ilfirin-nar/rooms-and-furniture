@@ -9,17 +9,32 @@ namespace RoomsAndFurniture.Web.Tests
 {
     public abstract class TestsBase
     {
+        private readonly object locker = new object();
         protected readonly ServiceContainer Container;
         private DateTime dateForTest = new DateTime(2014, 12, 31);
 
-        protected DateTime DateForTest
+        protected static DateTime DateForTest
         {
-            get { return dateForTest = dateForTest.AddDays(1); }
+            get { return RandomDay(); }
+        }
+
+        private static DateTime RandomDay()
+        {
+            var start = new DateTime(1995, 1, 1);
+            var gen = new Random();
+            var range = (DateTime.Today - start).Days;
+            return start.AddDays(gen.Next(range));
         }
 
         protected long Timestamp
         {
-            get { return (int) (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds; }
+            get
+            {
+                lock (locker)
+                {
+                    return (int) (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+                }
+            }
         }
 
         protected TestsBase()

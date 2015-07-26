@@ -5,4 +5,3 @@ select *
         f.Type = @Type and
         f.Date = @Date and
         r.Name = @RoomName
-    limit 1
