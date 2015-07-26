@@ -1,39 +1,51 @@
 ﻿using System;
-using RoomsAndFurniture.Web.Business;
-using RoomsAndFurniture.Web.Business.Exceptions;
+using RoomsAndFurniture.Web.Business.Rooms;
+using RoomsAndFurniture.Web.Business.Rooms.Exceptions;
+using RoomsAndFurniture.Web.Domain;
 using RoomsAndFurniture.Web.Infrastructure.ClientModels;
 using RoomsAndFurniture.Web.Infrastructure.Extensions;
 using RoomsAndFurniture.Web.Models;
-using RoomsAndFurniture.Web.Models.Results;
-using RoomsAndFurniture.Web.WebHandlers.Mappers;
+using RoomsAndFurniture.Web.Models.Results.Rooms;
 
 namespace RoomsAndFurniture.Web.WebHandlers
 {
     internal class RoomWebHandler : IRoomWebHandler
     {
-        private readonly IRoomMapper mapper;
-        private readonly IRoomSaver saver;
+        private readonly IRoomCreator creator;
+        private readonly IRoomRemover roomRemover;
 
-        public RoomWebHandler(
-            IRoomMapper mapper,
-            IRoomSaver saver)
+        public RoomWebHandler(IRoomCreator creator, IRoomRemover roomRemover)
         {
-            this.mapper = mapper;
-            this.saver = saver;
+            this.creator = creator;
+            this.roomRemover = roomRemover;
         }
 
-        public ClientData<RoomClientModel> Create(string name, DateTime date)
+        public ResultBase<RoomClientModel> Create(string name, DateTime date)
         {
-            var room = mapper.Map(name, date);
+            var room = new Room { Name = name, CreateDate = date };
             try
             {
-                saver.Save(room);
+                creator.Create(room);
             }
-            catch (NotUniqueRoomNameException exception)
+            catch (RoomAlreadyExistsException exception)
             {
-                return new NonUniqueRoomNameResult(exception.RoomName);
+                return new NonUniqueRoomNameResult(exception.RoomName, exception.Date);
             }
             return new SuccessResult<RoomClientModel>(room.MapTo<RoomClientModel>());
+        }
+
+        public ResultBase Remove(string name, string moveFurnitureToRoom, DateTime date)
+        {
+            var room = new Room { Name = name, RemoveDate = date };
+            try
+            {
+                roomRemover.Remove(room, moveFurnitureToRoom);
+            }
+            catch (RoomNotFoundException exception)
+            {
+                return new NonUniqueRoomNameResult(exception.RoomName, exception.Date);
+            }
+            return new SuccessResult();
         }
     }
 }

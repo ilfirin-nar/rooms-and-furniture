@@ -20,7 +20,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>c33f2ca9</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>da0f3c1a</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,6 +46,10 @@
     </Reference>
     <Reference Include="Dapper, Version=1.40.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapper.1.42\lib\net45\Dapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="JetBrains.Annotations, Version=9.1.1.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Annotations.9.1.1\lib\net20\JetBrains.Annotations.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="LightInject, Version=3.0.2.7, Culture=neutral, processorArchitecture=MSIL">
@@ -79,7 +83,7 @@
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.SQLite, Version=1.0.97.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SQLite.Core.MSIL.1.0.97.0\lib\net451\System.Data.SQLite.dll</HintPath>
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.97.0\lib\net451\System.Data.SQLite.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
@@ -138,6 +142,12 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Queries\FurnitureQueries\Sql\GetFurnitureByTypeAndDateAndRoomNameQuery.sql" />
+    <Content Include="Queries\FurnitureQueries\Sql\UpdateRoomQuery.sql" />
+    <Content Include="Queries\FurnitureQueries\Sql\CreateRoomQuery.sql" />
+    <Content Include="Queries\RoomQueries\Sql\CreateRoomQuery.sql" />
+    <Content Include="Queries\RoomQueries\Sql\GetRoomByNameAndDateCriterionQuery.sql" />
+    <Content Include="Queries\RoomQueries\Sql\IsRoomExistsQuery.sql" />
     <Content Include="Scripts\Libs\jquery-ui-1.11.4\external\jquery\jquery.js" />
     <Content Include="Scripts\Libs\jquery-ui-1.11.4\images\ui-bg_diagonals-small_40_db4865_40x40.png" />
     <Content Include="Scripts\Libs\jquery-ui-1.11.4\images\ui-bg_diagonals-small_50_93c3cd_40x40.png" />
@@ -185,15 +195,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\IDatabaseInitializer.cs" />
-    <Compile Include="Criterions\RoomCriterions\IsExistsCriterion.cs" />
-    <Compile Include="Criterions\RoomCriterions\SaveRoomCriterion.cs" />
-    <Compile Include="DataAccess\IRoomDao.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DataAccess\RoomDao.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Infrastructure\ClientModels\ClientData.cs" />
+    <Compile Include="Business\Furnitures\FurnitureCreator.cs" />
+    <Compile Include="Business\Furnitures\FurnitureReader.cs" />
+    <Compile Include="Business\Furnitures\FurnitureAmountIncreaser.cs" />
+    <Compile Include="Business\Furnitures\FurnitureUpdater.cs" />
+    <Compile Include="Business\Furnitures\IFurnitureCreator.cs" />
+    <Compile Include="Business\Furnitures\IFurnitureReader.cs" />
+    <Compile Include="Business\Furnitures\IFurnitureAmountIncreaser.cs" />
+    <Compile Include="Business\Furnitures\IFurnitureUpdater.cs" />
+    <Compile Include="Business\Rooms\Exceptions\RoomNotFoundException.cs" />
+    <Compile Include="Business\Rooms\IRoomReader.cs" />
+    <Compile Include="Business\Rooms\IRoomRemover.cs" />
+    <Compile Include="Business\Rooms\RoomReader.cs" />
+    <Compile Include="Business\Rooms\RoomRemover.cs" />
+    <Compile Include="Criterions\FurnitureCriterions\GetFurnitureByTypeAndDateAndRoomNameCriterion.cs" />
+    <Compile Include="Criterions\FurnitureCriterions\UpdateFurnitureCriterion.cs" />
+    <Compile Include="Criterions\FurnitureCriterions\CreateFurnitureCriterion.cs" />
+    <Compile Include="Criterions\RoomCriterions\GetRoomByNameAndDate.cs" />
+    <Compile Include="Criterions\RoomCriterions\IsRoomExistsCriterion.cs" />
+    <Compile Include="Criterions\RoomCriterions\RemoveRoomCriterion.cs" />
+    <Compile Include="Criterions\RoomCriterions\CreateRoomCriterion.cs" />
+    <Compile Include="Infrastructure\ClientModels\ResultBase.cs" />
     <Compile Include="Infrastructure\ClientModels\FailResult.cs" />
     <Compile Include="Infrastructure\ClientModels\SuccessResult.cs" />
     <Compile Include="Infrastructure\CommonInterfaces\ICriterion.cs" />
@@ -211,11 +233,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\ServiceInstaller.cs" />
-    <Compile Include="Business\Exceptions\NotUniqueRoomNameException.cs" />
-    <Compile Include="Business\IRoomChecker.cs" />
-    <Compile Include="Business\IRoomSaver.cs" />
-    <Compile Include="Business\RoomChecker.cs" />
-    <Compile Include="Business\RoomSaver.cs" />
+    <Compile Include="Business\Rooms\Exceptions\RoomAlreadyExistsException.cs" />
+    <Compile Include="Business\Rooms\IRoomChecker.cs" />
+    <Compile Include="Business\Rooms\IRoomCreator.cs" />
+    <Compile Include="Business\Rooms\RoomChecker.cs" />
+    <Compile Include="Business\Rooms\RoomCreator.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\FurnitureController.cs" />
     <Compile Include="Controllers\HistoryController.cs" />
@@ -246,7 +268,8 @@
     <Compile Include="Models\FurnitureClientModel.cs" />
     <Compile Include="Models\HistoryClientModel.cs" />
     <Compile Include="Models\HomeClientModel.cs" />
-    <Compile Include="Models\Results\NonUniqueRoomNameResult.cs" />
+    <Compile Include="Models\Results\Rooms\RoomNotFoundResult.cs" />
+    <Compile Include="Models\Results\Rooms\NonUniqueRoomNameResult.cs" />
     <Compile Include="Models\RoomClientModel.cs" />
     <Compile Include="Models\RoomEventClientData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -255,21 +278,32 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MainDbInitializationQueries.resx</DependentUpon>
     </Compile>
+    <Compile Include="Queries\FurnitureQueries\GetFurnitureByTypeAndDateAndRoomNameQuery.cs" />
+    <Compile Include="Queries\FurnitureQueries\UpdateFurnitureQuery.cs" />
+    <Compile Include="Queries\FurnitureQueries\CreateRoomQuery.cs" />
+    <Compile Include="Queries\FurnitureQueries\Sql\FurnitureQueriesSql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FurnitureQueriesSql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Queries\RoomQueries\GetRoomByNameAndDateQuery.cs" />
     <Compile Include="Queries\RoomQueries\IsRoomExistsQuery.cs" />
-    <Compile Include="Queries\RoomQueries\SaveRoomQuery.cs" />
+    <Compile Include="Queries\RoomQueries\CreateRoomQuery.cs" />
+    <Compile Include="Queries\RoomQueries\Sql\RoomQueriesSql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RoomQueriesSql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="WebHandlers\FurnitureWebHandler.cs" />
     <Compile Include="WebHandlers\HomeWebHandler.cs" />
     <Compile Include="WebHandlers\IFurnitureWebHandler.cs" />
     <Compile Include="WebHandlers\IHomeWebHandler.cs" />
     <Compile Include="WebHandlers\IRoomWebHandler.cs" />
-    <Compile Include="WebHandlers\Mappers\IRoomMapper.cs" />
-    <Compile Include="WebHandlers\Mappers\RoomMapper.cs" />
     <Compile Include="WebHandlers\RoomWebHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ErrorsHandling\" />
-    <Folder Include="Queries\FurnitureQueries\Sql\" />
     <Folder Include="Queries\RoomEventQueries\Sql\" />
-    <Folder Include="Queries\RoomQueries\Sql\" />
     <Folder Include="Queries\RoomStateQueries\Sql\" />
   </ItemGroup>
   <ItemGroup>
@@ -279,6 +313,14 @@
     <EmbeddedResource Include="Queries\DatabaseInitialization\MainDbInitializationQueries.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>MainDbInitializationQueries.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Queries\FurnitureQueries\Sql\FurnitureQueriesSql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FurnitureQueriesSql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Queries\RoomQueries\Sql\RoomQueriesSql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RoomQueriesSql.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -306,6 +348,13 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.97.0\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.97.0\build\net451\System.Data.SQLite.Core.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.97.0\build\net451\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.97.0\build\net451\System.Data.SQLite.Core.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

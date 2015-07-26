@@ -7,11 +7,12 @@ using RoomsAndFurniture.Web.Queries.RoomQueries.Sql;
 
 namespace RoomsAndFurniture.Web.Queries.RoomQueries
 {
-    public class IsRoomExistsQuery : IQuery<IsRoomExistsCriterion, bool>
+    public class CreateRoomQuery : IQuery<CreateRoomCriterion, int>
     {
-        public bool Proceed(IDbConnection connection, IsRoomExistsCriterion criterion)
+        public int Proceed(IDbConnection connection, CreateRoomCriterion criterion)
         {
-            return connection.Query<bool>(RoomQueriesSql.IsRoomExistsQuery, criterion).First();
+            criterion.Room.Id = connection.Query<int>(RoomQueriesSql.CreateRoomQuery, criterion.Room).FirstOrDefault();
+            return criterion.Room.Id;
         }
     }
 }

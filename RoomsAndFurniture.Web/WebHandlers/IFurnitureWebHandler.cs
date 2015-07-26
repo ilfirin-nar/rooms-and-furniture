@@ -1,10 +1,11 @@
-﻿using RoomsAndFurniture.Web.Infrastructure.CommonInterfaces;
-using RoomsAndFurniture.Web.Models;
+﻿using System;
+using RoomsAndFurniture.Web.Infrastructure.ClientModels;
+using RoomsAndFurniture.Web.Infrastructure.CommonInterfaces;
 
 namespace RoomsAndFurniture.Web.WebHandlers
 {
     public interface IFurnitureWebHandler : IWebHandler
     {
-        FurnitureClientModel Create();
+        ResultBase Create(string type, string roomName, DateTime date);
     }
 }

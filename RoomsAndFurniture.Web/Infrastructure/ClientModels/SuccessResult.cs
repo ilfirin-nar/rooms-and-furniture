@@ -1,6 +1,6 @@
 ﻿namespace RoomsAndFurniture.Web.Infrastructure.ClientModels
 {
-    public class SuccessResult<T> : ClientData<T> where T : new()
+    public class SuccessResult : ResultBase
     {
         public SuccessResult()
         {
@@ -9,6 +9,22 @@
 
         public SuccessResult(string message)
         {
+            Message = message;
+            IsSuccess = true;
+        }
+
+    }
+
+    public class SuccessResult<T> : ResultBase<T> where T : new()
+    {
+        public SuccessResult()
+        {
+            IsSuccess = true;
+        }
+
+        public SuccessResult(string message)
+        {
+            Message = message;
             IsSuccess = true;
         }
 

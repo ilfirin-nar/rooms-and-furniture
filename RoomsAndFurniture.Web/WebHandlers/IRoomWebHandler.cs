@@ -7,6 +7,8 @@ namespace RoomsAndFurniture.Web.WebHandlers
 {
     public interface IRoomWebHandler : IWebHandler
     {
-        ClientData<RoomClientModel> Create(string name, DateTime date);
+        ResultBase<RoomClientModel> Create(string name, DateTime date);
+
+        ResultBase Remove(string name, string moveFurnitureToRoom, DateTime date);
     }
 }
