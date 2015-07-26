@@ -5,6 +5,6 @@ namespace RoomsAndFurniture.Web.WebHandlers
 {
     public interface IFurnitureWebHandler : IWebHandler
     {
-         FurnitureClientModel Create
+        FurnitureClientModel Create();
     }
 }

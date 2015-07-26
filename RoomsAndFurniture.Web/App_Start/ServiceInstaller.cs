@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using LightInject;
 using RoomsAndFurniture.Web.Infrastructure.CommonInterfaces;
+using RoomsAndFurniture.Web.Infrastructure.Database;
 using RoomsAndFurniture.Web.Infrastructure.DependencyInjection;
 
 namespace RoomsAndFurniture.Web
@@ -20,10 +21,11 @@ namespace RoomsAndFurniture.Web
             container = new ServiceContainer();
         }
 
-        public static void Install()
+        public static IServiceContainer Install()
         {
             installer = new ServiceInstaller();
             installer.RegisterServices();
+            return installer.container;
         }
 
         private void RegisterServices()
@@ -32,8 +34,12 @@ namespace RoomsAndFurniture.Web
             container.Register<IWebHandler>(ThisAssembly);
             container.Register<IClientDataMapper>(ThisAssembly);
             container.Register<IValidator>(ThisAssembly);
-            container.Register<IService>(ThisAssembly);
-            container.Register<IDao>(ThisAssembly);
+            container.Register<IBusinessService>(ThisAssembly);
+            container.Register<IQueryBuilder>((factory) => new QueryBuilder(factory));
+            container.Register<IMainDbConectionFactory>(ThisAssembly, LifeTimeFactory.PerContainer);
+            container.Register<IQueryProceeder>(ThisAssembly, LifeTimeFactory.PerContainer);
+            container.Register<IQuery>(ThisAssembly, LifeTimeFactory.PerContainer);
+            container.Register<IService>(ThisAssembly, LifeTimeFactory.PerContainer);
             container.EnableMvc();
         }
     }

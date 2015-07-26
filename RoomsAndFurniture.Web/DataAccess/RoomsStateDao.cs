@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
 using RoomsAndFurniture.Web.Domain;
-using RoomsAndFurniture.Web.Infrastructure;
+using RoomsAndFurniture.Web.Infrastructure.Database;
 
 namespace RoomsAndFurniture.Web.DataAccess
 {
@@ -12,7 +12,7 @@ namespace RoomsAndFurniture.Web.DataAccess
     {
         public IList<RoomState> Get(DateTime date)
         {
-            using (var connection = new SqlConnection(ConnectionStringKeeper.RoomsAndFurniture))
+            using (var connection = new SqlConnection(ConnectionStringKeeper.Main))
             {
                 const string sql = @"
                     select *

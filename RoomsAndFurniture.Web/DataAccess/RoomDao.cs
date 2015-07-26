@@ -1,31 +1,28 @@
-﻿using System.Data.SqlClient;
-using System.Linq;
-using Dapper;
+﻿using RoomsAndFurniture.Web.Criterions.RoomCriterions;
 using RoomsAndFurniture.Web.Domain;
-using RoomsAndFurniture.Web.Infrastructure;
+using RoomsAndFurniture.Web.Infrastructure.CommonInterfaces;
 
 namespace RoomsAndFurniture.Web.DataAccess
 {
     internal class RoomDao : IRoomDao
     {
+        private readonly IQueryBuilder queryBuilder;
+
+        public RoomDao(IQueryBuilder queryBuilder)
+        {
+            this.queryBuilder = queryBuilder;
+        }
+
         public int Create(Room room)
         {
-
-            using (var connection = new SqlConnection(ConnectionStringKeeper.RoomsAndFurniture))
-            {
-                const string sql = "insert into dbo.Room (CreateDate, Name) values (@CreateDate, @Name)";
-                room.Id = connection.Execute(sql, room);
-                return room.Id;
-            }
+            var criterion = new SaveRoomCriterion(room);
+            return queryBuilder.Query<SaveRoomCriterion, int>().Proceed(criterion);
         }
 
         public bool IsExists(string name)
         {
-            using (var connection = new SqlConnection(ConnectionStringKeeper.RoomsAndFurniture))
-            {
-                const string sql = "select top 1 Id from dbo.Room where Name = @name";
-                return connection.Query<Room>(sql, new {name}).Any();
-            }
+            var criterion = new IsExistsCriterion(name);
+            return queryBuilder.Query<IsExistsCriterion, bool>().Proceed(criterion);
         }
     }
 }

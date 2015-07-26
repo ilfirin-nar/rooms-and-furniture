@@ -7,7 +7,11 @@ namespace RoomsAndFurniture.Web.Tests.Infrastructure
     {
         public static void GoAndRollback(Action action)
         {
-            using (var scope = new TransactionScope())
+            var transaction = new CommittableTransaction(new TransactionOptions
+            {
+                IsolationLevel = IsolationLevel.ReadCommitted
+            });
+            using (var scope = new TransactionScope(transaction))
             {
                 action();
                 scope.Dispose();

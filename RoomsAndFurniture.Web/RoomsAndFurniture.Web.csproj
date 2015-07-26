@@ -20,6 +20,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>c33f2ca9</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -51,6 +52,10 @@
       <HintPath>..\packages\LightInject.3.0.2.7\lib\net45\LightInject.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="LightInject.Interception, Version=1.0.0.8, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LightInject.Interception.1.0.0.8\lib\net45\LightInject.Interception.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="LightInject.Mvc, Version=1.0.0.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\LightInject.Mvc.1.0.0.4\lib\net45\LightInject.Mvc.dll</HintPath>
       <Private>True</Private>
@@ -73,6 +78,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.SQLite, Version=1.0.97.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Core.MSIL.1.0.97.0\lib\net451\System.Data.SQLite.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -121,10 +130,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\RoomsAndFurniture.mdf" />
-    <Content Include="App_Data\RoomsAndFurniture_log.ldf">
-      <DependentUpon>RoomsAndFurniture.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\Images\favicon.ico" />
     <Content Include="Content\Styles\history.css" />
     <Content Include="Content\Styles\tables.css" />
@@ -157,6 +162,8 @@
     <Content Include="Scripts\Libs\jquery-ui-1.11.4\jquery-ui.theme.css" />
     <Content Include="Scripts\Libs\jquery-ui-1.11.4\jquery-ui.theme.min.css" />
     <Content Include="Scripts\rooms.js" />
+    <Content Include="Queries\DatabaseInitialization\InitialDataSql.sql" />
+    <Content Include="Queries\DatabaseInitialization\CreateMainDatabaseSql.sql" />
     <Content Include="Views\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\History\Index.cshtml" />
@@ -175,12 +182,31 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\IDatabaseInitializer.cs" />
+    <Compile Include="Criterions\RoomCriterions\IsExistsCriterion.cs" />
+    <Compile Include="Criterions\RoomCriterions\SaveRoomCriterion.cs" />
+    <Compile Include="DataAccess\IRoomDao.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataAccess\RoomDao.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Infrastructure\CommonInterfaces\ICriterion.cs" />
+    <Compile Include="Infrastructure\CommonInterfaces\IQuery.cs" />
+    <Compile Include="Infrastructure\CommonInterfaces\IQueryBuilder.cs" />
+    <Compile Include="Infrastructure\CommonInterfaces\IQueryProceeder.cs" />
+    <Compile Include="Infrastructure\Database\QueryProceeder.cs" />
+    <Compile Include="Infrastructure\Database\QueryBuilder.cs" />
+    <Compile Include="Infrastructure\Database\IMainDbConectionFactory.cs" />
+    <Compile Include="Infrastructure\Database\ISqliteConnectionFactory.cs" />
+    <Compile Include="Infrastructure\Database\MainDatabaseCreator.cs" />
+    <Compile Include="Infrastructure\Database\DatabaseInfoKeeper.cs" />
+    <Compile Include="Infrastructure\Database\IDbConnectionFactory.cs" />
+    <Compile Include="App_Start\DatabaseInitializer.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\ServiceInstaller.cs" />
     <Compile Include="Business\Exceptions\NotUniqueRoomNameException.cs" />
-    <Compile Include="Business\FurnitureSaver.cs" />
-    <Compile Include="Business\IFurnitureSaver.cs" />
     <Compile Include="Business\IRoomChecker.cs" />
     <Compile Include="Business\IRoomSaver.cs" />
     <Compile Include="Business\RoomChecker.cs" />
@@ -189,12 +215,6 @@
     <Compile Include="Controllers\FurnitureController.cs" />
     <Compile Include="Controllers\HistoryController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
-    <Compile Include="DataAccess\FurnitureDao.cs" />
-    <Compile Include="DataAccess\IFurnitureDao.cs" />
-    <Compile Include="DataAccess\IRoomDao.cs" />
-    <Compile Include="DataAccess\IRoomsStateDao.cs" />
-    <Compile Include="DataAccess\RoomDao.cs" />
-    <Compile Include="DataAccess\RoomsStateDao.cs" />
     <Compile Include="Domain\Furniture.cs" />
     <Compile Include="Domain\Room.cs" />
     <Compile Include="Domain\RoomEvent.cs" />
@@ -203,15 +223,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\CommonInterfaces\IBusinessService.cs" />
     <Compile Include="Infrastructure\CommonInterfaces\IClientDataMapper.cs" />
     <Compile Include="Infrastructure\CommonInterfaces\IDao.cs" />
     <Compile Include="Infrastructure\CommonInterfaces\IService.cs" />
     <Compile Include="Infrastructure\CommonInterfaces\IValidator.cs" />
     <Compile Include="Infrastructure\CommonInterfaces\IWebHandler.cs" />
-    <Compile Include="Infrastructure\ConnectionStringKeeper.cs" />
+    <Compile Include="Infrastructure\Database\IDatabaseCreator.cs" />
+    <Compile Include="Infrastructure\Database\MainDbConnectionFactory.cs" />
+    <Compile Include="Infrastructure\DependencyInjection\IDaoInterceptor.cs" />
     <Compile Include="Infrastructure\DependencyInjection\LifettimeFactory.cs" />
     <Compile Include="Infrastructure\DependencyInjection\ServiceRegistrationFilter.cs" />
     <Compile Include="Infrastructure\DependencyInjection\ServiceRegistryExtensions.cs" />
+    <Compile Include="Infrastructure\Extensions\SqlConnectionExtensions.cs" />
     <Compile Include="Infrastructure\Extensions\ObjectExtensions.cs" />
     <Compile Include="Infrastructure\Extensions\TypeExtensions.cs" />
     <Compile Include="Models\FurnitureClientModel.cs" />
@@ -220,6 +244,13 @@
     <Compile Include="Models\RoomClientModel.cs" />
     <Compile Include="Models\RoomEventClientData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\DatabaseInitialization\MainDbInitializationQueries.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MainDbInitializationQueries.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Queries\RoomQueries\IsRoomExistsQuery.cs" />
+    <Compile Include="Queries\RoomQueries\SaveRoomQuery.cs" />
     <Compile Include="WebHandlers\HomeWebHandler.cs" />
     <Compile Include="WebHandlers\IFurnitureWebHandler.cs" />
     <Compile Include="WebHandlers\IHomeWebHandler.cs" />
@@ -230,9 +261,19 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ErrorsHandling\" />
+    <Folder Include="Queries\FurnitureQueries\Sql\" />
+    <Folder Include="Queries\RoomEventQueries\Sql\" />
+    <Folder Include="Queries\RoomQueries\Sql\" />
+    <Folder Include="Queries\RoomStateQueries\Sql\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Queries\DatabaseInitialization\MainDbInitializationQueries.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MainDbInitializationQueries.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

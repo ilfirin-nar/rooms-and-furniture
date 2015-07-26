@@ -10,6 +10,7 @@ namespace RoomsAndFurniture.Web.Tests
         protected TestsBase()
         {
             Container = TestsServiceInstaller.Install();
+            Container.GetInstance<IDatabaseInitializer>().Initialize();
         }
     }
 }

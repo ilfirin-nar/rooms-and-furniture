@@ -3,7 +3,7 @@ using RoomsAndFurniture.Web.Infrastructure.CommonInterfaces;
 
 namespace RoomsAndFurniture.Web.Business
 {
-    public interface IRoomSaver : IService
+    public interface IRoomSaver : IBusinessService
     {
         void Save(Room room);
     }

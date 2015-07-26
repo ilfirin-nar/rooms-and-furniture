@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using LightInject;
 using RoomsAndFurniture.Web.Infrastructure.CommonInterfaces;
+using RoomsAndFurniture.Web.Infrastructure.Database;
 using RoomsAndFurniture.Web.Infrastructure.DependencyInjection;
 
 namespace RoomsAndFurniture.Web.Tests.Infrastructure
@@ -35,6 +36,12 @@ namespace RoomsAndFurniture.Web.Tests.Infrastructure
             container.Register<IValidator>(Assembly, lifetimeFactory);
             container.Register<IService>(Assembly, lifetimeFactory);
             container.Register<IDao>(Assembly, lifetimeFactory);
+            container.Register<IBusinessService>(Assembly, lifetimeFactory);
+            container.Register<IQueryBuilder>((factory) => new QueryBuilder(factory));
+            container.Register<IMainDbConectionFactory>(Assembly, LifeTimeFactory.PerContainer);
+            container.Register<IQueryProceeder>(Assembly, LifeTimeFactory.PerContainer);
+            container.Register<IQuery>(Assembly, LifeTimeFactory.PerContainer);
+            container.Register<IService>(Assembly, LifeTimeFactory.PerContainer);
         }
     }
 }

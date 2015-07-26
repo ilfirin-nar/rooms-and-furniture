@@ -3,7 +3,7 @@ using RoomsAndFurniture.Web.Infrastructure.CommonInterfaces;
 
 namespace RoomsAndFurniture.Web.Business
 {
-    public interface IRoomChecker : IService
+    public interface IRoomChecker : IBusinessService
     {
         void Check(Room room);
     }

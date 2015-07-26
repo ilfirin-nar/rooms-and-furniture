@@ -11,12 +11,10 @@ namespace RoomsAndFurniture.Web
         {
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            ServiceInstaller.Install();
+            var container = ServiceInstaller.Install();
+            container.GetInstance<IDatabaseInitializer>().Initialize();
         }
 
-        void Application_Error(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
+        void Application_Error(object sender, EventArgs e) {}
     }
 }
