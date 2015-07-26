@@ -20,11 +20,16 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
         public Furniture Create(string type, DateTime date, string roomName, int count)
         {
             var room = roomReader.Get(roomName, date);
+            return Create(type, date, room.Id, count);
+        }
+
+        public Furniture Create(string type, DateTime date, int roomId, int count)
+        {
             var furniture = new Furniture
             {
                 Type = type,
                 Date = date,
-                RoomId = room.Id,
+                RoomId = roomId,
                 Count = count
             };
             var critreion = new CreateFurnitureCriterion(furniture);

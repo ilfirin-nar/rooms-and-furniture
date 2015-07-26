@@ -143,7 +143,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Queries\FurnitureQueries\Sql\GetFurnitureByTypeAndDateAndRoomNameQuery.sql" />
-    <Content Include="Queries\FurnitureQueries\Sql\UpdateRoomQuery.sql" />
+    <Content Include="Queries\FurnitureQueries\Sql\UpdateFurnitureQuery.sql" />
     <Content Include="Queries\FurnitureQueries\Sql\CreateRoomQuery.sql" />
     <Content Include="Queries\RoomQueries\Sql\CreateRoomQuery.sql" />
     <Content Include="Queries\RoomQueries\Sql\GetRoomByNameAndDateCriterionQuery.sql" />
@@ -195,11 +195,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\IDatabaseInitializer.cs" />
+    <Compile Include="Business\Furnitures\Exceptions\FurnitureNotFoundException.cs" />
     <Compile Include="Business\Furnitures\FurnitureCreator.cs" />
+    <Compile Include="Business\Furnitures\FurnitureMover.cs" />
     <Compile Include="Business\Furnitures\FurnitureReader.cs" />
     <Compile Include="Business\Furnitures\FurnitureAmountIncreaser.cs" />
     <Compile Include="Business\Furnitures\FurnitureUpdater.cs" />
     <Compile Include="Business\Furnitures\IFurnitureCreator.cs" />
+    <Compile Include="Business\Furnitures\IFurnitureMover.cs" />
     <Compile Include="Business\Furnitures\IFurnitureReader.cs" />
     <Compile Include="Business\Furnitures\IFurnitureAmountIncreaser.cs" />
     <Compile Include="Business\Furnitures\IFurnitureUpdater.cs" />

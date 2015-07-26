@@ -124,7 +124,7 @@
   <data name="GetFurnitureByTypeAndDateAndRoomNameQuery" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>getfurniturebytypeanddateandroomnamequery.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
   </data>
-  <data name="UpdateRoomQuery" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>updateroomquery.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
+  <data name="UpdateFurnitureQuery" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>updatefurniturequery.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
   </data>
 </root>

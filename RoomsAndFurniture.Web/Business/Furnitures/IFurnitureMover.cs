@@ -4,8 +4,8 @@ using RoomsAndFurniture.Web.Infrastructure.CommonInterfaces;
 
 namespace RoomsAndFurniture.Web.Business.Furnitures
 {
-    public interface IFurnitureReader : IBusinessService
+    public interface IFurnitureMover : IBusinessService
     {
-        Furniture GetClosestLeftByDate(string type, DateTime date, string roomName);
+        Furniture Move(string type, string roomNameFrom, string roomNameTo, DateTime date);
     }
 }

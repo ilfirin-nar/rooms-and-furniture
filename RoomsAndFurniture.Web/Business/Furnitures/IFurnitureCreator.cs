@@ -7,5 +7,7 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
     public interface IFurnitureCreator : IBusinessService
     {
         Furniture Create(string type, DateTime date, string roomName, int count);
+
+        Furniture Create(string type, DateTime date, int roomId, int count);
     }
 }

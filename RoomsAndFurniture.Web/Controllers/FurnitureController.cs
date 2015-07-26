@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web.Mvc;
-using RoomsAndFurniture.Web.Enums;
 using RoomsAndFurniture.Web.WebHandlers;
 
 namespace RoomsAndFurniture.Web.Controllers

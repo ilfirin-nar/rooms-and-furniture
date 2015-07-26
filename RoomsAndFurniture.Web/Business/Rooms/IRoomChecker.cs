@@ -7,5 +7,7 @@ namespace RoomsAndFurniture.Web.Business.Rooms
     public interface IRoomChecker : IBusinessService
     {
         bool IsExists(Room room, DateTime date);
+
+        bool IsExists(string roomName, DateTime date);
     }
 }

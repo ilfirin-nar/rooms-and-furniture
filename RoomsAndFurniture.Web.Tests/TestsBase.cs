@@ -20,21 +20,15 @@ namespace RoomsAndFurniture.Web.Tests
 
         private static DateTime RandomDay()
         {
-            var start = new DateTime(1995, 1, 1);
+            var start = new DateTime(1905, 1, 1);
             var gen = new Random();
             var range = (DateTime.Today - start).Days;
             return start.AddDays(gen.Next(range));
         }
 
-        protected long Timestamp
+        protected static long Timestamp
         {
-            get
-            {
-                lock (locker)
-                {
-                    return (int) (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-                }
-            }
+            get { return (int) (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds; }
         }
 
         protected TestsBase()

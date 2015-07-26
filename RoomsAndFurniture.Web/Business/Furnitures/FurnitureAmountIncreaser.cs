@@ -21,10 +21,14 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
 
         public Furniture Increase(string type, DateTime date, string roomName, int increaseBy)
         {
-            var furniture = reader.Get(type, date, roomName);
+            var furniture = reader.GetClosestLeftByDate(type, date, roomName);
             if (furniture == null)
             {
                 return creator.Create(type, date, roomName, increaseBy);
+            }
+            if (furniture.Date.Date < date.Date)
+            {
+                return creator.Create(type, date, roomName, furniture.Count + increaseBy);
             }
             furniture.Count = furniture.Count + increaseBy;
             return updater.Update(furniture);

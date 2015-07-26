@@ -11,7 +11,7 @@ namespace RoomsAndFurniture.Web.Queries.RoomQueries
     {
         public bool Proceed(IDbConnection connection, IsRoomExistsCriterion criterion)
         {
-            return connection.Query<bool>(RoomQueriesSql.IsRoomExistsQuery, criterion).First();
+            return connection.Query<int>(RoomQueriesSql.IsRoomExistsQuery, criterion).Any();
         }
     }
 }

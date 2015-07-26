@@ -94,9 +94,9 @@ namespace RoomsAndFurniture.Web.Queries.FurnitureQueries.Sql {
         ///        RoomId = @RoomId
         ///    where Id = @Id.
         /// </summary>
-        internal static string UpdateRoomQuery {
+        internal static string UpdateFurnitureQuery {
             get {
-                return ResourceManager.GetString("UpdateRoomQuery", resourceCulture);
+                return ResourceManager.GetString("UpdateFurnitureQuery", resourceCulture);
             }
         }
     }
