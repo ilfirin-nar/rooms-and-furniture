@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using RoomsAndFurniture.Web.Business.Rooms;
 using RoomsAndFurniture.Web.Criterions.FurnitureCriterions;
 using RoomsAndFurniture.Web.Domain;
@@ -35,6 +36,12 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
             var critreion = new CreateFurnitureCriterion(furniture);
             furniture.Id = queryBuilder.Query<CreateFurnitureCriterion, int>().Proceed(critreion);
             return furniture;
+        }
+
+        public void Create(IList<Furniture> furnitureItems)
+        {
+            var critreion = new CreateFurnitureItemsCriterion(furnitureItems);
+            queryBuilder.Command<CreateFurnitureItemsCriterion>().Proceed(critreion);
         }
     }
 }

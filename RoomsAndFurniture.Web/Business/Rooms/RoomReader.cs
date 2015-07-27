@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using RoomsAndFurniture.Web.Business.Rooms.Exceptions;
 using RoomsAndFurniture.Web.Criterions.RoomCriterions;
 using RoomsAndFurniture.Web.Domain;
@@ -24,6 +26,13 @@ namespace RoomsAndFurniture.Web.Business.Rooms
                 throw new RoomNotFoundException(name, date);
             }
             return room;
+        }
+
+        public IDictionary<string, Room> GetRooms(params string[] roomNames)
+        {
+            var criterion = new GetRoomsByNamesCriterion(roomNames);
+            var list = queryBuilder.Query<GetRoomsByNamesCriterion, IList<Room>>().Proceed(criterion);
+            return roomNames.ToDictionary(rn => rn, rn => list.First(r => r.Name == rn));
         }
     }
 }

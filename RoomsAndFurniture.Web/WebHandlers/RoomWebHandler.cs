@@ -34,12 +34,11 @@ namespace RoomsAndFurniture.Web.WebHandlers
             return new SuccessResult<RoomClientModel>(room.MapTo<RoomClientModel>());
         }
 
-        public ResultBase Remove(string name, string moveFurnitureToRoom, DateTime date)
+        public ResultBase Remove(string name, string roomTo, DateTime date)
         {
-            var room = new Room { Name = name, RemoveDate = date };
             try
             {
-                roomRemover.Remove(room, moveFurnitureToRoom);
+                roomRemover.Remove(name, roomTo, date);
             }
             catch (RoomNotFoundException exception)
             {

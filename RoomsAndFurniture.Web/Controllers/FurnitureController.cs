@@ -20,7 +20,7 @@ namespace RoomsAndFurniture.Web.Controllers
 
         public ActionResult Move(string type, string roomNameFrom, string roomNameTo, DateTime date)
         {
-            return Json(null);
+            return Json(handler.Move(type, roomNameFrom, roomNameTo, date));
         }
 
         public ActionResult Remove(string type, string roomName, DateTime date)

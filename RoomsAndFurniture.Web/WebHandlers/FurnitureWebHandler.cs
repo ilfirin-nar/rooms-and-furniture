@@ -1,9 +1,11 @@
 ﻿using System;
 using RoomsAndFurniture.Web.Business.Furnitures;
+using RoomsAndFurniture.Web.Business.Furnitures.Exceptions;
 using RoomsAndFurniture.Web.Business.Rooms.Exceptions;
 using RoomsAndFurniture.Web.Infrastructure.ClientModels;
 using RoomsAndFurniture.Web.Infrastructure.Extensions;
 using RoomsAndFurniture.Web.Models;
+using RoomsAndFurniture.Web.Models.Results.Furnitures;
 using RoomsAndFurniture.Web.Models.Results.Rooms;
 
 namespace RoomsAndFurniture.Web.WebHandlers
@@ -34,16 +36,21 @@ namespace RoomsAndFurniture.Web.WebHandlers
             }
         }
 
-        public ResultBase Move(string type, string roomNameFrom, string roomNameTo, DateTime date)
+        public ResultBase<FurnitureClientModel> Move(
+            string type, string roomNameFrom, string roomNameTo, DateTime date)
         {
             try
             {
-                furnitureMover.Move(type, roomNameFrom, roomNameTo, date);
-                return null;
+                var furniture = furnitureMover.Move(type, roomNameFrom, roomNameTo, date);
+                return new SuccessResult<FurnitureClientModel>(furniture.MapTo<FurnitureClientModel>());
             }
-            catch (Exception)
+            catch (FurnitureNotFoundException e)
             {
-                return null;
+                return new FurnitureNotFoundResult(e.FurnitureType, e.RoomName, e.Date);
+            }
+            catch (RoomNotFoundException e)
+            {
+                return new RoomNotFoundResult(e.RoomName, e.Date);
             }
         }
     }

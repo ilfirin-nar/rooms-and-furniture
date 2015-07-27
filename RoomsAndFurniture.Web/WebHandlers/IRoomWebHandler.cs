@@ -9,6 +9,6 @@ namespace RoomsAndFurniture.Web.WebHandlers
     {
         ResultBase<RoomClientModel> Create(string name, DateTime date);
 
-        ResultBase Remove(string name, string moveFurnitureToRoom, DateTime date);
+        ResultBase Remove(string name, string roomTo, DateTime date);
     }
 }

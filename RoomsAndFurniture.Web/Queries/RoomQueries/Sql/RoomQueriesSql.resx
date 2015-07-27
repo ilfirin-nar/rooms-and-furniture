@@ -124,7 +124,13 @@
   <data name="GetRoomByNameAndDateCriterionQuery" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>getroombynameanddatecriterionquery.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
   </data>
+  <data name="GetRoomsByNamesQuery" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>getroomsbynamesquery.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
+  </data>
   <data name="IsRoomExistsQuery" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>isroomexistsquery.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
+  </data>
+  <data name="RemoveRoomQuery" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>removeroomquery.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
   </data>
 </root>

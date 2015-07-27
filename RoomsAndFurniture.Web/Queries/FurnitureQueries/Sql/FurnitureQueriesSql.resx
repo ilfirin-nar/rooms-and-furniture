@@ -118,11 +118,20 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="CreateRoomQuery" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>createroomquery.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
+  <data name="CreateFurnitureItemsQuery" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>createfurnitureitemsquery.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
+  </data>
+  <data name="CreateFurnitureQuery" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>createfurniturequery.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
   </data>
   <data name="GetFurnitureByTypeAndDateAndRoomNameQuery" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>getfurniturebytypeanddateandroomnamequery.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
+  </data>
+  <data name="GetFurnitureItemsByRoomIdAndDateAndTypesQuery" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>getfurnitureitemsbyroomidanddateandtypesquery.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
+  </data>
+  <data name="GetFurnitureItemsByRoomIdAndDateQuery" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>getfurnitureitemsbyroomidanddatequery.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
   </data>
   <data name="UpdateFurnitureQuery" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>updatefurniturequery.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>

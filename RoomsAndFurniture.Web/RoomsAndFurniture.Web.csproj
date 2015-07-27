@@ -142,10 +142,15 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Queries\FurnitureQueries\Sql\CreateFurnitureItemsQuery.sql" />
+    <Content Include="Queries\FurnitureQueries\Sql\GetFurnitureItemsByRoomIdAndDateAndTypesQuery.sql" />
+    <Content Include="Queries\FurnitureQueries\Sql\GetFurnitureItemsByRoomIdAndDateQuery.sql" />
     <Content Include="Queries\FurnitureQueries\Sql\GetFurnitureByTypeAndDateAndRoomNameQuery.sql" />
     <Content Include="Queries\FurnitureQueries\Sql\UpdateFurnitureQuery.sql" />
-    <Content Include="Queries\FurnitureQueries\Sql\CreateRoomQuery.sql" />
+    <Content Include="Queries\FurnitureQueries\Sql\CreateFurnitureQuery.sql" />
+    <Content Include="Queries\RoomQueries\Sql\RemoveRoomQuery.sql" />
     <Content Include="Queries\RoomQueries\Sql\CreateRoomQuery.sql" />
+    <Content Include="Queries\RoomQueries\Sql\GetRoomsByNamesQuery.sql" />
     <Content Include="Queries\RoomQueries\Sql\GetRoomByNameAndDateCriterionQuery.sql" />
     <Content Include="Queries\RoomQueries\Sql\IsRoomExistsQuery.sql" />
     <Content Include="Scripts\Libs\jquery-ui-1.11.4\external\jquery\jquery.js" />
@@ -198,11 +203,13 @@
     <Compile Include="Business\Furnitures\Exceptions\FurnitureNotFoundException.cs" />
     <Compile Include="Business\Furnitures\FurnitureCreator.cs" />
     <Compile Include="Business\Furnitures\FurnitureMover.cs" />
+    <Compile Include="Business\Furnitures\FurnitureMultiMover.cs" />
     <Compile Include="Business\Furnitures\FurnitureReader.cs" />
     <Compile Include="Business\Furnitures\FurnitureAmountIncreaser.cs" />
     <Compile Include="Business\Furnitures\FurnitureUpdater.cs" />
     <Compile Include="Business\Furnitures\IFurnitureCreator.cs" />
     <Compile Include="Business\Furnitures\IFurnitureMover.cs" />
+    <Compile Include="Business\Furnitures\IFurnitureMultiMover.cs" />
     <Compile Include="Business\Furnitures\IFurnitureReader.cs" />
     <Compile Include="Business\Furnitures\IFurnitureAmountIncreaser.cs" />
     <Compile Include="Business\Furnitures\IFurnitureUpdater.cs" />
@@ -211,9 +218,14 @@
     <Compile Include="Business\Rooms\IRoomRemover.cs" />
     <Compile Include="Business\Rooms\RoomReader.cs" />
     <Compile Include="Business\Rooms\RoomRemover.cs" />
+    <Compile Include="Criterions\FurnitureCriterions\CreateFurnitureItemsCriterion.cs" />
     <Compile Include="Criterions\FurnitureCriterions\GetFurnitureByTypeAndDateAndRoomNameCriterion.cs" />
+    <Compile Include="Criterions\FurnitureCriterions\GetFurnitureItemsByRoomIdAndDateAndTypesCriterion.cs" />
+    <Compile Include="Criterions\FurnitureCriterions\GetFurnitureItemsByRoomIdAndDateCriterion.cs" />
+    <Compile Include="Criterions\FurnitureCriterions\UpdateFurnitureItemsCriterion.cs" />
     <Compile Include="Criterions\FurnitureCriterions\UpdateFurnitureCriterion.cs" />
     <Compile Include="Criterions\FurnitureCriterions\CreateFurnitureCriterion.cs" />
+    <Compile Include="Criterions\RoomCriterions\GetRoomsByNamesCriterion.cs" />
     <Compile Include="Criterions\RoomCriterions\GetRoomByNameAndDate.cs" />
     <Compile Include="Criterions\RoomCriterions\IsRoomExistsCriterion.cs" />
     <Compile Include="Criterions\RoomCriterions\RemoveRoomCriterion.cs" />
@@ -271,6 +283,7 @@
     <Compile Include="Models\FurnitureClientModel.cs" />
     <Compile Include="Models\HistoryClientModel.cs" />
     <Compile Include="Models\HomeClientModel.cs" />
+    <Compile Include="Models\Results\Furnitures\RoomNotFoundResult.cs" />
     <Compile Include="Models\Results\Rooms\RoomNotFoundResult.cs" />
     <Compile Include="Models\Results\Rooms\NonUniqueRoomNameResult.cs" />
     <Compile Include="Models\RoomClientModel.cs" />
@@ -281,15 +294,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MainDbInitializationQueries.resx</DependentUpon>
     </Compile>
+    <Compile Include="Queries\FurnitureQueries\CreateFurnitureItemsQuery.cs" />
+    <Compile Include="Queries\FurnitureQueries\GetFurnitureItemsByRoomIdAndDateAndTypesQuery.cs" />
+    <Compile Include="Queries\FurnitureQueries\GetFurnitureItemsByRoomIdAndDateQuery.cs" />
     <Compile Include="Queries\FurnitureQueries\GetFurnitureByTypeAndDateAndRoomNameQuery.cs" />
+    <Compile Include="Queries\FurnitureQueries\UpdateFurnitureItemsQuery.cs" />
     <Compile Include="Queries\FurnitureQueries\UpdateFurnitureQuery.cs" />
-    <Compile Include="Queries\FurnitureQueries\CreateRoomQuery.cs" />
+    <Compile Include="Queries\FurnitureQueries\CreateFurnitureQuery.cs" />
     <Compile Include="Queries\FurnitureQueries\Sql\FurnitureQueriesSql.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FurnitureQueriesSql.resx</DependentUpon>
     </Compile>
+    <Compile Include="Queries\RoomQueries\GetRoomsByNamesQuery.cs" />
     <Compile Include="Queries\RoomQueries\GetRoomByNameAndDateQuery.cs" />
+    <Compile Include="Queries\RoomQueries\RemoveRoomQuery.cs" />
     <Compile Include="Queries\RoomQueries\IsRoomExistsQuery.cs" />
     <Compile Include="Queries\RoomQueries\CreateRoomQuery.cs" />
     <Compile Include="Queries\RoomQueries\Sql\RoomQueriesSql.Designer.cs">

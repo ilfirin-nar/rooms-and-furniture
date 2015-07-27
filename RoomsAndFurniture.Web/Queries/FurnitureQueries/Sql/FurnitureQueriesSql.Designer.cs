@@ -64,24 +64,65 @@ namespace RoomsAndFurniture.Web.Queries.FurnitureQueries.Sql {
         ///   Looks up a localized string similar to insert into Furniture (Date, Type, Count, RoomId) values (@Date, @Type, @Count, @RoomId);
         ///select last_insert_rowid();.
         /// </summary>
-        internal static string CreateRoomQuery {
+        internal static string CreateFurnitureItemsQuery {
             get {
-                return ResourceManager.GetString("CreateRoomQuery", resourceCulture);
+                return ResourceManager.GetString("CreateFurnitureItemsQuery", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to select *
+        ///   Looks up a localized string similar to insert into Furniture (Date, Type, Count, RoomId) values (@Date, @Type, @Count, @RoomId);
+        ///select last_insert_rowid();.
+        /// </summary>
+        internal static string CreateFurnitureQuery {
+            get {
+                return ResourceManager.GetString("CreateFurnitureQuery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to select f.*
         ///    from Furniture as f
         ///    inner join Room as r on r.Id = f.RoomId
         ///    where
         ///        f.Type = @Type and
-        ///        f.Date = @Date and
-        ///        r.Name = @RoomName.
+        ///        f.Date &lt;= @Date and
+        ///        r.Name = @RoomName
+        ///    order by f.Date desc
+        ///    limit 1.
         /// </summary>
         internal static string GetFurnitureByTypeAndDateAndRoomNameQuery {
             get {
                 return ResourceManager.GetString("GetFurnitureByTypeAndDateAndRoomNameQuery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to select Id, Type, max(Date), RoomId, Count
+        ///    from Furniture
+        ///    where
+        ///        Date &lt;= @Date and
+        ///        RoomId = @RoomId and
+        ///        Type in (select from @FurnitureTypes)
+        ///    group by RoomId, Type, Count, Id.
+        /// </summary>
+        internal static string GetFurnitureItemsByRoomIdAndDateAndTypesQuery {
+            get {
+                return ResourceManager.GetString("GetFurnitureItemsByRoomIdAndDateAndTypesQuery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to select Id, max(Date) as Date, Type, RoomId, Count
+        ///    from Furniture
+        ///    where
+        ///        Date &lt;= @Date and
+        ///        RoomId = @RoomId
+        ///    group by Type, Id, Count, RoomId.
+        /// </summary>
+        internal static string GetFurnitureItemsByRoomIdAndDateQuery {
+            get {
+                return ResourceManager.GetString("GetFurnitureItemsByRoomIdAndDateQuery", resourceCulture);
             }
         }
         

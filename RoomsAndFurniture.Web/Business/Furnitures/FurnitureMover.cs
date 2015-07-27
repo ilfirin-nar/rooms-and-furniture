@@ -1,5 +1,4 @@
 ﻿using System;
-using RoomsAndFurniture.Web.Business.Furnitures.Exceptions;
 using RoomsAndFurniture.Web.Business.Rooms;
 using RoomsAndFurniture.Web.Business.Rooms.Exceptions;
 using RoomsAndFurniture.Web.Domain;
@@ -30,29 +29,21 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
 
         public Furniture Move(string type, string roomNameFrom, string roomNameTo, DateTime date)
         {
-            var furnitureFrom = reader.GetClosestLeftByDate(type, date, roomNameFrom);
-            CheckFurnitureFrom(furnitureFrom);
+            var furnitureFrom = reader.Get(type, roomNameFrom, date);
             CheckRooms(roomNameFrom, roomNameTo, date);
+            var furnitureCount = furnitureFrom.Count;
             RemoveFurnitureFromFirstRoom(furnitureFrom, date);
             var furnitureTo = reader.GetClosestLeftByDate(type, date, roomNameTo);
-            return SetFurnitureToSecondRoom(furnitureFrom, furnitureTo, date, roomNameTo, furnitureFrom.Count);
-        }
-
-        private static void CheckFurnitureFrom(Furniture furniture)
-        {
-            if (furniture == null)
-            {
-                throw new FurnitureNotFoundException();
-            }
+            return SetFurnitureToSecondRoom(furnitureFrom, furnitureTo, date, roomNameTo, furnitureCount);
         }
 
         private void CheckRooms(string roomNameFrom, string roomNameTo, DateTime date)
         {
-            if (roomChecker.IsExists(roomNameFrom, date))
+            if (!roomChecker.IsExists(roomNameFrom, date))
             {
                 throw new RoomNotFoundException(roomNameFrom, date);
             }
-            if (roomChecker.IsExists(roomNameTo, date))
+            if (!roomChecker.IsExists(roomNameTo, date))
             {
                 throw new RoomNotFoundException(roomNameTo, date);
             }
@@ -77,11 +68,12 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
                 var roomId = roomReader.Get(roomTo, date).Id;
                 return creator.Create(furnitureFrom.Type, date, roomId, furnitureFromCount);
             }
+            var count = furnitureTo.Count + furnitureFromCount;
             if (furnitureTo.Date.Date < date.Date)
             {
-                return creator.Create(furnitureTo.Type, date, furnitureTo.RoomId, 0);
+                return creator.Create(furnitureTo.Type, date, furnitureTo.RoomId, count);
             }
-            furnitureTo.Count = furnitureTo.Count + furnitureFromCount;
+            furnitureTo.Count = count;
             return updater.Update(furnitureFrom);
         }
     }

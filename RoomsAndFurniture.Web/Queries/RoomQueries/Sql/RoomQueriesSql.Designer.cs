@@ -61,7 +61,8 @@ namespace RoomsAndFurniture.Web.Queries.RoomQueries.Sql {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to insert into Room (CreateDate, Name) values (@CreateDate, @Name).
+        ///   Looks up a localized string similar to insert into Room (CreateDate, Name) values (@CreateDate, @Name);
+        ///select last_insert_rowid();.
         /// </summary>
         internal static string CreateRoomQuery {
             get {
@@ -71,10 +72,9 @@ namespace RoomsAndFurniture.Web.Queries.RoomQueries.Sql {
         
         /// <summary>
         ///   Looks up a localized string similar to select * from Room
-        ///where
-        ///    Name = @Name and
-        ///    CreateDate &gt;= @Date and
-        ///    RemoveDate &lt; @Date.
+        ///    where
+        ///        Name = @Name and
+        ///        @Date between CreateDate and coalesce(RemoveDate, &apos;9999-12-31&apos;).
         /// </summary>
         internal static string GetRoomByNameAndDateCriterionQuery {
             get {
@@ -83,18 +83,35 @@ namespace RoomsAndFurniture.Web.Queries.RoomQueries.Sql {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to select exists(
-        ///    select 1 from Room
+        ///   Looks up a localized string similar to select * from Room where Name in @Names.
+        /// </summary>
+        internal static string GetRoomsByNamesQuery {
+            get {
+                return ResourceManager.GetString("GetRoomsByNamesQuery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to select 1
+        ///    from Room
         ///    where
         ///        Name = @Name and
-        ///        CreateDate &gt;= @Date and
-        ///        RemoveDate &lt; @Date
-        ///    limit 1
-        ///).
+        ///        @Date between CreateDate and coalesce(RemoveDate, &apos;9999-12-31&apos;)
+        ///    limit 1.
         /// </summary>
         internal static string IsRoomExistsQuery {
             get {
                 return ResourceManager.GetString("IsRoomExistsQuery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to insert into Room (CreateDate, Name) values (@CreateDate, @Name);
+        ///select last_insert_rowid();.
+        /// </summary>
+        internal static string RemoveRoomQuery {
+            get {
+                return ResourceManager.GetString("RemoveRoomQuery", resourceCulture);
             }
         }
     }
