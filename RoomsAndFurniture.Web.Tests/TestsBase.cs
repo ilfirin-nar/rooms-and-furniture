@@ -33,11 +33,17 @@ namespace RoomsAndFurniture.Web.Tests
         protected TestsBase()
         {
             Container = TestsServiceInstaller.Install();
+            DeleteDatabase();
             Container.GetInstance<IDatabaseInitializer>().Initialize();
         }
 
         [TestFixtureTearDown]
         public void Cleanup()
+        {
+            DeleteDatabase();
+        }
+
+        private static void DeleteDatabase()
         {
             File.Delete(DatabaseInfoKeeper.Main.FilePath);
         }

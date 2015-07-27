@@ -54,7 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Furniture\CreateFurnitureTests - Copy 1.cs" />
+    <Compile Include="Furniture\MoveFurnitureTests.cs" />
     <Compile Include="Furniture\CreateFurnitureTests.cs" />
     <Compile Include="History\GetHistoryTest.cs" />
     <Compile Include="TestsServiceInstaller.cs" />
