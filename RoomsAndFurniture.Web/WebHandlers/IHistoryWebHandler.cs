@@ -7,6 +7,6 @@ namespace RoomsAndFurniture.Web.WebHandlers
 {
     public interface IHistoryWebHandler : IWebHandler
     {
-        ResultBase<IList<RoomEventClientData>> Get(bool isShort);
+        ResultBase<IList<RoomEventClientData>> Get(bool isShort = false);
     }
 }

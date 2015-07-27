@@ -3,7 +3,6 @@ using System.IO;
 using LightInject;
 using NUnit.Framework;
 using RoomsAndFurniture.Web.Infrastructure.Database;
-using RoomsAndFurniture.Web.Tests.Infrastructure;
 
 namespace RoomsAndFurniture.Web.Tests
 {

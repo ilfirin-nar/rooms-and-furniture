@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Transactions;
 
-namespace RoomsAndFurniture.Web.Tests.Infrastructure
+namespace RoomsAndFurniture.Web.Tests
 {
     public static class TransactionForTests
     {

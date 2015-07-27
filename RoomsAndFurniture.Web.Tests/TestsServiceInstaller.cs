@@ -4,7 +4,7 @@ using RoomsAndFurniture.Web.Infrastructure.CommonInterfaces;
 using RoomsAndFurniture.Web.Infrastructure.Database;
 using RoomsAndFurniture.Web.Infrastructure.DependencyInjection;
 
-namespace RoomsAndFurniture.Web.Tests.Infrastructure
+namespace RoomsAndFurniture.Web.Tests
 {
     public class TestsServiceInstaller
     {

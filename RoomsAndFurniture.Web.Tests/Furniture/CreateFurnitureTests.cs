@@ -40,5 +40,20 @@ namespace RoomsAndFurniture.Web.Tests.Furniture
 
             Assert.AreEqual(furniture1.Count + 1, furniture2.Count);
         }
+
+        [Test]
+        public void Create_RoomNotExists_Fail()
+        {
+            var furnitureWebHandler = Container.GetInstance<IFurnitureWebHandler>();
+            var furnitureType = string.Format("Test Furniture {0}", Timestamp);
+
+            var date = DateForTest;            
+            var furniture = furnitureWebHandler.Create(furnitureType, "Room name", date);
+
+            Assert.AreNotEqual(null, furniture);
+            Assert.AreEqual(false, furniture.IsSuccess);
+            Assert.AreNotEqual(null, furniture.Message);
+            Assert.AreNotEqual(string.Empty, furniture.Message);
+        }
     }
 }

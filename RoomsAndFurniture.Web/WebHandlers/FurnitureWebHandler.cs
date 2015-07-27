@@ -36,8 +36,7 @@ namespace RoomsAndFurniture.Web.WebHandlers
             }
         }
 
-        public ResultBase<FurnitureClientModel> Move(
-            string type, string roomNameFrom, string roomNameTo, DateTime date)
+        public ResultBase<FurnitureClientModel> Move(string type, string roomNameFrom, string roomNameTo, DateTime date)
         {
             try
             {

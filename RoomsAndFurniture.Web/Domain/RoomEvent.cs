@@ -5,6 +5,8 @@ namespace RoomsAndFurniture.Web.Domain
 {
     public class RoomEvent
     {
+        public RoomEvent() {}
+
         public RoomEvent(DateTime date, RoomEventType type, string description)
         {
             Date = date;

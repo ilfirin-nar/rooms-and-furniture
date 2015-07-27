@@ -16,7 +16,7 @@ namespace RoomsAndFurniture.Web.WebHandlers
             this.roomEventsReader = roomEventsReader;
         }
 
-        public ResultBase<IList<RoomEventClientData>> Get(bool isShort)
+        public ResultBase<IList<RoomEventClientData>> Get(bool isShort = false)
         {
             var roomEvents = roomEventsReader.Get(isShort);
             var result = roomEvents.Select(e => e.MapTo<RoomEventClientData>()).ToList();
