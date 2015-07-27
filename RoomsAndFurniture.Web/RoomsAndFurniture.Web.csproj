@@ -149,6 +149,9 @@
     <Content Include="Queries\FurnitureQueries\Sql\GetFurnitureByTypeAndDateAndRoomNameQuery.sql" />
     <Content Include="Queries\FurnitureQueries\Sql\UpdateFurnitureQuery.sql" />
     <Content Include="Queries\FurnitureQueries\Sql\CreateFurnitureQuery.sql" />
+    <Content Include="Queries\RoomEventQueries\Sql\GetShortRoomEventsQuery.sql" />
+    <Content Include="Queries\RoomEventQueries\Sql\GetRoomEventsQuery.sql" />
+    <Content Include="Queries\RoomEventQueries\Sql\SaveRoomEventQuery.sql" />
     <Content Include="Queries\RoomQueries\Sql\GetRoomsByDateQuery.sql" />
     <Content Include="Queries\RoomQueries\Sql\RemoveRoomQuery.sql" />
     <Content Include="Queries\RoomQueries\Sql\CreateRoomQuery.sql" />
@@ -215,6 +218,17 @@
     <Compile Include="Business\Furnitures\IFurnitureReader.cs" />
     <Compile Include="Business\Furnitures\IFurnitureAmountIncreaser.cs" />
     <Compile Include="Business\Furnitures\IFurnitureUpdater.cs" />
+    <Compile Include="Business\RoomEvents\IRoomEventLogger.cs" />
+    <Compile Include="Business\RoomEvents\IRoomEventSaver.cs" />
+    <Compile Include="Business\RoomEvents\IRoomEventsReader.cs" />
+    <Compile Include="Business\RoomEvents\RoomEventLogger.cs" />
+    <Compile Include="Business\RoomEvents\RoomEventMessage.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RoomEventMessage.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Business\RoomEvents\RoomEventSaver.cs" />
+    <Compile Include="Business\RoomEvents\RoomEventsReader.cs" />
     <Compile Include="Business\RoomStates\IRoomStateReader.cs" />
     <Compile Include="Business\RoomStates\RoomStateReader.cs" />
     <Compile Include="Business\Rooms\Exceptions\RoomNotFoundException.cs" />
@@ -236,6 +250,8 @@
     <Compile Include="Criterions\RoomCriterions\IsRoomExistsCriterion.cs" />
     <Compile Include="Criterions\RoomCriterions\RemoveRoomCriterion.cs" />
     <Compile Include="Criterions\RoomCriterions\CreateRoomCriterion.cs" />
+    <Compile Include="Criterions\RoomEventsCriterions\GetRoomEventsCriterion.cs" />
+    <Compile Include="Criterions\RoomEventsCriterions\SaveRoomEventCriterion.cs" />
     <Compile Include="Infrastructure\ClientModels\ResultBase.cs" />
     <Compile Include="Infrastructure\ClientModels\FailResult.cs" />
     <Compile Include="Infrastructure\ClientModels\SuccessResult.cs" />
@@ -313,6 +329,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FurnitureQueriesSql.resx</DependentUpon>
     </Compile>
+    <Compile Include="Queries\RoomEventQueries\GetRoomEventsQuery.cs" />
+    <Compile Include="Queries\RoomEventQueries\SaveRoomEventQuery.cs" />
+    <Compile Include="Queries\RoomEventQueries\Sql\RoomEventQueriesSql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RoomEventQueriesSql.resx</DependentUpon>
+    </Compile>
     <Compile Include="Queries\RoomQueries\GetRoomsByDateQuery.cs" />
     <Compile Include="Queries\RoomQueries\GetRoomsByNamesQuery.cs" />
     <Compile Include="Queries\RoomQueries\GetRoomByNameAndDateQuery.cs" />
@@ -325,22 +348,25 @@
       <DependentUpon>RoomQueriesSql.resx</DependentUpon>
     </Compile>
     <Compile Include="WebHandlers\FurnitureWebHandler.cs" />
+    <Compile Include="WebHandlers\HistoryWebHandler.cs" />
     <Compile Include="WebHandlers\HomeWebHandler.cs" />
     <Compile Include="WebHandlers\IFurnitureWebHandler.cs" />
+    <Compile Include="WebHandlers\IHistoryWebHandler.cs" />
     <Compile Include="WebHandlers\IHomeWebHandler.cs" />
     <Compile Include="WebHandlers\IRoomWebHandler.cs" />
     <Compile Include="WebHandlers\Mappers\IRoomMapper.cs" />
     <Compile Include="WebHandlers\Mappers\RoomMapper.cs" />
     <Compile Include="WebHandlers\RoomWebHandler.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ErrorsHandling\" />
-    <Folder Include="Queries\RoomEventQueries\Sql\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Business\RoomEvents\RoomEventMessage.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RoomEventMessage.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Queries\DatabaseInitialization\MainDbInitializationQueries.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>MainDbInitializationQueries.Designer.cs</LastGenOutput>
@@ -348,6 +374,10 @@
     <EmbeddedResource Include="Queries\FurnitureQueries\Sql\FurnitureQueriesSql.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>FurnitureQueriesSql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Queries\RoomEventQueries\Sql\RoomEventQueriesSql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RoomEventQueriesSql.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Queries\RoomQueries\Sql\RoomQueriesSql.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using RoomsAndFurniture.Web.Business.Rooms;
 using RoomsAndFurniture.Web.Criterions.FurnitureCriterions;
 using RoomsAndFurniture.Web.Domain;
@@ -12,7 +13,9 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
         private readonly IRoomReader roomReader;
         private readonly IQueryBuilder queryBuilder;
 
-        public FurnitureCreator(IRoomReader roomReader, IQueryBuilder queryBuilder)
+        public FurnitureCreator(
+            IRoomReader roomReader,
+            IQueryBuilder queryBuilder)
         {
             this.roomReader = roomReader;
             this.queryBuilder = queryBuilder;
@@ -40,6 +43,10 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
 
         public void Create(IList<Furniture> furnitureItems)
         {
+            if (!furnitureItems.Any())
+            {
+                return;
+            }
             var critreion = new CreateFurnitureItemsCriterion(furnitureItems);
             queryBuilder.Command<CreateFurnitureItemsCriterion>().Proceed(critreion);
         }

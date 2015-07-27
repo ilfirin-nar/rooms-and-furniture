@@ -1,4 +1,5 @@
 ﻿using System;
+using RoomsAndFurniture.Web.Business.RoomEvents;
 using RoomsAndFurniture.Web.Business.Rooms;
 using RoomsAndFurniture.Web.Business.Rooms.Exceptions;
 using RoomsAndFurniture.Web.Domain;
@@ -12,19 +13,22 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
         private readonly IFurnitureUpdater updater;
         private readonly IRoomReader roomReader;
         private readonly IRoomChecker roomChecker;
+        private readonly IRoomEventLogger roomEventLogger;
 
         public FurnitureMover(
             IFurnitureReader reader,
             IFurnitureCreator creator,
             IFurnitureUpdater updater,
             IRoomReader roomReader,
-            IRoomChecker roomChecker)
+            IRoomChecker roomChecker,
+            IRoomEventLogger roomEventLogger)
         {
             this.reader = reader;
             this.creator = creator;
             this.updater = updater;
             this.roomReader = roomReader;
             this.roomChecker = roomChecker;
+            this.roomEventLogger = roomEventLogger;
         }
 
         public Furniture Move(string type, string roomNameFrom, string roomNameTo, DateTime date)
@@ -33,8 +37,11 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
             CheckRooms(roomNameFrom, roomNameTo, date);
             var furnitureCount = furnitureFrom.Count;
             RemoveFurnitureFromFirstRoom(furnitureFrom, date);
+            roomEventLogger.LogMoveFurnitureOut(date, roomNameTo, roomNameFrom, furnitureCount, furnitureFrom);
             var furnitureTo = reader.GetClosestLeftByDate(type, date, roomNameTo);
-            return SetFurnitureToSecondRoom(furnitureFrom, furnitureTo, date, roomNameTo, furnitureCount);
+            var result = SetFurnitureToSecondRoom(furnitureFrom, furnitureTo, date, roomNameTo, furnitureCount);
+            roomEventLogger.LogMoveFurnitureIn(date, roomNameTo, roomNameFrom, furnitureCount, furnitureTo);
+            return result;
         }
 
         private void CheckRooms(string roomNameFrom, string roomNameTo, DateTime date)

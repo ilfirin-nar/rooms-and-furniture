@@ -1,5 +1,6 @@
 ﻿using System;
 using RoomsAndFurniture.Web.Business.Furnitures;
+using RoomsAndFurniture.Web.Business.RoomEvents;
 using RoomsAndFurniture.Web.Business.Rooms.Exceptions;
 using RoomsAndFurniture.Web.Criterions.RoomCriterions;
 using RoomsAndFurniture.Web.Domain;
@@ -11,15 +12,18 @@ namespace RoomsAndFurniture.Web.Business.Rooms
     {
         private readonly IRoomChecker checker;
         private readonly IFurnitureMultiMover furnitureMultiMover;
+        private readonly IRoomEventLogger roomEventLogger;
         private readonly IQueryBuilder queryBuilder;
 
         public RoomRemover(
             IRoomChecker checker,
             IFurnitureMultiMover furnitureMultiMover,
+            IRoomEventLogger roomEventLogger,
             IQueryBuilder queryBuilder)
         {
             this.checker = checker;
-            this.furnitureMultiMover = furnitureMultiMover;            
+            this.furnitureMultiMover = furnitureMultiMover;
+            this.roomEventLogger = roomEventLogger;
             this.queryBuilder = queryBuilder;
         }
 
@@ -31,7 +35,8 @@ namespace RoomsAndFurniture.Web.Business.Rooms
             }
             furnitureMultiMover.MoveAll(name, roomTo, date);
             var criterion = new RemoveRoomCriterion(new Room { Name = name, RemoveDate = date });
-            queryBuilder.Query<RemoveRoomCriterion, int>().Proceed(criterion);
+            queryBuilder.Query<RemoveRoomCriterion, bool>().Proceed(criterion);
+            roomEventLogger.LogRemoveRoom(date, name);
         }
     }
 }

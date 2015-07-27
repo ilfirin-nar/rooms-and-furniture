@@ -1,4 +1,5 @@
 ﻿using System;
+using RoomsAndFurniture.Web.Business.RoomEvents;
 using RoomsAndFurniture.Web.Domain;
 
 namespace RoomsAndFurniture.Web.Business.Furnitures
@@ -8,15 +9,18 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
         private readonly IFurnitureReader reader;
         private readonly IFurnitureCreator creator;
         private readonly IFurnitureUpdater updater;
+        private readonly IRoomEventLogger roomEventLogger;
 
         public FurnitureAmountIncreaser(
             IFurnitureReader reader,
             IFurnitureCreator creator,
-            IFurnitureUpdater updater)
+            IFurnitureUpdater updater,
+            IRoomEventLogger roomEventLogger)
         {
             this.reader = reader;
             this.creator = creator;
             this.updater = updater;
+            this.roomEventLogger = roomEventLogger;
         }
 
         public Furniture Increase(string type, DateTime date, string roomName, int increaseBy)
@@ -31,7 +35,9 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
                 return creator.Create(type, date, roomName, furniture.Count + increaseBy);
             }
             furniture.Count = furniture.Count + increaseBy;
-            return updater.Update(furniture);
+            var result = updater.Update(furniture);
+            roomEventLogger.LogAddFurniture(date, roomName, type, increaseBy);
+            return result;
         }
     }
 }

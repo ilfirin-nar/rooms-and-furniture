@@ -2,11 +2,11 @@
 {
     public enum RoomEventType
     {
-        CreateRoom,
-        RemoveRoom,
-        CreateFurniture,
-        MoveFurnitureIn,
-        MoveFurnitureOut,
-        RemoveFurniture
+        CreateRoom = 1,
+        RemoveRoom = 2,
+        AddFurniture = 3,
+        MoveFurnitureIn = 4,
+        MoveFurnitureOut = 5,
+        RemoveFurniture = 6
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using RoomsAndFurniture.Web.Business.RoomEvents;
 using RoomsAndFurniture.Web.Business.Rooms;
 using RoomsAndFurniture.Web.Business.Rooms.Exceptions;
 using RoomsAndFurniture.Web.Domain;
@@ -14,19 +15,22 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
         private readonly IFurnitureReader reader;
         private readonly IFurnitureCreator creator;
         private readonly IFurnitureUpdater updater;
+        private readonly IRoomEventLogger roomEventLogger;
 
         public FurnitureMultiMover(
             IRoomChecker roomChecker,
             IRoomReader roomReader,
             IFurnitureReader reader,
             IFurnitureCreator creator,
-            IFurnitureUpdater updater)
+            IFurnitureUpdater updater,
+            IRoomEventLogger roomEventLogger)
         {
             this.roomChecker = roomChecker;
             this.roomReader = roomReader;
             this.reader = reader;
             this.creator = creator;
             this.updater = updater;
+            this.roomEventLogger = roomEventLogger;
         }
 
         public void MoveAll(string roomFrom, string roomTo, DateTime date)

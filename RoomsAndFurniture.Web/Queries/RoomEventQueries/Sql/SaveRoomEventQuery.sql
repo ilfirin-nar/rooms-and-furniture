@@ -1,0 +1,1 @@
+insert into RoomEvent (Date, Type, Description) values (@Date, @Type, @Description);

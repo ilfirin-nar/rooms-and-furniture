@@ -5,7 +5,6 @@ using RoomsAndFurniture.Web.Business.Rooms.Exceptions;
 using RoomsAndFurniture.Web.Business.RoomStates;
 using RoomsAndFurniture.Web.Domain;
 using RoomsAndFurniture.Web.Infrastructure.ClientModels;
-using RoomsAndFurniture.Web.Infrastructure.Extensions;
 using RoomsAndFurniture.Web.Models;
 using RoomsAndFurniture.Web.Models.Results.Rooms;
 using RoomsAndFurniture.Web.WebHandlers.Mappers;
