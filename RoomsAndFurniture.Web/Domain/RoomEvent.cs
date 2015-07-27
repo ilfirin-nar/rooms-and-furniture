@@ -5,11 +5,11 @@ namespace RoomsAndFurniture.Web.Domain
 {
     public class RoomEvent
     {
-        public RoomEvent(DateTime date, RoomEventType type, string descripton)
+        public RoomEvent(DateTime date, RoomEventType type, string description)
         {
             Date = date;
             Type = type;
-            Descripton = descripton;
+            Description = description;
         }
 
         public int Id { get; set; }
@@ -18,6 +18,6 @@ namespace RoomsAndFurniture.Web.Domain
 
         public RoomEventType Type { get; set; }
 
-        public string Descripton { get; set; }
+        public string Description { get; set; }
     }
 }

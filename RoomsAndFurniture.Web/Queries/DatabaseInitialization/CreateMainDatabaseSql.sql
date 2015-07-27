@@ -20,10 +20,7 @@ create table if not exists Furniture (
 create table if not exists RoomEvent (
     Id integer not null,
     Date datetime not null,
-    RoomEventType tinyint not null,
-    RoomId integer not null,
-    FurnitureId integer not null,
-    constraint PF_RoomEvent primary key (Id),
-    constraint FK_RoomEvent_RoomId_Room_Id foreign key (RoomId) references Room(Id),
-    constraint FK_RoomEvent_FurnitureId_Furniture_Id foreign key (FurnitureId) references Furniture(Id)
+    Type int not null,
+    Description varchar(100) not null,
+    constraint PF_RoomEvent primary key (Id)
 );
