@@ -13,10 +13,10 @@ namespace RoomsAndFurniture.Web.WebHandlers
                 Rooms = new List<RoomClientModel> {
                     new RoomClientModel
                     {
-                        Id = 1,
-                        CreateDate = DateTime.Now,
-                        Name = "Гостинная",
-                        Furniture = new List<FurnitureClientModel>
+                        RoomId = 1,
+                        Date = DateTime.Now,
+                        RoomName = "Гостинная",
+                        FurnitureItems = new List<FurnitureClientModel>
                         {
                             new FurnitureClientModel { Id = 1, Count = 10, Type = "Стол"},
                             new FurnitureClientModel { Id = 2, Count = 436, Type = "Стул"},
@@ -26,10 +26,10 @@ namespace RoomsAndFurniture.Web.WebHandlers
                     },
                     new RoomClientModel
                     {
-                        Id = 2,
-                        CreateDate = DateTime.Now,
-                        Name = "Спальня",
-                        Furniture = new List<FurnitureClientModel>
+                        RoomId = 2,
+                        Date = DateTime.Now,
+                        RoomName = "Спальня",
+                        FurnitureItems = new List<FurnitureClientModel>
                         {
                             new FurnitureClientModel { Id = 5, Count = 3, Type = "Стол"},
                             new FurnitureClientModel { Id = 6, Count = 35, Type = "Стул"},

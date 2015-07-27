@@ -13,9 +13,9 @@ namespace RoomsAndFurniture.Web.Controllers
             this.handler = handler;
         }
 
-        public ActionResult Get(DateTime date)
+        public ActionResult Get(DateTime? date = null)
         {
-            throw new NotImplementedException();
+            return Json(handler.Get(date));
         }
 
         public ActionResult Create(string name, DateTime date)
@@ -25,7 +25,7 @@ namespace RoomsAndFurniture.Web.Controllers
 
         public ActionResult Remove(string name, string moveFurnitureTo, DateTime date)
         {
-            throw new NotImplementedException();
+            return Json(handler.Remove(name, moveFurnitureTo, date));
         }
     }
 }

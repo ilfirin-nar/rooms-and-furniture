@@ -16,8 +16,8 @@ namespace RoomsAndFurniture.Web.Tests.Room
             Assert.AreNotEqual(null, result);
             var resultData = result.Data;
             Assert.AreNotEqual(null, resultData);
-            Assert.AreEqual(roomName, resultData.Name);
-            Assert.AreNotEqual(0, resultData.Id);
+            Assert.AreEqual(roomName, resultData.RoomName);
+            Assert.AreNotEqual(0, resultData.RoomId);
         }
 
         [Test]

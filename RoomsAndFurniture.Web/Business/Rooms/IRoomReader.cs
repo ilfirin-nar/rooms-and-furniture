@@ -9,6 +9,8 @@ namespace RoomsAndFurniture.Web.Business.Rooms
     {
         Room Get(string name, DateTime date);
 
-        IDictionary<string, Room> GetRooms(params string[] roomNames);
+        IList<Room> Get(DateTime date);
+
+        IDictionary<string, Room> Get(params string[] roomNames);
     }
 }

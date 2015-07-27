@@ -32,7 +32,7 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
         public void MoveAll(string roomFrom, string roomTo, DateTime date)
         {
             CheckRooms(roomFrom, roomTo, date);
-            var rooms = roomReader.GetRooms(roomFrom, roomTo);
+            var rooms = roomReader.Get(roomFrom, roomTo);
             var furnitureItemsFrom = reader.GetFurnitureItems(rooms[roomFrom], date);
             var furnitureItemsTo = reader.GetFurnitureItems(furnitureItemsFrom.Select(f => f.Type).ToList(), rooms[roomTo], date);
             SetFurnitureToSecondRoom(furnitureItemsFrom, furnitureItemsTo, rooms[roomTo], date);

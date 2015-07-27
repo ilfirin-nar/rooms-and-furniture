@@ -5,12 +5,12 @@ namespace RoomsAndFurniture.Web.Models
 {
     public class RoomClientModel
     {
-        public int Id { get; set; }
+        public int RoomId { get; set; }
 
-        public DateTime CreateDate { get; set; }
+        public DateTime Date { get; set; }
 
-        public string Name { get; set; }
+        public string RoomName { get; set; }
 
-        public IList<FurnitureClientModel> Furniture { get; set; }
+        public IList<FurnitureClientModel> FurnitureItems { get; set; }
     }
 }

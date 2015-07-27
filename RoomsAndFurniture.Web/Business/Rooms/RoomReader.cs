@@ -28,7 +28,13 @@ namespace RoomsAndFurniture.Web.Business.Rooms
             return room;
         }
 
-        public IDictionary<string, Room> GetRooms(params string[] roomNames)
+        public IList<Room> Get(DateTime date)
+        {
+            var criterion = new GetRoomsByDateCriterion(date);
+            return queryBuilder.Query<GetRoomsByDateCriterion, IList<Room>>().Proceed(criterion);
+        }
+
+        public IDictionary<string, Room> Get(params string[] roomNames)
         {
             var criterion = new GetRoomsByNamesCriterion(roomNames);
             var list = queryBuilder.Query<GetRoomsByNamesCriterion, IList<Room>>().Proceed(criterion);

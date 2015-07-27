@@ -15,7 +15,7 @@
 
     }
 
-    public class SuccessResult<T> : ResultBase<T> where T : new()
+    public class SuccessResult<T> : ResultBase<T>
     {
         public SuccessResult()
         {

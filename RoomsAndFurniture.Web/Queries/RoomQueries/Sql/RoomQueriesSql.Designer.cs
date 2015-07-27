@@ -85,6 +85,15 @@ namespace RoomsAndFurniture.Web.Queries.RoomQueries.Sql {
         /// <summary>
         ///   Looks up a localized string similar to select * from Room where Name in @Names.
         /// </summary>
+        internal static string GetRoomsByDateQuery {
+            get {
+                return ResourceManager.GetString("GetRoomsByDateQuery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to select * from Room where Name in @Names.
+        /// </summary>
         internal static string GetRoomsByNamesQuery {
             get {
                 return ResourceManager.GetString("GetRoomsByNamesQuery", resourceCulture);
@@ -106,8 +115,13 @@ namespace RoomsAndFurniture.Web.Queries.RoomQueries.Sql {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to insert into Room (CreateDate, Name) values (@CreateDate, @Name);
-        ///select last_insert_rowid();.
+        ///   Looks up a localized string similar to update Room
+        ///    set
+        ///        RemoveDate = @RemoveDate,
+        ///        IsDeleted = 1
+        ///    where
+        ///        Name = @Name and
+        ///        CreateDate &lt;= @RemoveDate.
         /// </summary>
         internal static string RemoveRoomQuery {
             get {

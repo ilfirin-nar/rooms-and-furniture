@@ -14,5 +14,7 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
         IList<Furniture> GetFurnitureItems(Room roomFrom, DateTime date);
 
         IList<Furniture> GetFurnitureItems(IList<string> furnitureTypes, Room room, DateTime date);
+
+        IList<Furniture> Get(IList<int> roomsIds, DateTime date);
     }
 }

@@ -133,6 +133,9 @@
   <data name="GetFurnitureItemsByRoomIdAndDateQuery" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>getfurnitureitemsbyroomidanddatequery.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
   </data>
+  <data name="GetFurnitureItemsByRoomsIdsAndDateQuery" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>getfurnitureitemsbyroomsidsanddatequery.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
+  </data>
   <data name="UpdateFurnitureQuery" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>updatefurniturequery.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
   </data>

@@ -36,6 +36,12 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
             return furnitureFrom;
         }
 
+        public IList<Furniture> Get(IList<int> roomsIds, DateTime date)
+        {
+            var critretion = new GetFurnitureItemsByRoomsIdsAndDateCriterion(roomsIds, date);
+            return queryBuilder.Query<GetFurnitureItemsByRoomsIdsAndDateCriterion, IList<Furniture>>().Proceed(critretion);
+        }
+
         public IList<Furniture> GetFurnitureItems(Room room, DateTime date)
         {
             var critretion = new GetFurnitureItemsByRoomIdAndDateCriterion(room.Id, date);

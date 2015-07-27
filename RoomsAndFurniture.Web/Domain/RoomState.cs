@@ -7,8 +7,10 @@ namespace RoomsAndFurniture.Web.Domain
     {
         public int RoomId { get; set; }
 
+        public string RoomName { get; set; }
+
         public DateTime Date { get; set; }
 
-        public IList<Furniture> FurnitureState { get; set; }
+        public IList<Furniture> FurnitureItems { get; set; }
     }
 }

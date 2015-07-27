@@ -7,7 +7,7 @@
         public string Message { get; set; }
     }
 
-    public abstract class ResultBase<T> : ResultBase where T : new()
+    public abstract class ResultBase<T> : ResultBase
     {
         public T Data { get; set; }
     }

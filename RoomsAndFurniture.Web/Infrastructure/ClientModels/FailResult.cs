@@ -14,7 +14,7 @@
         }
     }
 
-    public class FailResult<T> : ResultBase<T> where T : new()
+    public class FailResult<T> : ResultBase<T>
     {
         public FailResult()
         {

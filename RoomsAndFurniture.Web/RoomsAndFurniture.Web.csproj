@@ -144,10 +144,12 @@
     </Content>
     <Content Include="Queries\FurnitureQueries\Sql\CreateFurnitureItemsQuery.sql" />
     <Content Include="Queries\FurnitureQueries\Sql\GetFurnitureItemsByRoomIdAndDateAndTypesQuery.sql" />
+    <Content Include="Queries\FurnitureQueries\Sql\GetFurnitureItemsByRoomsIdsAndDateQuery.sql" />
     <Content Include="Queries\FurnitureQueries\Sql\GetFurnitureItemsByRoomIdAndDateQuery.sql" />
     <Content Include="Queries\FurnitureQueries\Sql\GetFurnitureByTypeAndDateAndRoomNameQuery.sql" />
     <Content Include="Queries\FurnitureQueries\Sql\UpdateFurnitureQuery.sql" />
     <Content Include="Queries\FurnitureQueries\Sql\CreateFurnitureQuery.sql" />
+    <Content Include="Queries\RoomQueries\Sql\GetRoomsByDateQuery.sql" />
     <Content Include="Queries\RoomQueries\Sql\RemoveRoomQuery.sql" />
     <Content Include="Queries\RoomQueries\Sql\CreateRoomQuery.sql" />
     <Content Include="Queries\RoomQueries\Sql\GetRoomsByNamesQuery.sql" />
@@ -213,6 +215,8 @@
     <Compile Include="Business\Furnitures\IFurnitureReader.cs" />
     <Compile Include="Business\Furnitures\IFurnitureAmountIncreaser.cs" />
     <Compile Include="Business\Furnitures\IFurnitureUpdater.cs" />
+    <Compile Include="Business\RoomStates\IRoomStateReader.cs" />
+    <Compile Include="Business\RoomStates\RoomStateReader.cs" />
     <Compile Include="Business\Rooms\Exceptions\RoomNotFoundException.cs" />
     <Compile Include="Business\Rooms\IRoomReader.cs" />
     <Compile Include="Business\Rooms\IRoomRemover.cs" />
@@ -222,9 +226,11 @@
     <Compile Include="Criterions\FurnitureCriterions\GetFurnitureByTypeAndDateAndRoomNameCriterion.cs" />
     <Compile Include="Criterions\FurnitureCriterions\GetFurnitureItemsByRoomIdAndDateAndTypesCriterion.cs" />
     <Compile Include="Criterions\FurnitureCriterions\GetFurnitureItemsByRoomIdAndDateCriterion.cs" />
+    <Compile Include="Criterions\FurnitureCriterions\GetFurnitureItemsByRoomsIdsAndDateCriterion.cs" />
     <Compile Include="Criterions\FurnitureCriterions\UpdateFurnitureItemsCriterion.cs" />
     <Compile Include="Criterions\FurnitureCriterions\UpdateFurnitureCriterion.cs" />
     <Compile Include="Criterions\FurnitureCriterions\CreateFurnitureCriterion.cs" />
+    <Compile Include="Criterions\RoomCriterions\GetRoomsByDateCriterion.cs" />
     <Compile Include="Criterions\RoomCriterions\GetRoomsByNamesCriterion.cs" />
     <Compile Include="Criterions\RoomCriterions\GetRoomByNameAndDate.cs" />
     <Compile Include="Criterions\RoomCriterions\IsRoomExistsCriterion.cs" />
@@ -298,6 +304,7 @@
     <Compile Include="Queries\FurnitureQueries\GetFurnitureItemsByRoomIdAndDateAndTypesQuery.cs" />
     <Compile Include="Queries\FurnitureQueries\GetFurnitureItemsByRoomIdAndDateQuery.cs" />
     <Compile Include="Queries\FurnitureQueries\GetFurnitureByTypeAndDateAndRoomNameQuery.cs" />
+    <Compile Include="Queries\FurnitureQueries\GetFurnitureItemsByRoomsIdsAndDateQuery.cs" />
     <Compile Include="Queries\FurnitureQueries\UpdateFurnitureItemsQuery.cs" />
     <Compile Include="Queries\FurnitureQueries\UpdateFurnitureQuery.cs" />
     <Compile Include="Queries\FurnitureQueries\CreateFurnitureQuery.cs" />
@@ -306,6 +313,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FurnitureQueriesSql.resx</DependentUpon>
     </Compile>
+    <Compile Include="Queries\RoomQueries\GetRoomsByDateQuery.cs" />
     <Compile Include="Queries\RoomQueries\GetRoomsByNamesQuery.cs" />
     <Compile Include="Queries\RoomQueries\GetRoomByNameAndDateQuery.cs" />
     <Compile Include="Queries\RoomQueries\RemoveRoomQuery.cs" />
@@ -321,12 +329,13 @@
     <Compile Include="WebHandlers\IFurnitureWebHandler.cs" />
     <Compile Include="WebHandlers\IHomeWebHandler.cs" />
     <Compile Include="WebHandlers\IRoomWebHandler.cs" />
+    <Compile Include="WebHandlers\Mappers\IRoomMapper.cs" />
+    <Compile Include="WebHandlers\Mappers\RoomMapper.cs" />
     <Compile Include="WebHandlers\RoomWebHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ErrorsHandling\" />
     <Folder Include="Queries\RoomEventQueries\Sql\" />
-    <Folder Include="Queries\RoomStateQueries\Sql\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
