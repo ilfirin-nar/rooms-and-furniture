@@ -1,2 +1,2 @@
-# rooms-and-furniture
-ТЗ к 24.07.2015
+﻿# rooms-and-furniture
+Тестовое задание от 21.07.2015
