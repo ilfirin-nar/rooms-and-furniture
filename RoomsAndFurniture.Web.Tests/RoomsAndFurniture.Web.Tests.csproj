@@ -58,6 +58,7 @@
     <Compile Include="Furniture\CreateFurnitureTests.cs" />
     <Compile Include="History\GetHistoryTest.cs" />
     <Compile Include="Room\RemoveRoomTests.cs" />
+    <Compile Include="TestHelper.cs" />
     <Compile Include="TestsServiceInstaller.cs" />
     <Compile Include="TransactionForTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

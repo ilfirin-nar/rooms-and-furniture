@@ -27,7 +27,7 @@ namespace RoomsAndFurniture.Web.Tests
 
         protected static long Timestamp
         {
-            get { return (int) (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds; }
+            get { return (long)(DateTime.UtcNow.Subtract(DateTime.Today)).TotalMilliseconds; }
         }
 
         protected TestsBase()
