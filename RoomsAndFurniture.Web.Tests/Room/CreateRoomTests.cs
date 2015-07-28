@@ -21,7 +21,7 @@ namespace RoomsAndFurniture.Web.Tests.Room
         }
 
         [Test]
-        public void Create_AlreadyExistingRoom_AlreadyExists()
+        public void Create_AlreadyExistingRoom_Fail()
         {
             var roomName = string.Format("Test Room {0}", Timestamp);
             var handler = Container.GetInstance<IRoomWebHandler>();

@@ -10,6 +10,6 @@ namespace RoomsAndFurniture.Web.Criterions.FurnitureCriterions
             Furniture = furniture;
         }
 
-        public Furniture Furniture { get; private set; } 
+        public Furniture Furniture { get; private set; }
     }
 }

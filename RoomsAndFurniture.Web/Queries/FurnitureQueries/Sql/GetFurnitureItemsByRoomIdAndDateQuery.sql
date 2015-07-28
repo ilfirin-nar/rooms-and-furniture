@@ -3,4 +3,4 @@ select Id, max(Date) as Date, Type, RoomId, Count
     where
         Date <= @Date and
         RoomId = @RoomId
-    group by Type, Id, Count, RoomId
+    group by RoomId, Type

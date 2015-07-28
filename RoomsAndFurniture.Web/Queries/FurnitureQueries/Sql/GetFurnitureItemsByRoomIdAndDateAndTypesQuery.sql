@@ -4,4 +4,4 @@ select Id, Type, max(Date), RoomId, Count
         Date <= @Date and
         RoomId = @RoomId and
         Type in (select from @FurnitureTypes)
-    group by RoomId, Type, Count, Id
+    group by RoomId, Type
