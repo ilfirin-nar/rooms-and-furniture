@@ -1,1 +1,1 @@
-select * from RoomEvent order by Date desc
+select * from RoomEvent order by Date desc, Id desc

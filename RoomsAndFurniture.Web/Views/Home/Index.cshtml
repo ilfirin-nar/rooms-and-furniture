@@ -7,7 +7,7 @@
 
 <div class="roomsContent content">
     <div class="roomsFilters">
-        <input class="dateFilter" type="text" placeholder="Выберите дату" />
+        <input class="dateFilter" type="text" placeholder="Выберите дату" value="@ViewBag.CurrentDate" />
     </div>
     <table class="roomsTable contentTable">
         <thead>
@@ -54,6 +54,10 @@
         }
         </tbody>
     </table>
+    @if (Model.Rooms.Count == 0)
+    {
+        <div class="roomsNotFound">Комнат на дату @ViewBag.CurrentDate не существует</div>
+    }
     <div class="linkPanel">
         <a class="addRoomLink">+ Создать комнату</a>
     </div>

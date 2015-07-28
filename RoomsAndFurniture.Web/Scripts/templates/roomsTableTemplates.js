@@ -51,6 +51,9 @@
                     Date: data.Date,
                     Furniture: formFrunitureHtml(data.FurnitureItems)
                 });
+            },
+            formRoomsNotFoundHtml: function(dateFilter) {
+                return '<div class="roomsNotFound">Комнат на дату ' + dateFilter.split(' ')[0] + ' не существует</div>';
             }
         };
     })();

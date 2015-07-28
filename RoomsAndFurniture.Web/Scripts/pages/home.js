@@ -17,7 +17,12 @@
 
     function initFilter() {
         var input = $('.dateFilter');
-        input.datepicker({ onSelect: reloadTable });
+        input.datepicker({
+            onSelect: function (dateFilter) {
+                reloadTable(dateFilter);
+                window.history.pushState(dateFilter, "DateFilter", '/?date=' + dateFilter.split(' ')[0]);
+            }
+        });
     }
     
     function initDialogs() {
@@ -25,6 +30,7 @@
     }
 
     function addRowToRoomsTable(data) {
+        $('.roomsNotFound').remove();
         var row = $(templates.formRoomsTableRowHtml(data));
         tableBody.append(row);
     }
@@ -33,6 +39,15 @@
         $.get(urls.GetRooms, { date: dateFilter }, function (data) {
             if (data.IsSuccess) {
                 var rowHtml = '';
+                if (data.Data === null || data.Data === undefined || data.Data.length === 0) {
+                    if ($('.roomsNotFound').length > 0) {
+                        return;
+                    }
+                    tableBody.closest('table').after(templates.formRoomsNotFoundHtml(dateFilter));
+                    tableBody.html('');
+                    return;
+                }
+                $('.roomsNotFound').remove();
                 for (var index = 0; index < data.Data.length; index++) {
                     rowHtml += templates.formRoomsTableRowHtml(data.Data[index]);
                 }

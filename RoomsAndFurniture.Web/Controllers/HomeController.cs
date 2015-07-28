@@ -17,6 +17,7 @@ namespace RoomsAndFurniture.Web.Controllers
         public ActionResult Index(DateTime? date)
         {
             var roomsClientsList = handler.Get(date).Data;
+            ViewBag.CurrentDate = date.HasValue ? date.Value.ToString("yyyy-MM-dd") : string.Empty;
             return View(new HomeClientModel(roomsClientsList));
         }
 
