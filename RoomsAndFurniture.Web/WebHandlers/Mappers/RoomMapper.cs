@@ -13,7 +13,7 @@ namespace RoomsAndFurniture.Web.WebHandlers.Mappers
             return new RoomClientModel
             {
                 RoomId = room.Id,
-                Date = room.CreateDate,
+                Date = room.CreateDate.ToString("dd'.'MM'.'yyyy"),
                 RoomName = room.Name
             };
         }

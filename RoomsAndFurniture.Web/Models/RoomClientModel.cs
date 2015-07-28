@@ -7,7 +7,7 @@ namespace RoomsAndFurniture.Web.Models
     {
         public int RoomId { get; set; }
 
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
 
         public string RoomName { get; set; }
 

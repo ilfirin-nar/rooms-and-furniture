@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using NUnit.Framework;
-using RoomsAndFurniture.Web.Models;
+
 using RoomsAndFurniture.Web.WebHandlers;
 
 namespace RoomsAndFurniture.Web.Tests.Room

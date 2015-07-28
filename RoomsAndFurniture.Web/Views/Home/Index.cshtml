@@ -17,11 +17,11 @@
         @foreach (var room in Model.Rooms)
         {
             <tr>
-                <td class="itemName">@room.Name</td>
-                <td class="itemDate">@room.CreateDate.ToString("dd'.'MM'.'yyyy")</td>
+                <td class="itemName">@room.RoomName</td>
+                <td class="itemDate">@room.Date</td>
                 <td>
                     <ul>
-                        @foreach (var item in room.Furniture)
+                        @foreach (var item in room.FurnitureItems)
                         {
                             <li>
                                 @item.Type (@item.Count шт)

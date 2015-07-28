@@ -14,7 +14,7 @@ namespace RoomsAndFurniture.Web.WebHandlers
                     new RoomClientModel
                     {
                         RoomId = 1,
-                        Date = DateTime.Now,
+                        Date = DateTime.Now.ToString("dd'.'MM'.'yyyy"),
                         RoomName = "Гостинная",
                         FurnitureItems = new List<FurnitureClientModel>
                         {
@@ -27,7 +27,7 @@ namespace RoomsAndFurniture.Web.WebHandlers
                     new RoomClientModel
                     {
                         RoomId = 2,
-                        Date = DateTime.Now,
+                        Date = DateTime.Now.ToString("dd'.'MM'.'yyyy"),
                         RoomName = "Спальня",
                         FurnitureItems = new List<FurnitureClientModel>
                         {
