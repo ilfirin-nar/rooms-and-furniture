@@ -12,6 +12,6 @@ namespace RoomsAndFurniture.Web.WebHandlers
 
         ResultBase Remove(string name, string roomTo, DateTime date);
 
-        ResultBase<IList<RoomClientModel>> Get(DateTime? date);
+        ResultBase<IList<RoomClientModel>> Get(DateTime? date = null);
     }
 }

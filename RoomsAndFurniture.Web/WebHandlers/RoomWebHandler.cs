@@ -30,7 +30,7 @@ namespace RoomsAndFurniture.Web.WebHandlers
             this.mapper = mapper;
         }
 
-        public ResultBase<IList<RoomClientModel>> Get(DateTime? date)
+        public ResultBase<IList<RoomClientModel>> Get(DateTime? date = null)
         {
             if (!date.HasValue)
             {
