@@ -15,17 +15,17 @@ namespace RoomsAndFurniture.Web.Controllers
 
         public ActionResult Get(DateTime? date = null)
         {
-            return Json(handler.Get(date));
+            return Json(handler.Get(date), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Create(string name, DateTime date)
         {
-            return Json(handler.Create(name, date));
+            return Json(handler.Create(name, date), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Remove(string name, string moveFurnitureTo, DateTime date)
         {
-            return Json(handler.Remove(name, moveFurnitureTo, date));
+            return Json(handler.Remove(name, moveFurnitureTo, date), JsonRequestBehavior.AllowGet);
         }
     }
 }

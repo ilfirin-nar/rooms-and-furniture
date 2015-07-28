@@ -20,10 +20,14 @@ namespace RoomsAndFurniture.Web.Business.RoomStates
             this.furnitureReader = furnitureReader;
         }
 
-        public IList<RoomState> Get(DateTime date)
+        public IList<RoomState> Get(DateTime? date = null)
         {
-            var rooms = roomReader.Get(date);
-            return rooms.Any() ? GetRoomsStates(rooms, date) : new List<RoomState>();
+            if (!date.HasValue)
+            {
+                date = DateTime.Today;
+            }
+            var rooms = roomReader.Get(date.Value);
+            return rooms.Any() ? GetRoomsStates(rooms, date.Value) : new List<RoomState>();
         }
 
         private IList<RoomState> GetRoomsStates(IList<Room> rooms, DateTime date)
@@ -33,7 +37,7 @@ namespace RoomsAndFurniture.Web.Business.RoomStates
             return rooms.Select(room => new RoomState
             {
                 RoomId = room.Id,
-                Date = date,
+                Date = room.CreateDate,
                 RoomName = room.Name,
                 FurnitureItems = furnitureItems.Where(f => f.RoomId == room.Id).ToList()
             }).ToList();

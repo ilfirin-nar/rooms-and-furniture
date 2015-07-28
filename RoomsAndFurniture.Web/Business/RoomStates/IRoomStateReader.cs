@@ -7,6 +7,6 @@ namespace RoomsAndFurniture.Web.Business.RoomStates
 {
     public interface IRoomStateReader : IBusinessService
     {
-        IList<RoomState> Get(DateTime date);
+        IList<RoomState> Get(DateTime? date = null);
     }
 }

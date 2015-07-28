@@ -32,11 +32,7 @@ namespace RoomsAndFurniture.Web.WebHandlers
 
         public ResultBase<IList<RoomClientModel>> Get(DateTime? date = null)
         {
-            if (!date.HasValue)
-            {
-                date = DateTime.Today;
-            }
-            var roomsStates = roomStateReader.Get(date.Value);
+            var roomsStates = roomStateReader.Get(date);
             var result = mapper.Map(roomsStates);
             return new SuccessResult<IList<RoomClientModel>>(result);
         }

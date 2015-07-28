@@ -3,6 +3,8 @@
     ViewBag.Title = "Главная";
 }
 
+@Scripts.Render("~/Scripts/Home")
+
 <div class="roomsContent content">
     <table class="roomsTable contentTable">
         <thead>
@@ -21,14 +23,21 @@
                 <td class="itemDate">@room.Date</td>
                 <td>
                     <ul>
-                        @foreach (var item in room.FurnitureItems)
+                        @if (room.FurnitureItems.Count != 0)
                         {
-                            <li>
-                                @item.Type (@item.Count шт)
-                                <div class="furnitureControls">
-                                    <a class="addFurniture" href="/Furniture/Create">+ Добавить</a> <a class="removeFurniture" href="/Furniture/Remove">- Удалить</a> <a class="moveFurniture">Переместить</a>
-                                </div>
-                            </li>
+                            foreach (var item in room.FurnitureItems)
+                            {
+                                <li>
+                                    @item.Type (@item.Count шт)
+                                    <div class="furnitureControls">
+                                        <a class="addFurniture" href="/Furniture/Create">+ Добавить</a> <a class="removeFurniture" href="/Furniture/Remove">- Удалить</a> <a class="moveFurniture">Переместить</a>
+                                    </div>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li class="emptyRoom">Комната пуста</li>
                         }
                         <li>
                             <a class="createFurnitureLink">+ Добавить мебель</a>
@@ -36,15 +45,15 @@
                     </ul>
                 </td>
                 <td class="itemDelete">
-                    <a class="removeRoomLink">Удалить комнату от</a>
-                    <input type="text" class="deleteRoomDatepicker">
+                    <a class="removeRoomLink">Удалить</a>
                 </td>
             </tr>
         }
         </tbody>
     </table>
-    <div class="buttonPanel">
-        @Html.ActionLink("+ Создать комнату на", "Create", "Room")
-        <input type="text" id="createRoomDatepicker">
+    <div class="linkPanel">
+        <a class="addRoomLink">+ Создать комнату</a>
     </div>
 </div>
+
+@Html.Partial("AddRoomDialog")

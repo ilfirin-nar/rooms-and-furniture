@@ -26,6 +26,7 @@ namespace RoomsAndFurniture.Web.WebHandlers.Mappers
         public RoomClientModel Map(RoomState item)
         {
             var result = item.MapTo<RoomClientModel>();
+            result.Date = item.Date.ToString("dd'.'MM'.'yyyy");
             result.FurnitureItems = item.FurnitureItems.Select(i => i.MapTo<FurnitureClientModel>()).ToList();
             return result;
         }

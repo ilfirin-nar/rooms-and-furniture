@@ -24,6 +24,23 @@
     transition: all 0.5s ease;
 }
 
+.roomsContent .roomsTable tbody ul li.emptyRoom {
+    font-style: italic;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: background-color 0.5s ease;
+}
+
+.roomsContent .roomsTable tbody ul li.emptyRoom:hover {
+    font-style: italic;
+    background-color: #fffdd1;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: background-color 0.5s ease;
+}
+
 .roomsContent .roomsTable tbody .createFurnitureLink {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -52,4 +69,9 @@
 
 .roomsContent .furnitureControls .moveFurniture {
     background-color: lightblue;
+}
+
+.roomsContent .linkPanel {
+    margin-left: 20px;
+    margin-top: 30px;
 }
