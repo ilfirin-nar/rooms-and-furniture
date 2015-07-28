@@ -15,7 +15,7 @@ namespace RoomsAndFurniture.Web
             bundles.Add(new ScriptBundle("~/Scripts/Home").Include(
                 "~/Scripts/templates/roomsTableTemplates.js",
                 "~/Scripts/pages/home.js",
-                "~/Scripts/dialogs/addRoomDialog.js"));
+                "~/Scripts/dialogs/*.js"));
             bundles.Add(new ScriptBundle("~/Scripts/History").Include("~/Scripts/pages/history.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/Jquery").Include(

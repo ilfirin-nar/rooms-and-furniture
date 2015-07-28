@@ -160,6 +160,7 @@
     <Content Include="Queries\RoomQueries\Sql\GetRoomsByNamesQuery.sql" />
     <Content Include="Queries\RoomQueries\Sql\GetRoomByNameAndDateCriterionQuery.sql" />
     <Content Include="Queries\RoomQueries\Sql\IsRoomExistsQuery.sql" />
+    <Content Include="Scripts\dialogs\removeRoomDialog.js" />
     <Content Include="Scripts\dialogs\addRoomDialog.js" />
     <Content Include="Scripts\urls.js" />
     <Content Include="Scripts\pages\history.js" />
@@ -199,6 +200,7 @@
     <Content Include="Views\History\Index.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\AddRoomDialog.cshtml" />
+    <Content Include="Views\Home\RemoveRoomDialog.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

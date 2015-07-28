@@ -44,3 +44,11 @@
 .ui-dialog .ui-state-error {
     padding: .3em;
 }
+
+.addRoomDialog {
+    display: none;
+}
+
+.removeRoomDialog {
+    display: none;
+}

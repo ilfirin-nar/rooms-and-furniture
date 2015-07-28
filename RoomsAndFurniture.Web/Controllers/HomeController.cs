@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using RoomsAndFurniture.Web.Models;
 using RoomsAndFurniture.Web.WebHandlers;
 
@@ -13,9 +14,9 @@ namespace RoomsAndFurniture.Web.Controllers
             this.handler = handler;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(DateTime? date)
         {
-            var roomsClientsList = handler.Get().Data;
+            var roomsClientsList = handler.Get(date).Data;
             return View(new HomeClientModel(roomsClientsList));
         }
 

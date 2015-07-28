@@ -6,6 +6,9 @@
 @Scripts.Render("~/Scripts/Home")
 
 <div class="roomsContent content">
+    <div class="roomsFilters">
+        <input class="dateFilter" type="text" placeholder="Выберите дату" />
+    </div>
     <table class="roomsTable contentTable">
         <thead>
         <tr>
@@ -57,3 +60,4 @@
 </div>
 
 @Html.Partial("AddRoomDialog")
+@Html.Partial("RemoveRoomDialog")
