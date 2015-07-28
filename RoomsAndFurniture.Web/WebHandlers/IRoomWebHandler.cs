@@ -8,10 +8,12 @@ namespace RoomsAndFurniture.Web.WebHandlers
 {
     public interface IRoomWebHandler : IWebHandler
     {
+        ResultBase<IList<RoomClientModel>> Get(DateTime? date = null);
+
         ResultBase<RoomClientModel> Create(string name, DateTime date);
 
         ResultBase Remove(string name, string roomTo, DateTime date);
 
-        ResultBase<IList<RoomClientModel>> Get(DateTime? date = null);
+        ResultBase RemoveWithoutMovig(string name, DateTime date);
     }
 }

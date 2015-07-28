@@ -74,7 +74,10 @@ namespace RoomsAndFurniture.Web.Queries.RoomQueries.Sql {
         ///   Looks up a localized string similar to select * from Room
         ///    where
         ///        Name = @Name and
-        ///        @Date between CreateDate and coalesce(RemoveDate, &apos;9999-12-31&apos;).
+        ///        CreateDate &lt;= @Date and (
+        ///            RemoveDate is null or
+        ///            RemoveDate &gt; @Date
+        ///        )        .
         /// </summary>
         internal static string GetRoomByNameAndDateCriterionQuery {
             get {
@@ -83,7 +86,12 @@ namespace RoomsAndFurniture.Web.Queries.RoomQueries.Sql {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to select * from Room where Name in @Names.
+        ///   Looks up a localized string similar to select * from Room
+        ///    where
+        ///        CreateDate &lt;= @Date and (
+        ///            RemoveDate is null or
+        ///            RemoveDate &gt; @Date
+        ///        ).
         /// </summary>
         internal static string GetRoomsByDateQuery {
             get {
@@ -102,10 +110,31 @@ namespace RoomsAndFurniture.Web.Queries.RoomQueries.Sql {
         
         /// <summary>
         ///   Looks up a localized string similar to select 1
+        ///    from Room as r
+        ///    inner join Furniture as f on f.RoomId = r.Id
+        ///    where
+        ///        r.Name = @Name and
+        ///        r.CreateDate &lt;= @Date and (
+        ///            r/RemoveDate is null or
+        ///            r.RemoveDate &gt; @Date
+        ///        )
+        ///    limit 1.
+        /// </summary>
+        internal static string IsExistAndEmptyRoomQuery {
+            get {
+                return ResourceManager.GetString("IsExistAndEmptyRoomQuery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to select 1
         ///    from Room
         ///    where
         ///        Name = @Name and
-        ///        @Date between CreateDate and coalesce(RemoveDate, &apos;9999-12-31&apos;)
+        ///        CreateDate &lt;= @Date and (
+        ///            RemoveDate is null or
+        ///            RemoveDate &gt; @Date
+        ///        )
         ///    limit 1.
         /// </summary>
         internal static string IsRoomExistsQuery {

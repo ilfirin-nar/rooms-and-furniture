@@ -9,5 +9,7 @@ namespace RoomsAndFurniture.Web.Business.Rooms
         bool IsExists(Room room, DateTime date);
 
         bool IsExists(string roomName, DateTime date);
+
+        bool IsExistAndEmpty(string roomName, DateTime date);
     }
 }

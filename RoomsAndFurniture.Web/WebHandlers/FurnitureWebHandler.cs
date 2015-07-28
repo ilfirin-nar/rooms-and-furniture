@@ -32,7 +32,7 @@ namespace RoomsAndFurniture.Web.WebHandlers
             }
             catch (RoomNotFoundException exception)
             {
-                return new RoomNotFoundResult(exception.RoomName, exception.Date);
+                return new RoomNotFoundResult<FurnitureClientModel>(exception.RoomName, exception.Date);
             }
         }
 
@@ -49,7 +49,7 @@ namespace RoomsAndFurniture.Web.WebHandlers
             }
             catch (RoomNotFoundException e)
             {
-                return new RoomNotFoundResult(e.RoomName, e.Date);
+                return new RoomNotFoundResult<FurnitureClientModel>(e.RoomName, e.Date);
             }
         }
     }

@@ -46,7 +46,7 @@ namespace RoomsAndFurniture.Web.WebHandlers
             }
             catch (RoomAlreadyExistsException exception)
             {
-                return new NonUniqueRoomNameResult(exception.RoomName, exception.Date);
+                return new RoomWithSameNameAlreadyExistResult(exception.RoomName, exception.Date);
             }
             return new SuccessResult<RoomClientModel>(mapper.Map(room));
         }
@@ -59,7 +59,20 @@ namespace RoomsAndFurniture.Web.WebHandlers
             }
             catch (RoomNotFoundException exception)
             {
-                return new NonUniqueRoomNameResult(exception.RoomName, exception.Date);
+                return new RoomNotFoundResult(exception.RoomName, exception.Date);
+            }
+            return new SuccessResult();
+        }
+
+        public ResultBase RemoveWithoutMovig(string name, DateTime date)
+        {
+            try
+            {
+                roomRemover.RemoveWithoutMoving(name, date);
+            }
+            catch (RoomNotFoundOrNotEmptyException exception)
+            {
+                return new RoomNotExistOrNotEmptyResult(exception.RoomName, exception.Date);
             }
             return new SuccessResult();
         }

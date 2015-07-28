@@ -154,6 +154,7 @@
     <Content Include="Queries\RoomEventQueries\Sql\GetRoomEventsQuery.sql" />
     <Content Include="Queries\RoomEventQueries\Sql\SaveRoomEventQuery.sql" />
     <Content Include="Queries\RoomQueries\Sql\GetRoomsByDateQuery.sql" />
+    <Content Include="Queries\RoomQueries\Sql\IsExistAndEmptyRoomQuery.sql" />
     <Content Include="Queries\RoomQueries\Sql\RemoveRoomQuery.sql" />
     <Content Include="Queries\RoomQueries\Sql\CreateRoomQuery.sql" />
     <Content Include="Queries\RoomQueries\Sql\GetRoomsByNamesQuery.sql" />
@@ -239,6 +240,7 @@
     <Compile Include="Business\RoomEvents\RoomEventsReader.cs" />
     <Compile Include="Business\RoomStates\IRoomStateReader.cs" />
     <Compile Include="Business\RoomStates\RoomStateReader.cs" />
+    <Compile Include="Business\Rooms\Exceptions\RoomNotFoundOrNotEmptyException.cs" />
     <Compile Include="Business\Rooms\Exceptions\RoomNotFoundException.cs" />
     <Compile Include="Business\Rooms\IRoomReader.cs" />
     <Compile Include="Business\Rooms\IRoomRemover.cs" />
@@ -255,6 +257,7 @@
     <Compile Include="Criterions\RoomCriterions\GetRoomsByDateCriterion.cs" />
     <Compile Include="Criterions\RoomCriterions\GetRoomsByNamesCriterion.cs" />
     <Compile Include="Criterions\RoomCriterions\GetRoomByNameAndDate.cs" />
+    <Compile Include="Criterions\RoomCriterions\IsExistAndEmptyRoomCriterion.cs" />
     <Compile Include="Criterions\RoomCriterions\IsRoomExistsCriterion.cs" />
     <Compile Include="Criterions\RoomCriterions\RemoveRoomCriterion.cs" />
     <Compile Include="Criterions\RoomCriterions\CreateRoomCriterion.cs" />
@@ -313,9 +316,10 @@
     <Compile Include="Models\FurnitureClientModel.cs" />
     <Compile Include="Models\HistoryClientModel.cs" />
     <Compile Include="Models\HomeClientModel.cs" />
-    <Compile Include="Models\Results\Furnitures\RoomNotFoundResult.cs" />
+    <Compile Include="Models\Results\Furnitures\FurnitureNotFoundResult.cs" />
+    <Compile Include="Models\Results\Rooms\RoomNotExistOrNotEmptyResult.cs" />
     <Compile Include="Models\Results\Rooms\RoomNotFoundResult.cs" />
-    <Compile Include="Models\Results\Rooms\NonUniqueRoomNameResult.cs" />
+    <Compile Include="Models\Results\Rooms\RoomWithSameNameAlreadyExistResult.cs" />
     <Compile Include="Models\RoomClientModel.cs" />
     <Compile Include="Models\RoomEventClientData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -347,6 +351,7 @@
     <Compile Include="Queries\RoomQueries\GetRoomsByDateQuery.cs" />
     <Compile Include="Queries\RoomQueries\GetRoomsByNamesQuery.cs" />
     <Compile Include="Queries\RoomQueries\GetRoomByNameAndDateQuery.cs" />
+    <Compile Include="Queries\RoomQueries\IsExistAndEmptyRoomQuery.cs" />
     <Compile Include="Queries\RoomQueries\RemoveRoomQuery.cs" />
     <Compile Include="Queries\RoomQueries\IsRoomExistsQuery.cs" />
     <Compile Include="Queries\RoomQueries\CreateRoomQuery.cs" />

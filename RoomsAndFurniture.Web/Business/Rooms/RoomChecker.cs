@@ -24,5 +24,11 @@ namespace RoomsAndFurniture.Web.Business.Rooms
             var criterion = new IsRoomExistsCriterion(roomName, date);
             return queryBuilder.Query<IsRoomExistsCriterion, bool>().Proceed(criterion);
         }
+
+        public bool IsExistAndEmpty(string roomName, DateTime date)
+        {
+            var criterion = new IsExistAndEmptyRoomCriterion(roomName, date);
+            return queryBuilder.Query<IsExistAndEmptyRoomCriterion, bool>().Proceed(criterion);
+        }
     }
 }

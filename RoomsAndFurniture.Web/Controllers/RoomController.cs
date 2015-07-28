@@ -27,5 +27,10 @@ namespace RoomsAndFurniture.Web.Controllers
         {
             return Json(handler.Remove(name, moveFurnitureTo, date), JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult RemoveWithoutMoving(string name, DateTime date)
+        {
+            return Json(handler.RemoveWithoutMovig(name, date), JsonRequestBehavior.AllowGet);
+        }
     }
 }

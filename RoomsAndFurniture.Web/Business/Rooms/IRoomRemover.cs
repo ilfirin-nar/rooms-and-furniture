@@ -6,5 +6,7 @@ namespace RoomsAndFurniture.Web.Business.Rooms
     public interface IRoomRemover : IBusinessService
     {
         void Remove(string name, string roomTo, DateTime date);
+
+        void RemoveWithoutMoving(string name, DateTime date);
     }
 }

@@ -32,24 +32,33 @@ namespace RoomsAndFurniture.Web.Business.Rooms
 
         public void Remove(string name, string roomTo, DateTime date)
         {
-            CheckRooms(name, roomTo, date);
+            if (!checker.IsExists(name, date))
+            {
+                throw new RoomNotFoundException(name, date);
+            }
+            if (!checker.IsExists(roomTo, date))
+            {
+                throw new RoomNotFoundException(roomTo, date);
+            }
             var rooms = reader.Get(name, roomTo);
             furnitureMultiMover.MoveAll(rooms[name], rooms[roomTo], date);
+            Remove(name, date);
+        }
+
+        public void RemoveWithoutMoving(string name, DateTime date)
+        {
+            if (!checker.IsExistAndEmpty(name, date))
+            {
+                throw new RoomNotFoundOrNotEmptyException(name, date);
+            }
+            Remove(name, date);
+        }
+
+        private void Remove(string name, DateTime date)
+        {
             var criterion = new RemoveRoomCriterion(new Room { Name = name, RemoveDate = date });
             queryBuilder.Query<RemoveRoomCriterion, bool>().Proceed(criterion);
             roomEventLogger.LogRemoveRoom(date, name);
-        }
-
-        private void CheckRooms(string roomNameFrom, string roomNameTo, DateTime date)
-        {
-            if (!checker.IsExists(roomNameFrom, date))
-            {
-                throw new RoomNotFoundException(roomNameFrom, date);
-            }
-            if (!checker.IsExists(roomNameTo, date))
-            {
-                throw new RoomNotFoundException(roomNameTo, date);
-            }
         }
     }
 }
