@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using RoomsAndFurniture.Web.Business.RoomEvents;
 using RoomsAndFurniture.Web.Business.Rooms;
-using RoomsAndFurniture.Web.Business.Rooms.Exceptions;
 using RoomsAndFurniture.Web.Domain;
 
 namespace RoomsAndFurniture.Web.Business.Furnitures
 {
     internal class FurnitureMultiMover : IFurnitureMultiMover
     {
-        private readonly IRoomChecker roomChecker;
         private readonly IRoomReader roomReader;
         private readonly IFurnitureReader reader;
         private readonly IFurnitureCreator creator;
@@ -18,14 +16,12 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
         private readonly IRoomEventLogger roomEventLogger;
 
         public FurnitureMultiMover(
-            IRoomChecker roomChecker,
             IRoomReader roomReader,
             IFurnitureReader reader,
             IFurnitureCreator creator,
             IFurnitureUpdater updater,
             IRoomEventLogger roomEventLogger)
-        {
-            this.roomChecker = roomChecker;
+        {            
             this.roomReader = roomReader;
             this.reader = reader;
             this.creator = creator;
@@ -33,26 +29,16 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
             this.roomEventLogger = roomEventLogger;
         }
 
-        public void MoveAll(string roomFrom, string roomTo, DateTime date)
+        public void MoveAll(Room roomFrom, Room roomTo, DateTime date)
         {
-            CheckRooms(roomFrom, roomTo, date);
-            var rooms = roomReader.Get(roomFrom, roomTo);
-            var furnitureItemsFrom = reader.GetFurnitureItems(rooms[roomFrom], date);
-            var furnitureItemsTo = reader.GetFurnitureItems(furnitureItemsFrom.Select(f => f.Type).ToList(), rooms[roomTo], date);
-            SetFurnitureToSecondRoom(furnitureItemsFrom, furnitureItemsTo, rooms[roomTo], date);
+            var furnitureItemsFrom = reader.GetFurnitureItems(roomFrom, date);
+            if (!furnitureItemsFrom.Any())
+            {
+                return;
+            }
+            var furnitureItemsTo = reader.GetFurnitureItems(furnitureItemsFrom.Select(f => f.Type).ToList(), roomTo, date);
+            SetFurnitureToSecondRoom(furnitureItemsFrom, furnitureItemsTo, roomTo, date);
             RemoveFurnitureItemsFromFirstRoom(furnitureItemsFrom, date);
-        }
-
-        private void CheckRooms(string roomNameFrom, string roomNameTo, DateTime date)
-        {
-            if (!roomChecker.IsExists(roomNameFrom, date))
-            {
-                throw new RoomNotFoundException(roomNameFrom, date);
-            }
-            if (!roomChecker.IsExists(roomNameTo, date))
-            {
-                throw new RoomNotFoundException(roomNameTo, date);
-            }
         }
 
         private void SetFurnitureToSecondRoom(

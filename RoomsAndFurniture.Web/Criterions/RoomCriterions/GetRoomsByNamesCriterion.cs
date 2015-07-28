@@ -1,16 +1,15 @@
-﻿using RoomsAndFurniture.Web.Infrastructure.CommonInterfaces;
+﻿using System.Collections.Generic;
+using RoomsAndFurniture.Web.Infrastructure.CommonInterfaces;
 
 namespace RoomsAndFurniture.Web.Criterions.RoomCriterions
 {
     public class GetRoomsByNamesCriterion : ICriterion
     {
-        private readonly string[] names;
+        public string[] Names { get; set; }
 
         public GetRoomsByNamesCriterion(string[] names)
         {
-            this.names = names;
+            Names = names;
         }
-
-        public string[] Names { get; set; }
     }
 }

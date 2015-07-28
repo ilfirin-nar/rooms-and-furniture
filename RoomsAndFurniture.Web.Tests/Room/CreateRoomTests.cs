@@ -9,7 +9,7 @@ namespace RoomsAndFurniture.Web.Tests.Room
         [Test]
         public void Create_ValidParameters_Success()
         {
-            var roomName = string.Format("Test Room UNIQUE");
+            const string roomName = "Test Room UNIQUE";
             var handler = Container.GetInstance<IRoomWebHandler>();
             var date = DateForTest;
             var result = handler.Create(roomName, date);
