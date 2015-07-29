@@ -373,7 +373,9 @@
     <Compile Include="WebHandlers\Mappers\RoomMapper.cs" />
     <Compile Include="WebHandlers\RoomWebHandler.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Queries\Refactor\" />
+  </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>

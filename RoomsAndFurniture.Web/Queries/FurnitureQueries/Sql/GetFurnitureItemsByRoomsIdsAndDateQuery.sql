@@ -1,7 +1,10 @@
-select Id, max(Date) as Date, Type, RoomId, Count
-    from Furniture
+select f.CreateDate as Date, f.Type, count(f.Id) as Count, fl.RoomId
+    from Furniture as f
+    inner join FurnitureLocation as fl on f.Id = fl.FurnitureId
     where
-        Date <= @Date and
-        RoomId in @RoomsIds
-    group by RoomId, Type
-    having Count != 0
+        f.CreateDate <= @Date and (
+            f.RemoveDate is null or
+            f.RemoveDate > @Date
+        ) and
+        fl.RoomId in @RoomsIds
+    group by fl.RoomId, f.Type;
