@@ -2,7 +2,7 @@
 
     'use strict';
 
-    dialogs.initRoomDialog = function (dialogOpenElement, callback) {
+    dialogs.initAddRoomDialog = function (dialogOpenElement, callback) {
         var dialog,
             form,
             roomNameField = $("#roomCreateNameField"),

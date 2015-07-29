@@ -2,23 +2,25 @@
 
     'use strict';
 
-    dialogs.initRoomDialog = function (dialogOpenElement, callback) {
+    dialogs.initRemoveRoomDialog = function (dialogOpenElement, callback) {
         var dialog,
             form,
-            roomNameField = $("#roomCreateNameField"),
-            dateField = $("#roomCreateDateField"),
+            roomNameField = $(".roomNameField"),
+            roomNameMoveToField = $(".roomNameMoveToField"),
+            dateField = $(".roomRemoveDateField"),
             allFields = $([]).add(roomNameField).add(dateField),
-            tips = $(".validateTips");
+            tips = $(".validateTips"),
+            isWithoutMoving = false;
 
         $(dateField).datepicker();
 
-        dialog = $(".addRoomDialog").dialog({
+        dialog = $(".removeRoomDialog").dialog({
             autoOpen: false,
             height: 400,
             width: 380,
             modal: true,
             buttons: {
-                "Создать комнату": addRoom,
+                "Удалить комнату": removeRoom,
                 "Отмена": function() {
                     dialog.dialog("close");
                 }
@@ -31,25 +33,59 @@
 
         form = dialog.find("form").on("submit", function(event) {
             event.preventDefault();
-            addRoom();
+            removeRoom();
         });
 
-        dialogOpenElement.on("click", function() {
+        dialogOpenElement.on("click", function () {
+            var element = $(this), tr = element.closest('tr');
+            isWithoutMoving = tr.find('.emptyRoom').length > 0;
+            if (isWithoutMoving) {
+                hideMoveToField();
+            } else {
+                showMoveToField();
+            }
+            roomNameField.val(tr.find('td.itemName').text());
             dialog.dialog("open");
         });
 
-        function addRoom() {
+        function showMoveToField() {
+            dialog.find('.roomNameMoveToFieldLabel').show();
+            dialog.find('.roomNameMoveToField').show();
+        }
+
+        function hideMoveToField() {
+            dialog.find('.roomNameMoveToFieldLabel').hide();
+            dialog.find('.roomNameMoveToField').hide();
+        }
+
+        function removeRoom() {
             var isValid = validate();
             if (isValid) {
-                var parameters = { name: roomNameField.val(), date: dateField.val() };
-                $.get(urls.CreateRoom, parameters, function (data) {
-                    if (data.IsSuccess) {
-                        callback(data.Data);
-                        dialog.dialog("close");
-                    } else {
-                        updateTips(data.Message);
-                    }
-                });
+                if (isWithoutMoving) {
+                    var parameters = { name: roomNameField.val(), date: dateField.val() };
+                    $.get(urls.RemoveRoomWithoutMoving, parameters, function(data) {
+                        if (data.IsSuccess) {
+                            callback(data.Data);
+                            dialog.dialog("close");
+                        } else {
+                            updateTips(data.Message);
+                        }
+                    });
+                } else {
+                    var parameters = {
+                        name: roomNameField.val(),
+                        moveFurnitureTo: roomNameMoveToField.val(),
+                        date: dateField.val()
+                    };
+                    $.get(urls.RemoveRoom, parameters, function (data) {
+                        if (data.IsSuccess) {
+                            callback(roomNameField.val());
+                            dialog.dialog("close");
+                        } else {
+                            updateTips(data.Message);
+                        }
+                    });
+                }
             }
             return isValid;
         }
@@ -57,7 +93,9 @@
         function validate() {
             var isValid = true;
             allFields.removeClass("ui-state-error");
-            isValid = checkLength(roomNameField, "Название комнаты", 3, 20);
+            if (!isWithoutMoving) {
+                isValid = checkLength(roomNameMoveToField, "Комната, куда переместить мебель", 3, 20);
+            }
             isValid = isValid && checkDateField();
             return isValid;
         }

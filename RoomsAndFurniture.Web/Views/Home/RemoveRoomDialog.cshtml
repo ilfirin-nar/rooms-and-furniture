@@ -2,11 +2,11 @@
     <p class="validateTips">Все поля должны быть заполнены</p>
     <form>
         <fieldset>
-            <input type="hidden" name="name" id="roomNameField">
+            <input type="hidden" name="name" class="roomNameField">
             <label for="date">Дата</label>
-            <input type="text" name="date" id="roomRemoveDateField" class="text ui-widget-content ui-corner-all">
-            <label for="roomNameMoveTo">Комната, куда переместить мебель</label>
-            <input type="text" name="roomNameMoveTo" id="roomNameMoveToField" class="text ui-widget-content ui-corner-all">
+            <input type="text" name="date" class="roomRemoveDateField text ui-widget-content ui-corner-all">
+            <label class="roomNameMoveToFieldLabel" for="roomNameMoveTo">Комната, куда переместить мебель</label>
+            <input type="text" name="roomNameMoveTo" class="roomNameMoveToField text ui-widget-content ui-corner-all">
             <input type="submit" tabindex="-1" style="position: absolute; top: -1000px">
         </fieldset>
     </form>

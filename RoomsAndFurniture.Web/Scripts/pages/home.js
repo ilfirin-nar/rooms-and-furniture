@@ -26,7 +26,8 @@
     }
     
     function initDialogs() {
-        dialogs.initRoomDialog($('.addRoomLink'), addRowToRoomsTable);
+        dialogs.initAddRoomDialog($('.addRoomLink'), addRowToRoomsTable);
+        dialogs.initRemoveRoomDialog($('.removeRoomLink'), deleteRowFromRoomsTable);
     }
 
     function addRowToRoomsTable(data) {
@@ -56,6 +57,14 @@
                 tableBody.html(data.Message);
             }
         });
+    }
+
+    function deleteRowFromRoomsTable(roomName) {
+        if (roomName === '') {
+            reloadTable($('.dateFilter').val());
+            return;
+        }
+        tableBody.find("td.itemName:contains('" + roomName + "')").closest('tr').remove();
     }
 
 })(App.Page, App.Dialogs, App.Templates.RoomsTemplates, App.Urls.Urls);
