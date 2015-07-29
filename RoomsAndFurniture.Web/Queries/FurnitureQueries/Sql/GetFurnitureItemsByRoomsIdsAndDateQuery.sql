@@ -4,3 +4,4 @@ select Id, max(Date) as Date, Type, RoomId, Count
         Date <= @Date and
         RoomId in @RoomsIds
     group by RoomId, Type
+    having Count != 0

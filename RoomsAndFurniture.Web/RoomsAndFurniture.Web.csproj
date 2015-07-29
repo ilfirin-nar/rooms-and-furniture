@@ -221,6 +221,7 @@
   <ItemGroup>
     <Compile Include="App_Start\IDatabaseInitializer.cs" />
     <Compile Include="Business\Furnitures\Exceptions\FurnitureNotFoundException.cs" />
+    <Compile Include="Business\Furnitures\Exceptions\InvalidFurnitureMovingException.cs" />
     <Compile Include="Business\Furnitures\FurnitureCreator.cs" />
     <Compile Include="Business\Furnitures\FurnitureMover.cs" />
     <Compile Include="Business\Furnitures\FurnitureMultiMover.cs" />
@@ -322,6 +323,7 @@
     <Compile Include="Models\FurnitureClientModel.cs" />
     <Compile Include="Models\HistoryClientModel.cs" />
     <Compile Include="Models\HomeClientModel.cs" />
+    <Compile Include="Models\Results\Furnitures\InvalidFurnitureMovingResult.cs" />
     <Compile Include="Models\Results\Furnitures\FurnitureNotFoundResult.cs" />
     <Compile Include="Models\Results\Rooms\RoomNotExistOrNotEmptyResult.cs" />
     <Compile Include="Models\Results\Rooms\RoomNotFoundResult.cs" />

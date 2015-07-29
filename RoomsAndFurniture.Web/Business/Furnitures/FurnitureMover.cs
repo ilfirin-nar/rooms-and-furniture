@@ -1,4 +1,5 @@
 ﻿using System;
+using RoomsAndFurniture.Web.Business.Furnitures.Exceptions;
 using RoomsAndFurniture.Web.Business.RoomEvents;
 using RoomsAndFurniture.Web.Business.Rooms;
 using RoomsAndFurniture.Web.Business.Rooms.Exceptions;
@@ -33,6 +34,10 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
 
         public Furniture Move(string type, string roomNameFrom, string roomNameTo, DateTime date)
         {
+            if (roomNameFrom == roomNameTo)
+            {
+                throw new InvalidFurnitureMovingException(roomNameFrom, roomNameTo);
+            }
             var furnitureFrom = reader.Get(type, roomNameFrom, date);
             CheckRooms(roomNameFrom, roomNameTo, date);
             var furnitureCount = furnitureFrom.Count;

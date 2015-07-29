@@ -33,10 +33,7 @@ namespace RoomsAndFurniture.Web.Tests.Furniture
 
             var firstRoomResult = result.First(r => r.RoomName == firstRoomName);
             Assert.AreNotEqual(null, firstRoomResult.FurnitureItems);
-            Assert.AreEqual(1, firstRoomResult.FurnitureItems.Count);
-            var furnitureFromFirstRoom = firstRoomResult.FurnitureItems.First(f => f.Type == firstFurnitureType);
-            Assert.AreNotEqual(null, furnitureFromFirstRoom);
-            Assert.AreEqual(0, furnitureFromFirstRoom.Count);
+            Assert.AreEqual(0, firstRoomResult.FurnitureItems.Count);
 
             var secondRoomResult = result.First(r => r.RoomName == secondRoomName);
             Assert.AreNotEqual(null, secondRoomResult.FurnitureItems);
@@ -69,13 +66,7 @@ namespace RoomsAndFurniture.Web.Tests.Furniture
 
             var firstRoomResult = result.First(r => r.RoomName == firstRoomName);
             Assert.AreNotEqual(null, firstRoomResult.FurnitureItems);
-            Assert.AreEqual(2, firstRoomResult.FurnitureItems.Count);
-            var firstFurnitureFromFirst = firstRoomResult.FurnitureItems.First(f => f.Type == firstFurnitureType);
-            Assert.AreNotEqual(null, firstFurnitureFromFirst);
-            Assert.AreEqual(0, firstFurnitureFromFirst.Count);
-            var secondFurnitureFromFirstRoom = firstRoomResult.FurnitureItems.First(f => f.Type == secondFurnitureType);
-            Assert.AreNotEqual(null, secondFurnitureFromFirstRoom);
-            Assert.AreEqual(0, secondFurnitureFromFirstRoom.Count);
+            Assert.AreEqual(0, firstRoomResult.FurnitureItems.Count);
 
             var secondRoomResult = result.First(r => r.RoomName == secondRoomName);
             Assert.AreNotEqual(null, secondRoomResult.FurnitureItems);
@@ -109,10 +100,7 @@ namespace RoomsAndFurniture.Web.Tests.Furniture
 
             var firstRoomResult = result.First(r => r.RoomName == firstRoomName);
             Assert.AreNotEqual(null, firstRoomResult.FurnitureItems);
-            Assert.AreEqual(1, firstRoomResult.FurnitureItems.Count);
-            var furnitureFromFirstRoom = firstRoomResult.FurnitureItems.First(f => f.Type == firstFurnitureType);
-            Assert.AreNotEqual(null, furnitureFromFirstRoom);
-            Assert.AreEqual(0, furnitureFromFirstRoom.Count);
+            Assert.AreEqual(0, firstRoomResult.FurnitureItems.Count);
 
             var secondRoomResult = result.First(r => r.RoomName == secondRoomName);
             Assert.AreNotEqual(null, secondRoomResult.FurnitureItems);

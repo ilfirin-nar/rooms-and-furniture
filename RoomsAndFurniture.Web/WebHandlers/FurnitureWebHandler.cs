@@ -51,6 +51,10 @@ namespace RoomsAndFurniture.Web.WebHandlers
             {
                 return new RoomNotFoundResult<FurnitureClientModel>(e.RoomName, e.Date);
             }
+            catch (InvalidFurnitureMovingException)
+            {
+                return new InvalidFurnitureMovingResult();
+            }
         }
     }
 }
