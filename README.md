@@ -6,6 +6,8 @@
 * [Value Injecter](https://valueinjecter.codeplex.com/)
 * [SQLite](https://system.data.sqlite.org/)
 
+Проект ASP.NET MVC 5 созданный в Visual Studio 2013.
+
 ## О реализации
 Был выбран обыкновенный "слоистый" подход к организации логики: слой контроллеров → слой веб-хэндлеров → бизнес-логика → доступ к данным.
 <br/>
