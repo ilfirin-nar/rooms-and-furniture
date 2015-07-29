@@ -26,7 +26,7 @@
     }
     
     function initDialogs() {
-        dialogs.initAddRoomDialog($('.addRoomLink'), addRowToRoomsTable);
+        dialogs.initAddRoomDialog($('.addRoomLink'), reloadByFilter);
         initTableDialogs();
     }
 
@@ -34,12 +34,6 @@
         dialogs.initRemoveRoomDialog($('.removeRoomLink'), deleteRowFromRoomsTable);
         dialogs.initAddFurnitureDialog($('.addFurniture'), reloadByFilter);
         dialogs.initMoveFurnitureDialog($('.moveFurniture'), reloadByFilter);
-    }
-
-    function addRowToRoomsTable(data) {
-        $('.roomsNotFound').remove();
-        var row = $(templates.formRoomsTableRowHtml(data));
-        tableBody.append(row);
     }
 
     function reloadTable(dateFilter) {
