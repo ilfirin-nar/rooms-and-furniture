@@ -38,10 +38,8 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
             }
             var furnitureItemsTo = reader.GetFurnitureItems(furnitureItemsFrom.Select(f => f.Type).ToList(), roomTo, date);
             SetFurnitureToSecondRoom(furnitureItemsFrom, furnitureItemsTo, roomTo, date);
-            if (isRemoveFromFirstRoom)
-            {
-                RemoveFurnitureItemsFromFirstRoom(furnitureItemsFrom, date);
-            }
+            roomEventLogger.LogMoveFurnitureItems(date, roomFrom.Name, roomTo.Name, furnitureItemsFrom);
+            RemoveFurnitureItemsFromFirstRoom(furnitureItemsFrom, date);
         }
 
         private void SetFurnitureToSecondRoom(

@@ -42,10 +42,9 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
             CheckRooms(roomNameFrom, roomNameTo, date);
             var furnitureCount = furnitureFrom.Count;
             RemoveFurnitureFromFirstRoom(furnitureFrom, date);
-            roomEventLogger.LogMoveFurnitureOut(date, roomNameTo, roomNameFrom, furnitureCount, furnitureFrom);
             var furnitureTo = reader.GetClosestLeftByDate(type, date, roomNameTo);
             var result = SetFurnitureToSecondRoom(furnitureFrom, furnitureTo, date, roomNameTo, furnitureCount);
-            roomEventLogger.LogMoveFurnitureIn(date, roomNameTo, roomNameFrom, furnitureCount, result);
+            roomEventLogger.LogMoveFurniture(date, roomNameFrom, roomNameTo, furnitureCount, furnitureFrom);
             return result;
         }
 

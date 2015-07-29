@@ -37,7 +37,7 @@ namespace RoomsAndFurniture.Web.Business.RoomEvents
             saver.Save(roomEvent);
         }
 
-        public void LogMoveFurnitureOut(DateTime date, string roomName, string roomTo, int count, Furniture furniture)
+        public void LogMoveFurniture(DateTime date, string roomName, string roomTo, int count, Furniture furniture)
         {
             var furnitureDescription = string.Format(RoomEventMessage.FurnitureTemplate, furniture.Type, count);
             var descripton = string.Format(RoomEventMessage.FurnitureWasMoved, furnitureDescription, roomName, roomTo);
@@ -45,26 +45,10 @@ namespace RoomsAndFurniture.Web.Business.RoomEvents
             saver.Save(roomEvent);
         }
 
-        public void LogMoveFurnitureIn(DateTime date, string roomName, string roomFrom, int count, Furniture furniture)
-        {
-            var furnitureDescription = string.Format(RoomEventMessage.FurnitureTemplate, furniture.Type, count);
-            var descripton = string.Format(RoomEventMessage.FurnitureWasMoved, furnitureDescription, roomFrom, roomName);
-            var roomEvent = new RoomEvent(date, RoomEventType.MoveFurnitureIn, descripton);
-            saver.Save(roomEvent);
-        }
-
-        public void LogMoveFurnitureItemsOut(DateTime date, string roomName, string roomTo, IList<Furniture> furnitureItems)
+        public void LogMoveFurnitureItems(DateTime date, string roomName, string roomTo, IList<Furniture> furnitureItems)
         {
             var furnitureDescription = GetFurnitureItemsString(furnitureItems);
             var descripton = string.Format(RoomEventMessage.FurnitureWasMoved, furnitureDescription, roomName, roomTo);
-            var roomEvent = new RoomEvent(date, RoomEventType.MoveFurnitureIn, descripton);
-            saver.Save(roomEvent);
-        }
-
-        public void LogMoveFurnitureItemsIn(DateTime date, string roomName, string roomFrom, IList<Furniture> furnitureItems)
-        {
-            var furnitureDescription = GetFurnitureItemsString(furnitureItems);
-            var descripton = string.Format(RoomEventMessage.FurnitureWasMoved, furnitureDescription, roomFrom, roomName);
             var roomEvent = new RoomEvent(date, RoomEventType.MoveFurnitureIn, descripton);
             saver.Save(roomEvent);
         }
