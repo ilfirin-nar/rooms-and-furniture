@@ -27,6 +27,10 @@
     
     function initDialogs() {
         dialogs.initAddRoomDialog($('.addRoomLink'), addRowToRoomsTable);
+        innitTableDialogs();
+    }
+
+    function innitTableDialogs() {
         dialogs.initRemoveRoomDialog($('.removeRoomLink'), deleteRowFromRoomsTable);
     }
 
@@ -53,6 +57,7 @@
                     rowHtml += templates.formRoomsTableRowHtml(data.Data[index]);
                 }
                 tableBody.html(rowHtml);
+                innitTableDialogs();
             } else {
                 tableBody.html(data.Message);
             }
@@ -60,7 +65,7 @@
     }
 
     function deleteRowFromRoomsTable(roomName) {
-        if (roomName === '') {
+        if (roomName === null) {
             reloadTable($('.dateFilter').val());
             return;
         }

@@ -16,7 +16,7 @@
 
         dialog = $(".removeRoomDialog").dialog({
             autoOpen: false,
-            height: 400,
+            height: 420,
             width: 380,
             modal: true,
             buttons: {
@@ -65,7 +65,7 @@
                     var parameters = { name: roomNameField.val(), date: dateField.val() };
                     $.get(urls.RemoveRoomWithoutMoving, parameters, function(data) {
                         if (data.IsSuccess) {
-                            callback(data.Data);
+                            callback(roomNameField.val());
                             dialog.dialog("close");
                         } else {
                             updateTips(data.Message);
@@ -79,7 +79,7 @@
                     };
                     $.get(urls.RemoveRoom, parameters, function (data) {
                         if (data.IsSuccess) {
-                            callback(roomNameField.val());
+                            callback(null);
                             dialog.dialog("close");
                         } else {
                             updateTips(data.Message);

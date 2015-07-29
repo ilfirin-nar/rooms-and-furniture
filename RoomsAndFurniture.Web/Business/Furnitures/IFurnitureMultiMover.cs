@@ -6,6 +6,6 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
 {
     public interface IFurnitureMultiMover : IBusinessService
     {
-        void MoveAll(Room roomFrom, Room roomTo, DateTime date);
+        void MoveAll(Room roomFrom, Room roomTo, DateTime date, bool isRemoveFromFirstRoom = false);
     }
 }

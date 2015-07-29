@@ -8,7 +8,7 @@ insert into Furniture (Date, Type, Count, RoomId) values ('2015-03-01 00:00:00',
 insert into Furniture (Date, Type, Count, RoomId) values ('2015-03-01 00:00:00', 'Комод', 4, 1);
 insert into Furniture (Date, Type, Count, RoomId) values ('2015-03-01 00:00:00', 'Табурет', 5, 1);
 insert into Furniture (Date, Type, Count, RoomId) values ('2015-03-01 00:00:00', 'Диван', 1, 1);
-insert into Furniture (Date, Type, Count, RoomId) values ('2015-04-01 00:00:00', 'Парта', 2, 2);
+insert into Furniture (Date, Type, Count, RoomId) values ('2015-04-01 00:00:00', 'Кресло', 2, 2);
 insert into Furniture (Date, Type, Count, RoomId) values ('2015-04-01 00:00:00', 'Стеллаж', 1, 2);
 insert into Furniture (Date, Type, Count, RoomId) values ('2015-04-01 00:00:00', 'Шкаф-купе', 2, 2);
 insert into Furniture (Date, Type, Count, RoomId) values ('2015-05-01 00:00:00', 'Кресло', 9, 3);
@@ -29,7 +29,7 @@ insert into RoomEvent (Date, Type, Description) values ('2015-03-01 00:00:00', 2
 insert into RoomEvent (Date, Type, Description) values ('2015-03-01 00:00:00', 2, 'Мебель "Комод" (4 шт.) была добавлена в комнату "Гостинная"');
 insert into RoomEvent (Date, Type, Description) values ('2015-03-01 00:00:00', 2, 'Мебель "Табурет" (5 шт.) была добавлена в комнату "Гостинная"');
 insert into RoomEvent (Date, Type, Description) values ('2015-03-01 00:00:00', 2, 'Мебель "Диван" (1 шт.) была добавлена в комнату "Гостинная"');
-insert into RoomEvent (Date, Type, Description) values ('2015-04-01 00:00:00', 2, 'Мебель "Парта" (2 шт.) была добавлена в комнату "Спальня"');
+insert into RoomEvent (Date, Type, Description) values ('2015-04-01 00:00:00', 2, 'Мебель "Кресло" (2 шт.) была добавлена в комнату "Спальня"');
 insert into RoomEvent (Date, Type, Description) values ('2015-04-01 00:00:00', 2, 'Мебель "Стеллаж" (1 шт.) была добавлена в комнату "Спальня"');
 insert into RoomEvent (Date, Type, Description) values ('2015-04-01 00:00:00', 2, 'Мебель "Шкаф-купе" (2 шт.) была добавлена в комнату "Спальня"');
 insert into RoomEvent (Date, Type, Description) values ('2015-05-01 00:00:00', 2, 'Мебель "Кресло" (9 шт.) была добавлена в комнату "Кухня"');

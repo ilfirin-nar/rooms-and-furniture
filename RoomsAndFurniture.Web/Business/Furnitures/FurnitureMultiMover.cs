@@ -29,7 +29,7 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
             this.roomEventLogger = roomEventLogger;
         }
 
-        public void MoveAll(Room roomFrom, Room roomTo, DateTime date)
+        public void MoveAll(Room roomFrom, Room roomTo, DateTime date, bool isRemoveFromFirstRoom = false)
         {
             var furnitureItemsFrom = reader.GetFurnitureItems(roomFrom, date);
             if (!furnitureItemsFrom.Any())
@@ -38,7 +38,10 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
             }
             var furnitureItemsTo = reader.GetFurnitureItems(furnitureItemsFrom.Select(f => f.Type).ToList(), roomTo, date);
             SetFurnitureToSecondRoom(furnitureItemsFrom, furnitureItemsTo, roomTo, date);
-            RemoveFurnitureItemsFromFirstRoom(furnitureItemsFrom, date);
+            if (isRemoveFromFirstRoom)
+            {
+                RemoveFurnitureItemsFromFirstRoom(furnitureItemsFrom, date);
+            }
         }
 
         private void SetFurnitureToSecondRoom(
