@@ -2,6 +2,10 @@
 
     'use strict';
 
-    page.start = function () {}
+    page.start = function() {
+        $('.shortHistory').on('change', function() {
+            window.location.href = '/History?isShort=' + $(this).is(':checked');
+        });
+    };
 
 })(App.Page, App.Dialogs);

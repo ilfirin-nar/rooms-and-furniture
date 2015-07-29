@@ -13,14 +13,14 @@ namespace RoomsAndFurniture.Web.Controllers
             this.handler = handler;
         }
 
-        public ActionResult Create(string type, string roomName, DateTime date)
+        public ActionResult Create(string type, string roomName, DateTime date, int count = 1)
         {
-            return Json(handler.Create(type, roomName, date));
+            return Json(handler.Create(type, roomName, date, count), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Move(string type, string roomNameFrom, string roomNameTo, DateTime date)
         {
-            return Json(handler.Move(type, roomNameFrom, roomNameTo, date));
+            return Json(handler.Move(type, roomNameFrom, roomNameTo, date), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Remove(string type, string roomName, DateTime date)

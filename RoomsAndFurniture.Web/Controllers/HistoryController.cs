@@ -15,8 +15,8 @@ namespace RoomsAndFurniture.Web.Controllers
 
         public ActionResult Index(bool isShort = false)
         {
-            var data = handler.Get().Data;
-            return View(new HistoryClientModel(data));
+            var data = handler.Get(isShort).Data;
+            return View(new HistoryClientModel(data, isShort));
         }
     }
 }

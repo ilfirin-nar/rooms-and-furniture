@@ -27,11 +27,13 @@
     
     function initDialogs() {
         dialogs.initAddRoomDialog($('.addRoomLink'), addRowToRoomsTable);
-        innitTableDialogs();
+        initTableDialogs();
     }
 
-    function innitTableDialogs() {
+    function initTableDialogs() {
         dialogs.initRemoveRoomDialog($('.removeRoomLink'), deleteRowFromRoomsTable);
+        dialogs.initAddFurnitureDialog($('.addFurniture'), reloadByFilter);
+        dialogs.initMoveFurnitureDialog($('.moveFurniture'), reloadByFilter);
     }
 
     function addRowToRoomsTable(data) {
@@ -57,7 +59,7 @@
                     rowHtml += templates.formRoomsTableRowHtml(data.Data[index]);
                 }
                 tableBody.html(rowHtml);
-                innitTableDialogs();
+                initTableDialogs();
             } else {
                 tableBody.html(data.Message);
             }
@@ -66,10 +68,14 @@
 
     function deleteRowFromRoomsTable(roomName) {
         if (roomName === null) {
-            reloadTable($('.dateFilter').val());
+            reloadByFilter();
             return;
         }
         tableBody.find("td.itemName:contains('" + roomName + "')").closest('tr').remove();
+    }
+
+    function reloadByFilter() {
+        reloadTable($('.dateFilter').val());
     }
 
 })(App.Page, App.Dialogs, App.Templates.RoomsTemplates, App.Urls.Urls);

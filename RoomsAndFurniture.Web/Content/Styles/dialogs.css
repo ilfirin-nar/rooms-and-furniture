@@ -45,10 +45,6 @@
     padding: .3em;
 }
 
-.addRoomDialog {
-    display: none;
-}
-
-.removeRoomDialog {
+.modalDialog {
     display: none;
 }

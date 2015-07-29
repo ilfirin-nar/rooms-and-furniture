@@ -31,9 +31,9 @@
                             foreach (var item in room.FurnitureItems)
                             {
                                 <li>
-                                    @item.Type (@item.Count шт)
+                                    <span class="furnitureType">@item.Type</span> (<span class="furnitureTypeCount">@item.Count шт</span>)
                                     <div class="furnitureControls">
-                                        <a class="addFurniture" href="/Furniture/Create">+ Добавить</a> <!--<a class="removeFurniture" href="/Furniture/Remove">- Удалить</a>--> <a class="moveFurniture">Переместить</a>
+                                        <a class="addFurniture">+ Добавить</a> <!--<a class="removeFurniture" href="/Furniture/Remove">- Удалить</a>--> <a class="moveFurniture">Переместить</a>
                                     </div>
                                 </li>
                             }
@@ -43,7 +43,7 @@
                             <li class="emptyRoom">Комната пуста</li>
                         }
                         <li>
-                            <a class="createFurnitureLink">+ Добавить мебель</a>
+                            <a class="createFurnitureLink addFurniture">+ Добавить мебель</a>
                         </li>
                     </ul>
                 </td>
@@ -65,3 +65,5 @@
 
 @Html.Partial("AddRoomDialog")
 @Html.Partial("RemoveRoomDialog")
+@Html.Partial("AddFurnitureDialog")
+@Html.Partial("MoveFurnitureDialog")

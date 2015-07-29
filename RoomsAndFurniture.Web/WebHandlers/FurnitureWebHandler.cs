@@ -23,11 +23,11 @@ namespace RoomsAndFurniture.Web.WebHandlers
             this.furnitureMover = furnitureMover;
         }
 
-        public ResultBase<FurnitureClientModel> Create(string type, string roomName, DateTime date)
+        public ResultBase<FurnitureClientModel> Create(string type, string roomName, DateTime date, int count = 1)
         {
             try
             {
-                var furniture = amountIncreaser.Increase(type, date, roomName, 1);
+                var furniture = amountIncreaser.Increase(type, date, roomName, count);
                 return new SuccessResult<FurnitureClientModel>(furniture.MapTo<FurnitureClientModel>());
             }
             catch (RoomNotFoundException exception)

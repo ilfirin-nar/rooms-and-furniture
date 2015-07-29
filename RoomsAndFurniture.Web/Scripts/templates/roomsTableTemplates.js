@@ -11,7 +11,7 @@
                     '<td>' +
                     '<ul>' +
                     data.Furniture +
-                    '<li><a class="createFurnitureLink">+ Добавить мебель</a></li>' +
+                    '<li><a class="createFurnitureLink addFurniture">+ Добавить мебель</a></li>' +
                     '</ul>' +
                     '</td>' +
                     '<td class="itemDelete"><a class="removeRoomLink">Удалить</a></td>' +
@@ -21,10 +21,10 @@
 
         function getRoomsTableRowFurnitureItem(data) {
             return (
-                '<li>' + data.Type + ' (' + data.Count + ' шт)' +
+                '<li><span class="furnitureType">' + data.Type + '</span> (<span class="furnitureTypeCount">' + data.Count + ' шт</span>)' +
                     '<div class="furnitureControls">' +
-                        '<a class="addFurniture" href="/Furniture/Create">+ Добавить</a>' +
-                        '<a class="removeFurniture" href="/Furniture/Remove">- Удалить</a>' +
+                        '<a class="addFurniture">+ Добавить</a>' +
+                        //'<a class="removeFurniture" href="/Furniture/Remove">- Удалить</a>' +
                         '<a class="moveFurniture">Переместить</a>' +
                     '</div>' +
                 '</li>'

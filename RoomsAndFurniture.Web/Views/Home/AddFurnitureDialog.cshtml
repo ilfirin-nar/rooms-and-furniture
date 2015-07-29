@@ -1,0 +1,15 @@
+﻿<div class="addFurnitureDialog modalDialog" title="Добавить мебель">
+    <p class="validateTips">Все поля должны быть заполнены</p>
+    <form>
+        <fieldset>
+            <input type="hidden" name="roomNameField" id="addFurnitureRoomNameField">   
+            <label for="dateField">Дата</label>
+            <input type="text" name="dateField" id="addFurnitureDateField" class="text ui-widget-content ui-corner-all">
+            <label class="furnitureFieldLabel" for="roomNameMoveTo">Тип мебели</label>
+            <input type="text" name="furnitureField" id="addFurnitureTypeField" class="text ui-widget-content ui-corner-all">
+@*            <label class="countFieldLabel" for="countField">Количество</label>*@
+@*            <input type="number" name="countField" class="countField number ui-widget-content ui-corner-all">*@
+            <input type="submit" tabindex="-1" style="position: absolute; top: -1000px">
+        </fieldset>
+    </form>
+</div>

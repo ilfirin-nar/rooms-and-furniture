@@ -160,6 +160,8 @@
     <Content Include="Queries\RoomQueries\Sql\GetRoomsByNamesQuery.sql" />
     <Content Include="Queries\RoomQueries\Sql\GetRoomByNameAndDateCriterionQuery.sql" />
     <Content Include="Queries\RoomQueries\Sql\IsRoomExistsQuery.sql" />
+    <Content Include="Scripts\dialogs\moveFurnitureDialog.js" />
+    <Content Include="Scripts\dialogs\addFurnitureDialog.js" />
     <Content Include="Scripts\dialogs\removeRoomDialog.js" />
     <Content Include="Scripts\dialogs\addRoomDialog.js" />
     <Content Include="Scripts\urls.js" />
@@ -201,6 +203,8 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\AddRoomDialog.cshtml" />
     <Content Include="Views\Home\RemoveRoomDialog.cshtml" />
+    <Content Include="Views\Home\AddFurnitureDialog.cshtml" />
+    <Content Include="Views\Home\MoveFurnitureDialog.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -5,9 +5,9 @@
     dialogs.initRemoveRoomDialog = function (dialogOpenElement, callback) {
         var dialog,
             form,
-            roomNameField = $(".roomNameField"),
-            roomNameMoveToField = $(".roomNameMoveToField"),
-            dateField = $(".roomRemoveDateField"),
+            roomNameField = $("#roomNameField"),
+            roomNameMoveToField = $("#roomNameMoveToField"),
+            dateField = $("#roomRemoveDateField"),
             allFields = $([]).add(roomNameField).add(dateField),
             tips = $(".validateTips"),
             isWithoutMoving = false;
@@ -50,12 +50,12 @@
 
         function showMoveToField() {
             dialog.find('.roomNameMoveToFieldLabel').show();
-            dialog.find('.roomNameMoveToField').show();
+            dialog.find('#roomNameMoveToField').show();
         }
 
         function hideMoveToField() {
             dialog.find('.roomNameMoveToFieldLabel').hide();
-            dialog.find('.roomNameMoveToField').hide();
+            dialog.find('#roomNameMoveToField').hide();
         }
 
         function removeRoom() {
@@ -94,7 +94,7 @@
             var isValid = true;
             allFields.removeClass("ui-state-error");
             if (!isWithoutMoving) {
-                isValid = checkLength(roomNameMoveToField, "Комната, куда переместить мебель", 3, 20);
+                isValid = checkLength(roomNameMoveToField, "Переместить мебель в комнату", 3, 20);
             }
             isValid = isValid && checkDateField();
             return isValid;
@@ -103,7 +103,7 @@
         function checkLength(object, fieldName, min, max) {
             if (object.val().length > max || object.val().length < min) {
                 setErrorClass(object);
-                updateTips('Длина поля ' + fieldName + ' должна быть между ' + min + ' и ' + max + '.');
+                updateTips('Длина поля ' + fieldName + ' должна быть между ' + min + ' и ' + max + ' символами');
                 return false;
             } else {
                 return true;
