@@ -8,10 +8,12 @@ namespace RoomsAndFurniture.Web.Controllers
     public class HomeController : Controller
     {
         private readonly IRoomWebHandler handler;
+        private readonly IDatabaseInitializer databaseInitializer;
 
-        public HomeController(IRoomWebHandler handler)
+        public HomeController(IRoomWebHandler handler, IDatabaseInitializer databaseInitializer)
         {
             this.handler = handler;
+            this.databaseInitializer = databaseInitializer;
         }
 
         public ActionResult Index(DateTime? date)
@@ -21,9 +23,10 @@ namespace RoomsAndFurniture.Web.Controllers
             return View(new HomeClientModel(roomsClientsList));
         }
 
-        public ActionResult AddRoomDialog()
+        public ActionResult RecreateDatabase()
         {
-            return PartialView("AddRoomDialog");
+            databaseInitializer.Recreate();
+            return RedirectToAction("Index");
         }
     }
 }

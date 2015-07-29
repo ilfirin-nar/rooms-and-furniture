@@ -19,5 +19,11 @@ namespace RoomsAndFurniture.Web
                 databaseCreator.Create(DatabaseInfoKeeper.Main.FilePath);
             }
         }
+
+        public void Recreate()
+        {
+            File.Delete(DatabaseInfoKeeper.Main.FilePath);
+            databaseCreator.Create(DatabaseInfoKeeper.Main.FilePath);
+        }
     }
 }

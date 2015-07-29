@@ -5,5 +5,7 @@ namespace RoomsAndFurniture.Web
     public interface IDatabaseInitializer : IService
     {
         void Initialize();
+
+        void Recreate();
     }
 }
