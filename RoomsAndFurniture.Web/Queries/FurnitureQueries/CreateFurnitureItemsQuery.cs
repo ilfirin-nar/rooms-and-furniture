@@ -10,7 +10,7 @@ namespace RoomsAndFurniture.Web.Queries.FurnitureQueries
     {
         public void Proceed(IDbConnection connection, CreateFurnitureItemsCriterion criterion)
         {
-            connection.Execute(FurnitureQueriesSql.CreateFurnitureItemsQuery, criterion.FurnitureItems);
+            connection.Execute(FurnitureQueriesSql.CreateFurnitureQuery, criterion.FurnitureItems);
         }
     }
 }
