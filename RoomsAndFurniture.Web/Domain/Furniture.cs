@@ -1,28 +1,16 @@
 ﻿using System;
+using RoomsAndFurniture.Web.Infrastructure.CommonInterfaces;
 
 namespace RoomsAndFurniture.Web.Domain
 {
-    public class Furniture
+    public class Furniture : IEntity<int>
     {
-        public Furniture() {}
-
-        public Furniture(Furniture furniture)
-        {
-            Id = furniture.Id;
-            Date = furniture.Date;
-            Type = furniture.Type;
-            Count = furniture.Count;
-            RoomId = furniture.RoomId;
-        }
-
         public int Id { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateTime CreateDate { get; set; }
+
+        public DateTime? RemoveDate { get; set; }
 
         public string Type { get; set; }
-
-        public int Count { get; set; }
-
-        public int RoomId { get; set; }
     }
 }

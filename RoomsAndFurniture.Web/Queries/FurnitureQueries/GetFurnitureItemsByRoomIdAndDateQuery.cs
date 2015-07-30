@@ -10,12 +10,12 @@ using RoomsAndFurniture.Web.Queries.FurnitureQueries.Sql;
 namespace RoomsAndFurniture.Web.Queries.FurnitureQueries
 {
     public class GetFurnitureItemsByRoomIdAndDateQuery
-        : IQuery<GetFurnitureItemsByRoomIdAndDateCriterion, IList<Furniture>>
+        : IQuery<GetFurnitureItemsByRoomIdAndDateCriterion, IList<FurnitureState>>
     {
-        public IList<Furniture> Proceed(IDbConnection connection, GetFurnitureItemsByRoomIdAndDateCriterion criterion)
+        public IList<FurnitureState> Proceed(IDbConnection connection, GetFurnitureItemsByRoomIdAndDateCriterion criterion)
         {
             var sql = FurnitureQueriesSql.GetFurnitureItemsByRoomIdAndDateQuery;
-            return connection.Query<Furniture>(sql, criterion).ToList();
+            return connection.Query<FurnitureState>(sql, criterion).ToList();
         }
     }
 }

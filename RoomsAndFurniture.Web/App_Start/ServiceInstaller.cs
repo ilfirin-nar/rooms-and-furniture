@@ -35,6 +35,7 @@ namespace RoomsAndFurniture.Web
             container.Register<IClientDataMapper>(ThisAssembly);
             container.Register<IValidator>(ThisAssembly);
             container.Register<IBusinessService>(ThisAssembly);
+            container.Register<IRepository>(ThisAssembly);
             container.Register<IQueryBuilder>((factory) => new QueryBuilder(factory));
             container.Register<IMainDbConectionFactory>(ThisAssembly, LifeTimeFactory.PerContainer);
             container.Register<IQueryProceeder>(ThisAssembly, LifeTimeFactory.PerContainer);

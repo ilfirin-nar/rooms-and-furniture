@@ -5,11 +5,11 @@ namespace RoomsAndFurniture.Web.Criterions.FurnitureCriterions
 {
     public class UpdateFurnitureCriterion : ICriterion
     {
-        public UpdateFurnitureCriterion(Furniture furniture)
+        public UpdateFurnitureCriterion(FurnitureState furnitureState)
         {
-            Furniture = furniture;
+            FurnitureState = furnitureState;
         }
 
-        public Furniture Furniture { get; private set; }
+        public FurnitureState FurnitureState { get; private set; }
     }
 }

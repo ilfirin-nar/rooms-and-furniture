@@ -21,27 +21,26 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
             this.queryBuilder = queryBuilder;
         }
 
-        public Furniture Create(string type, DateTime date, string roomName, int count)
+        public FurnitureState Create(string type, DateTime date, string roomName, int count)
         {
             var room = roomReader.Get(roomName, date);
             return Create(type, date, room.Id, count);
         }
 
-        public Furniture Create(string type, DateTime date, int roomId, int count)
+        public FurnitureState Create(string type, DateTime date, int roomId, int count)
         {
-            var furniture = new Furniture
-            {
-                Type = type,
-                Date = date,
-                RoomId = roomId,
-                Count = count
-            };
-            var critreion = new CreateFurnitureCriterion(furniture);
-            furniture.Id = queryBuilder.Query<CreateFurnitureCriterion, int>().Proceed(critreion);
-            return furniture;
+//            var furniture = new Furniture
+//            {
+//                Type = type,
+//                CreateDate = date
+//            };
+//            var critreion = new CreateFurnitureCriterion(furniture);
+//            furniture.Id = queryBuilder.Query<CreateFurnitureCriterion, int>().Proceed(critreion);
+//            return furniture;
+            return null;
         }
 
-        public void Create(IList<Furniture> furnitureItems)
+        public void Create(IList<FurnitureState> furnitureItems)
         {
             if (!furnitureItems.Any())
             {

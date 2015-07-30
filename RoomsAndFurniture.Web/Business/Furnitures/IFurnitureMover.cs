@@ -6,6 +6,6 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
 {
     public interface IFurnitureMover : IBusinessService
     {
-        Furniture Move(string type, string roomNameFrom, string roomNameTo, DateTime date);
+        FurnitureState Move(string type, string roomNameFrom, string roomNameTo, DateTime date);
     }
 }

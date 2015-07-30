@@ -11,6 +11,6 @@ namespace RoomsAndFurniture.Web.Domain
 
         public DateTime Date { get; set; }
 
-        public IList<Furniture> FurnitureItems { get; set; }
+        public IList<FurnitureState> FurnitureItems { get; set; }
     }
 }

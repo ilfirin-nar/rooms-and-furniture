@@ -6,8 +6,8 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
 {
     public interface IFurnitureUpdater : IBusinessService
     {
-        Furniture Update(Furniture furniture);
+        FurnitureState Update(FurnitureState furnitureState);
 
-        IList<Furniture> Update(IList<Furniture> furnitureItems);
+        IList<FurnitureState> Update(IList<FurnitureState> furnitureItems);
     }
 }

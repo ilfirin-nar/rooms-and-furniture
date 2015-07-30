@@ -10,8 +10,8 @@ namespace RoomsAndFurniture.Web.Queries.FurnitureQueries
     {
         public int Proceed(IDbConnection connection, UpdateFurnitureCriterion criterion)
         {
-            connection.Execute(FurnitureQueriesSql.UpdateFurnitureQuery, criterion.Furniture);
-            return criterion.Furniture.Id;
+            connection.Execute(FurnitureQueriesSql.UpdateFurnitureQuery, criterion.FurnitureState);
+            return criterion.FurnitureState.Id;
         }
     }
 }

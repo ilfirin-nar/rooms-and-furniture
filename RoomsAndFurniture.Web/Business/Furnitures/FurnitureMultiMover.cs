@@ -43,23 +43,23 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
         }
 
         private void SetFurnitureToSecondRoom(
-            IEnumerable<Furniture> furnitureItemsFrom, IList<Furniture> furnitureItemsTo, Room roomTo, DateTime date)
+            IEnumerable<FurnitureState> furnitureItemsFrom, IList<FurnitureState> furnitureItemsTo, Room roomTo, DateTime date)
         {
-            var fournitureItemsForCreate = new List<Furniture>();
-            var fournitureItemsForUpdate = new List<Furniture>();
+            var fournitureItemsForCreate = new List<FurnitureState>();
+            var fournitureItemsForUpdate = new List<FurnitureState>();
             foreach (var fournitureItemFrom in furnitureItemsFrom)
             {
                 var fournitureItemTo = furnitureItemsTo.FirstOrDefault(f => f.Type == fournitureItemFrom.Type);
                 if (fournitureItemTo == null)
                 {
-                    var furnitureItemToCreate = new Furniture(fournitureItemFrom) { Date = date, RoomId = roomTo.Id };
+                    var furnitureItemToCreate = new FurnitureState(fournitureItemFrom) { Date = date, RoomId = roomTo.Id };
                     fournitureItemsForCreate.Add(furnitureItemToCreate);
                     continue;
                 }
                 var count = fournitureItemFrom.Count + fournitureItemTo.Count;
                 if (fournitureItemTo.Date < date.Date)
                 {
-                    var furnitureItemToCreate = new Furniture(fournitureItemTo) { Date = date, Count = count };
+                    var furnitureItemToCreate = new FurnitureState(fournitureItemTo) { Date = date, Count = count };
                     fournitureItemsForCreate.Add(furnitureItemToCreate);
                     continue;
                 }
@@ -70,15 +70,15 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
             updater.Update(fournitureItemsForUpdate);
         }
         
-        private void RemoveFurnitureItemsFromFirstRoom(IEnumerable<Furniture> furnitureItems, DateTime date)
+        private void RemoveFurnitureItemsFromFirstRoom(IEnumerable<FurnitureState> furnitureItems, DateTime date)
         {
-            var fournitureItemsForCreate = new List<Furniture>();
-            var fournitureItemsForUpdate = new List<Furniture>();
+            var fournitureItemsForCreate = new List<FurnitureState>();
+            var fournitureItemsForUpdate = new List<FurnitureState>();
             foreach (var furnitureItem in furnitureItems)
             {
                 if (furnitureItem.Date.Date < date.Date)
                 {
-                    var furnitureItemToCreate = new Furniture(furnitureItem) { Date = date, Count = 0 };
+                    var furnitureItemToCreate = new FurnitureState(furnitureItem) { Date = date, Count = 0 };
                     fournitureItemsForCreate.Add(furnitureItemToCreate);
                 }
                 furnitureItem.Count = 0;

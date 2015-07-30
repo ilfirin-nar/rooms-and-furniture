@@ -1,6 +1,7 @@
 ﻿using System;
 using RoomsAndFurniture.Web.Business.RoomEvents;
 using RoomsAndFurniture.Web.Domain;
+using RoomsAndFurniture.Web.Infrastructure.CommonInterfaces;
 
 namespace RoomsAndFurniture.Web.Business.Furnitures
 {
@@ -10,20 +11,26 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
         private readonly IFurnitureCreator creator;
         private readonly IFurnitureUpdater updater;
         private readonly IRoomEventLogger roomEventLogger;
+        private readonly IRepository<Furniture> furnitureRepository;
+        private readonly IRepository<FurnitureLocation> furnitureLocationRepository;
 
         public FurnitureAmountIncreaser(
             IFurnitureReader reader,
             IFurnitureCreator creator,
             IFurnitureUpdater updater,
-            IRoomEventLogger roomEventLogger)
+            IRoomEventLogger roomEventLogger,
+            IRepository<Furniture> furnitureRepository,
+            IRepository<FurnitureLocation> furnitureLocationRepository)
         {
             this.reader = reader;
             this.creator = creator;
             this.updater = updater;
             this.roomEventLogger = roomEventLogger;
+            this.furnitureRepository = furnitureRepository;
+            this.furnitureLocationRepository = furnitureLocationRepository;
         }
 
-        public Furniture Increase(string type, DateTime date, string roomName, int increaseBy)
+        public FurnitureState Increase(string type, DateTime date, string roomName, int increaseBy)
         {
             var furniture = reader.GetClosestLeftByDate(type, date, roomName);
             if (furniture == null)

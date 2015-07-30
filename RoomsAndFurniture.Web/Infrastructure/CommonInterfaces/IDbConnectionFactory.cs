@@ -1,7 +1,6 @@
 ﻿using System.Data;
-using RoomsAndFurniture.Web.Infrastructure.CommonInterfaces;
 
-namespace RoomsAndFurniture.Web.Infrastructure.Database
+namespace RoomsAndFurniture.Web.Infrastructure.CommonInterfaces
 {
     public interface IDbConnectionFactory<out T> : IService
         where T : IDbConnection

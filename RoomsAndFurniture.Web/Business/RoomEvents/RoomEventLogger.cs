@@ -37,15 +37,15 @@ namespace RoomsAndFurniture.Web.Business.RoomEvents
             saver.Save(roomEvent);
         }
 
-        public void LogMoveFurniture(DateTime date, string roomName, string roomTo, int count, Furniture furniture)
+        public void LogMoveFurniture(DateTime date, string roomName, string roomTo, int count, FurnitureState furnitureState)
         {
-            var furnitureDescription = string.Format(RoomEventMessage.FurnitureTemplate, furniture.Type, count);
+            var furnitureDescription = string.Format(RoomEventMessage.FurnitureTemplate, furnitureState.Type, count);
             var descripton = string.Format(RoomEventMessage.FurnitureWasMoved, furnitureDescription, roomName, roomTo);
             var roomEvent = new RoomEvent(date, RoomEventType.MoveFurnitureOut, descripton);
             saver.Save(roomEvent);
         }
 
-        public void LogMoveFurnitureItems(DateTime date, string roomName, string roomTo, IList<Furniture> furnitureItems)
+        public void LogMoveFurnitureItems(DateTime date, string roomName, string roomTo, IList<FurnitureState> furnitureItems)
         {
             var furnitureDescription = GetFurnitureItemsString(furnitureItems);
             var descripton = string.Format(RoomEventMessage.FurnitureWasMoved, furnitureDescription, roomName, roomTo);
@@ -53,7 +53,7 @@ namespace RoomsAndFurniture.Web.Business.RoomEvents
             saver.Save(roomEvent);
         }
 
-        private static string GetFurnitureItemsString(IEnumerable<Furniture> furnitureItems)
+        private static string GetFurnitureItemsString(IEnumerable<FurnitureState> furnitureItems)
         {
             var strings = furnitureItems.Select(f => string.Format(RoomEventMessage.FurnitureTemplate, f.Type, f.Count)).ToList();
             return string.Join(", ", strings);

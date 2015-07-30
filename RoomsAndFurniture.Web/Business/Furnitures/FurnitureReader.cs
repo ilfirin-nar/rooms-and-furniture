@@ -20,13 +20,13 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
         /// <summary>
         /// Возвращает состояние мебели на ближайшую слева (более ранюю) дату или, если запись есть, на заданную.
         /// </summary>
-        public Furniture GetClosestLeftByDate(string type, DateTime date, string roomName)
+        public FurnitureState GetClosestLeftByDate(string type, DateTime date, string roomName)
         {
             var criterion = new GetFurnitureByTypeAndDateAndRoomNameCriterion(type, date, roomName);
-            return queryBuilder.Query<GetFurnitureByTypeAndDateAndRoomNameCriterion, Furniture>().Proceed(criterion);
+            return queryBuilder.Query<GetFurnitureByTypeAndDateAndRoomNameCriterion, FurnitureState>().Proceed(criterion);
         }
 
-        public Furniture Get(string type, string roomName, DateTime date)
+        public FurnitureState Get(string type, string roomName, DateTime date)
         {
             var furnitureFrom = GetClosestLeftByDate(type, date, roomName);
             if (furnitureFrom == null)
@@ -36,22 +36,22 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
             return furnitureFrom;
         }
 
-        public IList<Furniture> Get(IList<int> roomsIds, DateTime date)
+        public IList<FurnitureState> Get(IList<int> roomsIds, DateTime date)
         {
             var critretion = new GetFurnitureItemsByRoomsIdsAndDateCriterion(roomsIds, date);
-            return queryBuilder.Query<GetFurnitureItemsByRoomsIdsAndDateCriterion, IList<Furniture>>().Proceed(critretion);
+            return queryBuilder.Query<GetFurnitureItemsByRoomsIdsAndDateCriterion, IList<FurnitureState>>().Proceed(critretion);
         }
 
-        public IList<Furniture> GetFurnitureItems(Room room, DateTime date)
+        public IList<FurnitureState> GetFurnitureItems(Room room, DateTime date)
         {
             var critretion = new GetFurnitureItemsByRoomIdAndDateCriterion(room.Id, date);
-            return queryBuilder.Query<GetFurnitureItemsByRoomIdAndDateCriterion, IList<Furniture>>().Proceed(critretion);
+            return queryBuilder.Query<GetFurnitureItemsByRoomIdAndDateCriterion, IList<FurnitureState>>().Proceed(critretion);
         }
 
-        public IList<Furniture> GetFurnitureItems(IList<string> furnitureTypes, Room room, DateTime date)
+        public IList<FurnitureState> GetFurnitureItems(IList<string> furnitureTypes, Room room, DateTime date)
         {
             var critretion = new GetFurnitureItemsByRoomIdAndDateAndTypesCriterion(room.Id, date, furnitureTypes.ToArray());
-            return queryBuilder.Query<GetFurnitureItemsByRoomIdAndDateAndTypesCriterion, IList<Furniture>>().Proceed(critretion);
+            return queryBuilder.Query<GetFurnitureItemsByRoomIdAndDateAndTypesCriterion, IList<FurnitureState>>().Proceed(critretion);
         }
     }
 }

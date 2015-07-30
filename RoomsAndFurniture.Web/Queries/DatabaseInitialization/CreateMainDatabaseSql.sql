@@ -16,7 +16,7 @@ create table if not exists Furniture (
 
 create table if not exists FurnitureLocation (
     Id integer not null,
-    Date datetime not null,
+    Date date not null,
     FurnitureId integer not null,
     RoomId integer not null,
     constraint PF_FurnitureLocation primary key (Id),

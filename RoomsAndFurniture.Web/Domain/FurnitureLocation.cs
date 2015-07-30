@@ -4,16 +4,14 @@ using RoomsAndFurniture.Web.Infrastructure.Database;
 
 namespace RoomsAndFurniture.Web.Domain
 {
-    public class Room : IEntity<int>
+    public class FurnitureLocation : IEntity<int>
     {
         public int Id { get; set; }
 
-        public DateTime CreateDate { get; set; }
+        public DateTime Date { get; set; }
 
-        public DateTime? RemoveDate { get; set; }
+        public int FurnitureId { get; set; }
 
-        public string Name { get; set; }
-
-        public bool IsDeleted { get; set; }
+        public int RoomId { get; set; }
     }
 }

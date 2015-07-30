@@ -48,6 +48,10 @@
       <HintPath>..\packages\Dapper.1.42\lib\net45\Dapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="DapperExtensions, Version=1.4.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DapperExtensions.1.4.4\lib\net40\DapperExtensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="LightInject, Version=3.0.2.7, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\LightInject.3.0.2.7\lib\net45\LightInject.dll</HintPath>
       <Private>True</Private>
@@ -266,6 +270,9 @@
     <Compile Include="Criterions\RoomCriterions\CreateRoomCriterion.cs" />
     <Compile Include="Criterions\RoomEventsCriterions\GetRoomEventsCriterion.cs" />
     <Compile Include="Criterions\RoomEventsCriterions\SaveRoomEventCriterion.cs" />
+    <Compile Include="Domain\Furniture.cs" />
+    <Compile Include="Domain\FurnitureLocation.cs" />
+    <Compile Include="Domain\Mappings\AutoMappings.cs" />
     <Compile Include="Infrastructure\ClientModels\ResultBase.cs" />
     <Compile Include="Infrastructure\ClientModels\FailResult.cs" />
     <Compile Include="Infrastructure\ClientModels\SuccessResult.cs" />
@@ -273,13 +280,17 @@
     <Compile Include="Infrastructure\CommonInterfaces\IQuery.cs" />
     <Compile Include="Infrastructure\CommonInterfaces\IQueryBuilder.cs" />
     <Compile Include="Infrastructure\CommonInterfaces\IQueryProceeder.cs" />
+    <Compile Include="Infrastructure\CommonInterfaces\IEntity.cs" />
+    <Compile Include="Infrastructure\Database\EntityAutoMapper.cs" />
+    <Compile Include="Infrastructure\CommonInterfaces\IRepository.cs" />
+    <Compile Include="Infrastructure\Database\Exceptions\SaveEntityFailedException.cs" />
     <Compile Include="Infrastructure\Database\QueryProceeder.cs" />
     <Compile Include="Infrastructure\Database\QueryBuilder.cs" />
     <Compile Include="Infrastructure\Database\IMainDbConectionFactory.cs" />
     <Compile Include="Infrastructure\Database\ISqliteConnectionFactory.cs" />
     <Compile Include="Infrastructure\Database\MainDatabaseCreator.cs" />
     <Compile Include="Infrastructure\Database\DatabaseInfoKeeper.cs" />
-    <Compile Include="Infrastructure\Database\IDbConnectionFactory.cs" />
+    <Compile Include="Infrastructure\CommonInterfaces\IDbConnectionFactory.cs" />
     <Compile Include="App_Start\DatabaseInitializer.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -293,7 +304,7 @@
     <Compile Include="Controllers\FurnitureController.cs" />
     <Compile Include="Controllers\HistoryController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
-    <Compile Include="Domain\Furniture.cs" />
+    <Compile Include="Domain\FurnitureState.cs" />
     <Compile Include="Domain\Room.cs" />
     <Compile Include="Domain\RoomEvent.cs" />
     <Compile Include="Domain\RoomState.cs" />
@@ -309,6 +320,7 @@
     <Compile Include="Infrastructure\CommonInterfaces\IWebHandler.cs" />
     <Compile Include="Infrastructure\Database\IDatabaseCreator.cs" />
     <Compile Include="Infrastructure\Database\MainDbConnectionFactory.cs" />
+    <Compile Include="Infrastructure\Database\Repositiry.cs" />
     <Compile Include="Infrastructure\DependencyInjection\IDaoInterceptor.cs" />
     <Compile Include="Infrastructure\DependencyInjection\LifettimeFactory.cs" />
     <Compile Include="Infrastructure\DependencyInjection\ServiceRegistrationFilter.cs" />

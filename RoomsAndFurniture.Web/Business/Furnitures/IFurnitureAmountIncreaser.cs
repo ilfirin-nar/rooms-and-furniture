@@ -6,6 +6,6 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
 {
     public interface IFurnitureAmountIncreaser : IBusinessService
     {
-        Furniture Increase(string type, DateTime date, string roomName, int increaseBy);
+        FurnitureState Increase(string type, DateTime date, string roomName, int increaseBy);
     }
 }

@@ -11,8 +11,8 @@ namespace RoomsAndFurniture.Web.Queries.FurnitureQueries
     {
         public int Proceed(IDbConnection connection, CreateFurnitureCriterion criterion)
         {
-            criterion.Furniture.Id = connection.Query<int>(FurnitureQueriesSql.CreateFurnitureQuery, criterion.Furniture).FirstOrDefault();
-            return criterion.Furniture.Id;
+            criterion.FurnitureState.Id = connection.Query<int>(FurnitureQueriesSql.CreateFurnitureQuery, criterion.FurnitureState).FirstOrDefault();
+            return criterion.FurnitureState.Id;
         }
     }
 }
