@@ -11,5 +11,11 @@ namespace RoomsAndFurniture.Web.Infrastructure.Database
             Map(x => x.Id).Column("Id").Key(KeyType.Identity);
             AutoMap();
         }
+
+        protected EntityAutoMapper(string identityColumnName)
+        {
+            Map(x => x.Id).Column(identityColumnName).Key(KeyType.Identity);
+            AutoMap();
+        }
     }
 }

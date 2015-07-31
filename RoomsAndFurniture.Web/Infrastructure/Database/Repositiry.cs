@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using DapperExtensions;
@@ -12,36 +10,40 @@ namespace RoomsAndFurniture.Web.Infrastructure.Database
     public class Repositiry<TEntity> : IRepository<TEntity>
         where TEntity : class, IEntity
     {
-        private readonly static PropertyInfo primaryKeyProperty;
-        private readonly ISqliteConnectionFactory connectionFactory;
+        private readonly static PropertyInfo PrimaryKeyProperty;
+        private readonly IQueryExecuter queryExecuter;
 
         static Repositiry()
         {
-            primaryKeyProperty = typeof (TEntity).GetProperty("Id");
+            PrimaryKeyProperty = typeof (TEntity).GetProperty("Id");
         }
 
-        public Repositiry(ISqliteConnectionFactory connectionFactory)
+        public Repositiry(IQueryExecuter queryExecuter)
         {
-            this.connectionFactory = connectionFactory;
+            this.queryExecuter = queryExecuter;
         }
 
         public TEntity Get(dynamic id)
         {
-
-            return Execute(connection => connection.Get<TEntity>((object)id));
+            return queryExecuter.Execute(connection => connection.Get<TEntity>((object)id));
         }
 
         public IList<TEntity> Get()
         {
-            return Execute(connection => connection.GetList<TEntity>().ToList());
+            return queryExecuter.Execute(connection => connection.GetList<TEntity>().ToList());
         }
 
         /// <summary>Возвращает идентификатор сущности</summary>
         public dynamic Save(TEntity entity)
         {
             return IsNewEntity(entity)
-                ? Execute(connection => connection.Insert(entity))
-                : Execute(connection =>
+                ? queryExecuter.Execute(connection =>
+                {
+                    var id = connection.Insert(entity);
+                    PrimaryKeyProperty.SetValue(entity, id);
+                    return id;
+                })
+                : queryExecuter.Execute(connection =>
                 {
                     var id = GetEntityId(entity);
                     if (connection.Update(entity))
@@ -54,20 +56,12 @@ namespace RoomsAndFurniture.Web.Infrastructure.Database
 
         public bool Remove(TEntity entity)
         {
-            return Execute(connection => connection.Delete(entity));
-        }
-
-        private TResult Execute<TResult>(Func<IDbConnection, TResult> action)
-        {
-            using (var connection = connectionFactory.Create())
-            {
-                return action(connection);
-            }
+            return queryExecuter.Execute(connection => connection.Delete(entity));
         }
 
         private static bool IsNewEntity(TEntity entity)
         {
-            var value = primaryKeyProperty.GetValue(entity);
+            var value = PrimaryKeyProperty.GetValue(entity);
             if (value is long || value is int || value is short || value is byte)
             {
                 return (long) value == 0;
@@ -77,7 +71,7 @@ namespace RoomsAndFurniture.Web.Infrastructure.Database
 
         private static long GetEntityId(TEntity entity)
         {
-            return (long) primaryKeyProperty.GetValue(entity);
+            return (long) PrimaryKeyProperty.GetValue(entity);
         }
     }
 }

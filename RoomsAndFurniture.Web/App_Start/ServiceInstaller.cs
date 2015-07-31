@@ -36,11 +36,11 @@ namespace RoomsAndFurniture.Web
             container.Register<IValidator>(ThisAssembly);
             container.Register<IBusinessService>(ThisAssembly);
             container.Register<IRepository>(ThisAssembly);
+            container.Register<ISession>(ThisAssembly);
             container.Register<IQueryBuilder>((factory) => new QueryBuilder(factory));
-            container.Register<IMainDbConectionFactory>(ThisAssembly, LifeTimeFactory.PerContainer);
+            container.Register<IDbConnectionFactory>(ThisAssembly, LifeTimeFactory.PerContainer);
             container.Register<IQueryProceeder>(ThisAssembly, LifeTimeFactory.PerContainer);
             container.Register<IQuery>(ThisAssembly, LifeTimeFactory.PerContainer);
-            container.Register<IService>(ThisAssembly, LifeTimeFactory.PerContainer);
             container.EnableMvc();
         }
     }

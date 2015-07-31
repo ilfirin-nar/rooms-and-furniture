@@ -2,5 +2,5 @@
 
 namespace RoomsAndFurniture.Web.Infrastructure.DependencyInjection
 {
-    public interface IDaoInterceptor : IInterceptor { }
+    public interface ITransactionInterceptor : IInterceptor {}
 }

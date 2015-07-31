@@ -2,8 +2,9 @@
 
 namespace RoomsAndFurniture.Web.Infrastructure.CommonInterfaces
 {
-    public interface IDbConnectionFactory<out T> : IService
-        where T : IDbConnection
+    public interface IDbConnectionFactory : IService {}
+
+    public interface IDbConnectionFactory<out T> : IDbConnectionFactory where T : IDbConnection
     {
         T Create();
     }

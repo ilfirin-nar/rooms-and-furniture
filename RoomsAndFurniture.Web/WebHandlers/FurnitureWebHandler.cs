@@ -2,6 +2,7 @@
 using RoomsAndFurniture.Web.Business.Furnitures;
 using RoomsAndFurniture.Web.Business.Furnitures.Exceptions;
 using RoomsAndFurniture.Web.Business.Rooms.Exceptions;
+using RoomsAndFurniture.Web.Domain;
 using RoomsAndFurniture.Web.Infrastructure.ClientModels;
 using RoomsAndFurniture.Web.Infrastructure.Extensions;
 using RoomsAndFurniture.Web.Models;
@@ -12,14 +13,14 @@ namespace RoomsAndFurniture.Web.WebHandlers
 {
     internal class FurnitureWebHandler : IFurnitureWebHandler
     {
-        private readonly IFurnitureAmountIncreaser amountIncreaser;
+        private readonly IFurnitureAdder furnitureAdder;
         private readonly IFurnitureMover furnitureMover;
 
         public FurnitureWebHandler(
-            IFurnitureAmountIncreaser amountIncreaser,
+            IFurnitureAdder furnitureAdder,
             IFurnitureMover furnitureMover)
         {
-            this.amountIncreaser = amountIncreaser;
+            this.furnitureAdder = furnitureAdder;
             this.furnitureMover = furnitureMover;
         }
 
@@ -27,8 +28,8 @@ namespace RoomsAndFurniture.Web.WebHandlers
         {
             try
             {
-                var furniture = amountIncreaser.Increase(type, date, roomName, count);
-                return new SuccessResult<FurnitureClientModel>(furniture.MapTo<FurnitureClientModel>());
+                var furnitureState = furnitureAdder.Add(new Furniture(date, type), roomName);
+                return new SuccessResult<FurnitureClientModel>(furnitureState.MapTo<FurnitureClientModel>());
             }
             catch (RoomNotFoundException exception)
             {
