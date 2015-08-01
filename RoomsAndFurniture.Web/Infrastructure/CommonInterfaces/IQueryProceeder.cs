@@ -1,6 +1,6 @@
 ﻿namespace RoomsAndFurniture.Web.Infrastructure.CommonInterfaces
 {
-    public interface IQueryProceeder : IService {}
+    public interface IQueryProceeder {}
 
     public interface IQueryProceeder<in TCriterion> : IQueryProceeder where TCriterion : ICriterion
     {

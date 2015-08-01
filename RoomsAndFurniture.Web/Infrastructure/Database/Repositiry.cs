@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using DapperExtensions;
@@ -64,7 +65,7 @@ namespace RoomsAndFurniture.Web.Infrastructure.Database
             var value = PrimaryKeyProperty.GetValue(entity);
             if (value is long || value is int || value is short || value is byte)
             {
-                return (long) value == 0;
+                return Convert.ToInt64(value) == 0;
             }
             return false;
         }

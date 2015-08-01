@@ -1,8 +1,6 @@
-﻿using RoomsAndFurniture.Web.Infrastructure.CommonInterfaces;
-
-namespace RoomsAndFurniture.Web
+﻿namespace RoomsAndFurniture.Web
 {
-    public interface IDatabaseInitializer : IService
+    public interface IDatabaseInitializer
     {
         void Initialize();
 

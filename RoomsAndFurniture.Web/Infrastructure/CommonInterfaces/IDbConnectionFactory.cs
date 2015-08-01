@@ -2,7 +2,7 @@
 
 namespace RoomsAndFurniture.Web.Infrastructure.CommonInterfaces
 {
-    public interface IDbConnectionFactory : IService {}
+    public interface IDbConnectionFactory {}
 
     public interface IDbConnectionFactory<out T> : IDbConnectionFactory where T : IDbConnection
     {

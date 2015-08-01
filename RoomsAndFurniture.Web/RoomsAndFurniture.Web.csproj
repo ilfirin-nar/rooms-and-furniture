@@ -227,14 +227,12 @@
     <Compile Include="Business\Furnitures\FurnitureMover.cs" />
     <Compile Include="Business\Furnitures\FurnitureMultiMover.cs" />
     <Compile Include="Business\Furnitures\FurnitureReader.cs" />
-    <Compile Include="Business\Furnitures\FurnitureAmountIncreaser.cs" />
     <Compile Include="Business\Furnitures\FurnitureUpdater.cs" />
     <Compile Include="Business\Furnitures\IFurnitureAdder.cs" />
     <Compile Include="Business\Furnitures\IFurnitureCreator.cs" />
     <Compile Include="Business\Furnitures\IFurnitureMover.cs" />
     <Compile Include="Business\Furnitures\IFurnitureMultiMover.cs" />
     <Compile Include="Business\Furnitures\IFurnitureReader.cs" />
-    <Compile Include="Business\Furnitures\IFurnitureAmountIncreaser.cs" />
     <Compile Include="Business\Furnitures\IFurnitureUpdater.cs" />
     <Compile Include="Business\RoomEvents\IRoomEventLogger.cs" />
     <Compile Include="Business\RoomEvents\IRoomEventSaver.cs" />
@@ -335,7 +333,7 @@
     <Compile Include="Infrastructure\Extensions\SqlConnectionExtensions.cs" />
     <Compile Include="Infrastructure\Extensions\ObjectExtensions.cs" />
     <Compile Include="Infrastructure\Extensions\TypeExtensions.cs" />
-    <Compile Include="Infrastructure\Session.cs" />
+    <Compile Include="Infrastructure\SqliteSession.cs" />
     <Compile Include="Models\FurnitureClientModel.cs" />
     <Compile Include="Models\HistoryClientModel.cs" />
     <Compile Include="Models\HomeClientModel.cs" />

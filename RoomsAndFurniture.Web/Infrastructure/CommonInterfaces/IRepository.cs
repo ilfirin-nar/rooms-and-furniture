@@ -2,7 +2,7 @@
 
 namespace RoomsAndFurniture.Web.Infrastructure.CommonInterfaces
 {
-    public interface IRepository : IService {}
+    public interface IRepository {}
 
     public interface IRepository<TEntity> : IRepository where TEntity : IEntity
     {

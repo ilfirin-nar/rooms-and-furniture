@@ -3,7 +3,7 @@ using System.Data;
 
 namespace RoomsAndFurniture.Web.Infrastructure.CommonInterfaces
 {
-    public interface IQueryExecuter : IService
+    public interface IQueryExecuter
     {
         void Execute(Action<IDbConnection> action);
 

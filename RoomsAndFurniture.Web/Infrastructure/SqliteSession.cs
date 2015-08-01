@@ -4,9 +4,9 @@ using RoomsAndFurniture.Web.Infrastructure.Database;
 
 namespace RoomsAndFurniture.Web.Infrastructure
 {
-    public class MainDbSession : ISession
+    public class SqliteSession : ISession
     {
-        public MainDbSession(ISqliteConnectionFactory connectionFactory)
+        public SqliteSession(ISqliteConnectionFactory connectionFactory)
         {
             Connection = connectionFactory.Create();
             Connection.Open();

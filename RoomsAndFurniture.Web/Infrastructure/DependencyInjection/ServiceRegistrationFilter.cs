@@ -7,7 +7,9 @@ namespace RoomsAndFurniture.Web.Infrastructure.DependencyInjection
     {
         public static bool ShouldImplements<TInterface>(Type interfaceType, Type implementingType)
         {
-            return interfaceType.IsImplements<TInterface>() && implementingType.IsImplements<TInterface>();
+            var type = typeof(TInterface);
+            return (interfaceType == type || interfaceType.IsImplements<TInterface>()) && 
+                implementingType.IsImplements<TInterface>();
         }
     }
 }

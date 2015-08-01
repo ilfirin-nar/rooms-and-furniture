@@ -31,16 +31,19 @@ namespace RoomsAndFurniture.Web
         private void RegisterServices()
         {
             container.RegisterControllers();
-            container.Register<IWebHandler>(ThisAssembly);
+            container.Register<ISqliteConnectionFactory>(ThisAssembly, LifeTimeFactory.PerContainer);
+            container.Register<IDatabaseCreator>(ThisAssembly, LifeTimeFactory.PerContainer);
+            container.Register<IDatabaseInitializer>(ThisAssembly, LifeTimeFactory.PerContainer);
+            container.Register<IQueryExecuter>(ThisAssembly);
+            container.Register<IQueryProceeder>(ThisAssembly);
+            container.Register<IQuery>(ThisAssembly, LifeTimeFactory.PerContainer);
+            container.Register<IQueryBuilder>(factory => new QueryBuilder(factory));
+            container.Register<ISession>(ThisAssembly);
+            container.Register<IRepository>(ThisAssembly);
+            container.Register<IBusinessService>(ThisAssembly);
             container.Register<IClientDataMapper>(ThisAssembly);
             container.Register<IValidator>(ThisAssembly);
-            container.Register<IBusinessService>(ThisAssembly);
-            container.Register<IRepository>(ThisAssembly);
-            container.Register<ISession>(ThisAssembly);
-            container.Register<IQueryBuilder>((factory) => new QueryBuilder(factory));
-            container.Register<IDbConnectionFactory>(ThisAssembly, LifeTimeFactory.PerContainer);
-            container.Register<IQueryProceeder>(ThisAssembly, LifeTimeFactory.PerContainer);
-            container.Register<IQuery>(ThisAssembly, LifeTimeFactory.PerContainer);
+            container.Register<IWebHandler>(ThisAssembly);
             container.EnableMvc();
         }
     }
