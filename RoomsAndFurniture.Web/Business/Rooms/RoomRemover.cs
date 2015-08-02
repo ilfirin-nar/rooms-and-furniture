@@ -1,9 +1,8 @@
 ﻿using System;
 using RoomsAndFurniture.Web.Business.Furnitures;
-using RoomsAndFurniture.Web.Business.RoomEvents;
 using RoomsAndFurniture.Web.Business.Rooms.Exceptions;
-using RoomsAndFurniture.Web.Criterions.RoomCriterions;
 using RoomsAndFurniture.Web.Domain;
+using RoomsAndFurniture.Web.Infrastructure.Attributes;
 using RoomsAndFurniture.Web.Infrastructure.CommonInterfaces;
 
 namespace RoomsAndFurniture.Web.Business.Rooms
@@ -12,33 +11,25 @@ namespace RoomsAndFurniture.Web.Business.Rooms
     {
         private readonly IRoomReader reader;
         private readonly IRoomChecker checker;
-        private readonly IRoomEventLogger roomEventLogger;
-        private readonly IQueryBuilder queryBuilder;
+        private readonly IFurnitureMover furnitureMover;
+        private readonly IRepository<Room> repository;
 
         public RoomRemover(
             IRoomReader reader,
             IRoomChecker checker,
-            IRoomEventLogger roomEventLogger,
-            IQueryBuilder queryBuilder)
+            IFurnitureMover furnitureMover,
+            IRepository<Room> repository)
         {
             this.reader = reader;
             this.checker = checker;
-            this.roomEventLogger = roomEventLogger;
-            this.queryBuilder = queryBuilder;
+            this.furnitureMover = furnitureMover;
+            this.repository = repository;
         }
 
+        [Transactional]
         public void Remove(string name, string roomTo, DateTime date)
         {
-            if (!checker.IsExists(name, date))
-            {
-                throw new RoomNotFoundException(name, date);
-            }
-            if (!checker.IsExists(roomTo, date))
-            {
-                throw new RoomNotFoundException(roomTo, date);
-            }
-            var rooms = reader.Get(name, roomTo);
-            //furnitureMultiMover.MoveAll(rooms[name], rooms[roomTo], date);
+            furnitureMover.Move(name, roomTo, date);
             Remove(name, date);
         }
 
@@ -53,9 +44,9 @@ namespace RoomsAndFurniture.Web.Business.Rooms
 
         private void Remove(string name, DateTime date)
         {
-            var criterion = new RemoveRoomCriterion(new Room { Name = name, RemoveDate = date });
-            queryBuilder.Query<RemoveRoomCriterion, bool>().Proceed(criterion);
-            roomEventLogger.LogRemoveRoom(date, name);
+            var room = reader.Get(name, date);
+            room.RemoveDate = date;
+            repository.Save(room);
         }
     }
 }

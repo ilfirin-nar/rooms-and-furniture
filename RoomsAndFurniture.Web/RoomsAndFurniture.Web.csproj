@@ -143,6 +143,7 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Queries\FurnitureLocations\Sql\GetFurnitureLocationByRoomIdAndDateQuery.sql" />
     <Content Include="Queries\FurnitureLocations\Sql\GetFurnitureLocationByTypeRoomIdAndDateQuery.sql" />
     <Content Include="Queries\FurnitureQueries\Sql\CreateFurnitureItemsQuery.sql" />
     <Content Include="Queries\FurnitureQueries\Sql\GetFurnitureItemsByRoomsIdsAndDateQuery.sql" />
@@ -260,6 +261,7 @@
     <Compile Include="Criterions\FurnitureCriterions\UpdateFurnitureItemsCriterion.cs" />
     <Compile Include="Criterions\FurnitureCriterions\UpdateFurnitureCriterion.cs" />
     <Compile Include="Criterions\FurnitureCriterions\CreateFurnitureCriterion.cs" />
+    <Compile Include="Criterions\FurnitureLocations\GetFurnitureLocationByRoomIdAndDateCriterion.cs" />
     <Compile Include="Criterions\FurnitureLocations\GetFurnitureLocationByTypeRoomIdAndDateCriterion.cs" />
     <Compile Include="Criterions\RoomCriterions\GetRoomsByDateCriterion.cs" />
     <Compile Include="Criterions\RoomCriterions\GetRoomsByNamesCriterion.cs" />
@@ -350,6 +352,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MainDbInitializationQueries.resx</DependentUpon>
     </Compile>
+    <Compile Include="Queries\FurnitureLocations\GetFurnitureLocationByRoomIdAndDateQuery.cs" />
     <Compile Include="Queries\FurnitureLocations\GetFurnitureLocationByTypeRoomIdAndDateQuery.cs" />
     <Compile Include="Queries\FurnitureLocations\Sql\FurnitureLocationsQuerySql.Designer.cs">
       <AutoGen>True</AutoGen>

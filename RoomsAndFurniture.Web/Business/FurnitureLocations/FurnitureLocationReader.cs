@@ -26,5 +26,11 @@ namespace RoomsAndFurniture.Web.Business.FurnitureLocations
             }
             return locations;
         }
+
+        public IList<FurnitureLocation> Get(int roomId, DateTime date)
+        {
+            var criterion = new GetFurnitureLocationByRoomIdAndDateCriterion(roomId, date);
+            return queryBuilder.Query<GetFurnitureLocationByRoomIdAndDateCriterion, IList<FurnitureLocation>>().Proceed(criterion);
+        }
     }
 }

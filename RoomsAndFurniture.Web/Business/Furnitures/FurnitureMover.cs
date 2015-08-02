@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using RoomsAndFurniture.Web.Business.FurnitureLocations;
 using RoomsAndFurniture.Web.Business.Furnitures.Exceptions;
 using RoomsAndFurniture.Web.Business.Rooms;
@@ -29,10 +28,21 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
         [Transactional]
         public void Move(string type, string roomNameFrom, string roomNameTo, DateTime date)
         {
+            Move(roomFromId => locationReader.Get(type, roomFromId, date), roomNameFrom, roomNameTo, date);
+        }
+
+        [Transactional]
+        public void Move(string roomNameFrom, string roomNameTo, DateTime date)
+        {
+            Move(roomFromId => locationReader.Get(roomFromId, date), roomNameFrom, roomNameTo, date);
+        }
+
+        private void Move(Func<int, IList<FurnitureLocation>> oldLocationsFunc, string roomNameFrom, string roomNameTo, DateTime date)
+        {
             CheckRooms(roomNameFrom, roomNameTo);
             var roomFrom = roomReader.Get(roomNameFrom, date);
             var roomTo = roomReader.Get(roomNameTo, date);
-            var oldLocations = locationReader.Get(type, roomFrom.Id, date);
+            var oldLocations = oldLocationsFunc(roomFrom.Id);
             var newLocations = new List<FurnitureLocation>();
             foreach (var oldLocation in oldLocations)
             {

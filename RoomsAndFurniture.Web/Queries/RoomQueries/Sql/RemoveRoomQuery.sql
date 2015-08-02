@@ -1,7 +1,6 @@
 update Room
     set
-        RemoveDate = @RemoveDate,
-        IsDeleted = 1
+        RemoveDate = @RemoveDate
     where
         Name = @Name and
         CreateDate <= @RemoveDate

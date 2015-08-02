@@ -1,6 +1,5 @@
 ﻿using System;
 using RoomsAndFurniture.Web.Infrastructure.CommonInterfaces;
-using RoomsAndFurniture.Web.Infrastructure.Database;
 
 namespace RoomsAndFurniture.Web.Domain
 {
@@ -13,7 +12,5 @@ namespace RoomsAndFurniture.Web.Domain
         public DateTime? RemoveDate { get; set; }
 
         public string Name { get; set; }
-
-        public bool IsDeleted { get; set; }
     }
 }

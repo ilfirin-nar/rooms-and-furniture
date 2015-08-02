@@ -8,5 +8,7 @@ namespace RoomsAndFurniture.Web.Business.FurnitureLocations
     public interface IFurnitureLocationReader : IBusinessService
     {
         IList<FurnitureLocation> Get(string type, int roomId, DateTime date);
+
+        IList<FurnitureLocation> Get(int roomId, DateTime date);
     }
 }

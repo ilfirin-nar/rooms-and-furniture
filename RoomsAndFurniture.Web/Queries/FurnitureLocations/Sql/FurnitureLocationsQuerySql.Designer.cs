@@ -76,6 +76,28 @@ namespace RoomsAndFurniture.Web.Queries.FurnitureLocations.Sql {
         ///        )  and
         ///        fl.RoomId = @RoomId.
         /// </summary>
+        internal static string GetFurnitureLocationByRoomIdAndDateQuery {
+            get {
+                return ResourceManager.GetString("GetFurnitureLocationByRoomIdAndDateQuery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to select fl.*
+        ///    from FurnitureLocation as fl
+        ///    inner join Furniture as f on f.Id = fl.FurnitureId
+        ///    where 
+        ///        f.Type = @Type and
+        ///        f.CreateDate &lt;= @Date and (
+        ///            f.RemoveDate is null or
+        ///            f.RemoveDate &gt; @Date
+        ///        ) and
+        ///        fl.BeginDate &lt;= @Date and (
+        ///            fl.EndDate is null or
+        ///            fl.EndDate &gt; @Date
+        ///        )  and
+        ///        fl.RoomId = @RoomId.
+        /// </summary>
         internal static string GetFurnitureLocationByTypeRoomIdAndDateQuery {
             get {
                 return ResourceManager.GetString("GetFurnitureLocationByTypeRoomIdAndDateQuery", resourceCulture);

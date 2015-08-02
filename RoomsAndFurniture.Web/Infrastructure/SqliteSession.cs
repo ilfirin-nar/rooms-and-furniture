@@ -14,6 +14,8 @@ namespace RoomsAndFurniture.Web.Infrastructure
 
         public IDbConnection Connection { get; private set; }
 
+        public bool InTransaction { get; set; }
+
         public void Dispose()
         {
             Connection.Dispose();

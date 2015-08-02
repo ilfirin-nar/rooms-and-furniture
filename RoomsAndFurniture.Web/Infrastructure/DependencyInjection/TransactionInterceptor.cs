@@ -15,8 +15,13 @@ namespace RoomsAndFurniture.Web.Infrastructure.DependencyInjection
 
         public object Invoke(IInvocationInfo invocationInfo)
         {
+            if (session.InTransaction)
+            {
+                return invocationInfo.Proceed();
+            }
             using (var transaction = session.Connection.BeginTransaction())
             {
+                session.InTransaction = true;
                 try
                 {
                     var result = invocationInfo.Proceed();
@@ -27,6 +32,10 @@ namespace RoomsAndFurniture.Web.Infrastructure.DependencyInjection
                 {
                     transaction.Rollback();
                     throw;
+                }
+                finally
+                {
+                    session.InTransaction = false;
                 }
             }
         }
