@@ -8,13 +8,13 @@ using RoomsAndFurniture.Web.Queries.FurnitureQueries.Sql;
 
 namespace RoomsAndFurniture.Web.Queries.FurnitureQueries
 {
-    public class GetFurnitureByTypeAndDateAndRoomNameQuery
-        : IQuery<GetFurnitureByTypeAndDateAndRoomNameCriterion, FurnitureState>
+    public class GetFurnitureByTypeAndDateAndRoomIdQuery
+        : IQuery<GetFurnitureByTypeAndDateAndRoomIdCriterion, Furniture>
     {
-        public FurnitureState Proceed(IDbConnection connection, GetFurnitureByTypeAndDateAndRoomNameCriterion criterion)
+        public Furniture Proceed(IDbConnection connection, GetFurnitureByTypeAndDateAndRoomIdCriterion criterion)
         {
             return connection
-                .Query<FurnitureState>(FurnitureQueriesSql.GetFurnitureByTypeAndDateAndRoomNameQuery, criterion)
+                .Query<Furniture>(FurnitureQueriesSql.GetFurnitureByTypeAndDateAndRoomIdQuery, criterion)
                 .FirstOrDefault();
         }
     }

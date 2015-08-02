@@ -21,14 +21,14 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
             this.roomReader = roomReader;
         }
 
-        [Transaction]
+        [Transactional]
         public int Add(Furniture furniture, string roomName)
         {
             var id = repository.Save(furniture);
             var room = roomReader.Get(roomName, furniture.CreateDate);
             var location = new FurnitureLocation
             {
-                Date = furniture.CreateDate,
+               BeginDate = furniture.CreateDate,
                 FurnitureId = id,
                 RoomId = room.Id
             };

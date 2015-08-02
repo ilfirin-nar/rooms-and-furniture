@@ -1,6 +1,5 @@
 ﻿using System;
 using RoomsAndFurniture.Web.Infrastructure.CommonInterfaces;
-using RoomsAndFurniture.Web.Infrastructure.Database;
 
 namespace RoomsAndFurniture.Web.Domain
 {
@@ -8,7 +7,9 @@ namespace RoomsAndFurniture.Web.Domain
     {
         public int Id { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateTime BeginDate { get; set; }
+
+        public DateTime? EndDate { get; set; }
 
         public int FurnitureId { get; set; }
 

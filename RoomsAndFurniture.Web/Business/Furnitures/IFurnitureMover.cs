@@ -1,11 +1,10 @@
 ﻿using System;
-using RoomsAndFurniture.Web.Domain;
 using RoomsAndFurniture.Web.Infrastructure.CommonInterfaces;
 
 namespace RoomsAndFurniture.Web.Business.Furnitures
 {
     public interface IFurnitureMover : IBusinessService
     {
-        FurnitureState Move(string type, string roomNameFrom, string roomNameTo, DateTime date);
+        void Move(string type, string roomNameFrom, string roomNameTo, DateTime date);
     }
 }

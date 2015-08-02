@@ -143,11 +143,10 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Queries\FurnitureLocations\Sql\GetFurnitureLocationByTypeRoomIdAndDateQuery.sql" />
     <Content Include="Queries\FurnitureQueries\Sql\CreateFurnitureItemsQuery.sql" />
-    <Content Include="Queries\FurnitureQueries\Sql\GetFurnitureItemsByRoomIdAndDateAndTypesQuery.sql" />
     <Content Include="Queries\FurnitureQueries\Sql\GetFurnitureItemsByRoomsIdsAndDateQuery.sql" />
-    <Content Include="Queries\FurnitureQueries\Sql\GetFurnitureItemsByRoomIdAndDateQuery.sql" />
-    <Content Include="Queries\FurnitureQueries\Sql\GetFurnitureByTypeAndDateAndRoomNameQuery.sql" />
+    <Content Include="Queries\FurnitureQueries\Sql\GetFurnitureByTypeAndDateAndRoomIdQuery.sql" />
     <Content Include="Queries\FurnitureQueries\Sql\UpdateFurnitureQuery.sql" />
     <Content Include="Queries\FurnitureQueries\Sql\CreateFurnitureQuery.sql" />
     <Content Include="Queries\RoomEventQueries\Sql\GetShortRoomEventsQuery.sql" />
@@ -220,18 +219,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\IDatabaseInitializer.cs" />
+    <Compile Include="Business\FurnitureLocations\FurnitureLocationReader.cs" />
+    <Compile Include="Business\FurnitureLocations\IFurnitureLocationReader.cs" />
     <Compile Include="Business\Furnitures\Exceptions\FurnitureNotFoundException.cs" />
     <Compile Include="Business\Furnitures\Exceptions\InvalidFurnitureMovingException.cs" />
     <Compile Include="Business\Furnitures\FurnitureAdder.cs" />
     <Compile Include="Business\Furnitures\FurnitureCreator.cs" />
     <Compile Include="Business\Furnitures\FurnitureMover.cs" />
-    <Compile Include="Business\Furnitures\FurnitureMultiMover.cs" />
     <Compile Include="Business\Furnitures\FurnitureReader.cs" />
     <Compile Include="Business\Furnitures\FurnitureUpdater.cs" />
     <Compile Include="Business\Furnitures\IFurnitureAdder.cs" />
     <Compile Include="Business\Furnitures\IFurnitureCreator.cs" />
     <Compile Include="Business\Furnitures\IFurnitureMover.cs" />
-    <Compile Include="Business\Furnitures\IFurnitureMultiMover.cs" />
     <Compile Include="Business\Furnitures\IFurnitureReader.cs" />
     <Compile Include="Business\Furnitures\IFurnitureUpdater.cs" />
     <Compile Include="Business\RoomEvents\IRoomEventLogger.cs" />
@@ -254,13 +253,14 @@
     <Compile Include="Business\Rooms\RoomReader.cs" />
     <Compile Include="Business\Rooms\RoomRemover.cs" />
     <Compile Include="Criterions\FurnitureCriterions\CreateFurnitureItemsCriterion.cs" />
-    <Compile Include="Criterions\FurnitureCriterions\GetFurnitureByTypeAndDateAndRoomNameCriterion.cs" />
+    <Compile Include="Criterions\FurnitureCriterions\GetFurnitureByTypeAndDateAndRoomiDCriterion.cs" />
     <Compile Include="Criterions\FurnitureCriterions\GetFurnitureItemsByRoomIdAndDateAndTypesCriterion.cs" />
     <Compile Include="Criterions\FurnitureCriterions\GetFurnitureItemsByRoomIdAndDateCriterion.cs" />
     <Compile Include="Criterions\FurnitureCriterions\GetFurnitureItemsByRoomsIdsAndDateCriterion.cs" />
     <Compile Include="Criterions\FurnitureCriterions\UpdateFurnitureItemsCriterion.cs" />
     <Compile Include="Criterions\FurnitureCriterions\UpdateFurnitureCriterion.cs" />
     <Compile Include="Criterions\FurnitureCriterions\CreateFurnitureCriterion.cs" />
+    <Compile Include="Criterions\FurnitureLocations\GetFurnitureLocationByTypeRoomIdAndDateCriterion.cs" />
     <Compile Include="Criterions\RoomCriterions\GetRoomsByDateCriterion.cs" />
     <Compile Include="Criterions\RoomCriterions\GetRoomsByNamesCriterion.cs" />
     <Compile Include="Criterions\RoomCriterions\GetRoomByNameAndDate.cs" />
@@ -273,7 +273,7 @@
     <Compile Include="Domain\Furniture.cs" />
     <Compile Include="Domain\FurnitureLocation.cs" />
     <Compile Include="Domain\Mappings\AutoMappings.cs" />
-    <Compile Include="Infrastructure\Attributes\TransactionAttribute.cs" />
+    <Compile Include="Infrastructure\Attributes\TransactionalAttribute.cs" />
     <Compile Include="Infrastructure\ClientModels\ResultBase.cs" />
     <Compile Include="Infrastructure\ClientModels\FailResult.cs" />
     <Compile Include="Infrastructure\ClientModels\SuccessResult.cs" />
@@ -350,19 +350,23 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MainDbInitializationQueries.resx</DependentUpon>
     </Compile>
+    <Compile Include="Queries\FurnitureLocations\GetFurnitureLocationByTypeRoomIdAndDateQuery.cs" />
+    <Compile Include="Queries\FurnitureLocations\Sql\FurnitureLocationsQuerySql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FurnitureLocationsQuerySql.resx</DependentUpon>
+    </Compile>
     <Compile Include="Queries\FurnitureQueries\CreateFurnitureItemsQuery.cs" />
-    <Compile Include="Queries\FurnitureQueries\GetFurnitureItemsByRoomIdAndDateAndTypesQuery.cs" />
-    <Compile Include="Queries\FurnitureQueries\GetFurnitureItemsByRoomIdAndDateQuery.cs" />
-    <Compile Include="Queries\FurnitureQueries\GetFurnitureByTypeAndDateAndRoomNameQuery.cs" />
+    <Compile Include="Queries\FurnitureQueries\GetFurnitureByTypeAndDateAndRoomIdQuery.cs" />
     <Compile Include="Queries\FurnitureQueries\GetFurnitureItemsByRoomsIdsAndDateQuery.cs" />
-    <Compile Include="Queries\FurnitureQueries\UpdateFurnitureItemsQuery.cs" />
-    <Compile Include="Queries\FurnitureQueries\UpdateFurnitureQuery.cs" />
-    <Compile Include="Queries\FurnitureQueries\CreateFurnitureQuery.cs" />
     <Compile Include="Queries\FurnitureQueries\Sql\FurnitureQueriesSql.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FurnitureQueriesSql.resx</DependentUpon>
     </Compile>
+    <Compile Include="Queries\FurnitureQueries\UpdateFurnitureItemsQuery.cs" />
+    <Compile Include="Queries\FurnitureQueries\UpdateFurnitureQuery.cs" />
+    <Compile Include="Queries\FurnitureQueries\CreateFurnitureQuery.cs" />
     <Compile Include="Queries\RoomEventQueries\GetRoomEventsQuery.cs" />
     <Compile Include="Queries\RoomEventQueries\SaveRoomEventQuery.cs" />
     <Compile Include="Queries\RoomEventQueries\Sql\RoomEventQueriesSql.Designer.cs">
@@ -406,8 +410,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>MainDbInitializationQueries.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Queries\FurnitureLocations\Sql\FurnitureLocationsQuerySql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FurnitureLocationsQuerySql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Queries\FurnitureQueries\Sql\FurnitureQueriesSql.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
       <LastGenOutput>FurnitureQueriesSql.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Queries\RoomEventQueries\Sql\RoomEventQueriesSql.resx">

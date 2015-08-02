@@ -12,20 +12,17 @@ namespace RoomsAndFurniture.Web.Business.Rooms
     {
         private readonly IRoomReader reader;
         private readonly IRoomChecker checker;
-        private readonly IFurnitureMultiMover furnitureMultiMover;
         private readonly IRoomEventLogger roomEventLogger;
         private readonly IQueryBuilder queryBuilder;
 
         public RoomRemover(
             IRoomReader reader,
             IRoomChecker checker,
-            IFurnitureMultiMover furnitureMultiMover,
             IRoomEventLogger roomEventLogger,
             IQueryBuilder queryBuilder)
         {
             this.reader = reader;
             this.checker = checker;
-            this.furnitureMultiMover = furnitureMultiMover;
             this.roomEventLogger = roomEventLogger;
             this.queryBuilder = queryBuilder;
         }
@@ -41,7 +38,7 @@ namespace RoomsAndFurniture.Web.Business.Rooms
                 throw new RoomNotFoundException(roomTo, date);
             }
             var rooms = reader.Get(name, roomTo);
-            furnitureMultiMover.MoveAll(rooms[name], rooms[roomTo], date);
+            //furnitureMultiMover.MoveAll(rooms[name], rooms[roomTo], date);
             Remove(name, date);
         }
 

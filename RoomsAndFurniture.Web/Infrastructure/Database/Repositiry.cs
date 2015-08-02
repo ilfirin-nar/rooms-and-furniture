@@ -55,6 +55,24 @@ namespace RoomsAndFurniture.Web.Infrastructure.Database
                 });
         }
 
+        public void Save(IEnumerable<TEntity> entities)
+        {
+            var forInsert = entities.Where(IsNewEntity).ToList();
+            var forUpdate = entities.Where(e => !forInsert.Contains(e));
+            queryExecuter.Execute(connection =>
+            {
+                connection.Insert<TEntity>(forInsert);
+            });
+            queryExecuter.Execute(connection =>
+            {
+                // TODO: Fix select N + 1 :(
+                foreach (var entity in forUpdate)
+                {
+                    connection.Update(entity);
+                }
+            });
+        }
+
         public bool Remove(TEntity entity)
         {
             return queryExecuter.Execute(connection => connection.Delete(entity));
@@ -72,7 +90,7 @@ namespace RoomsAndFurniture.Web.Infrastructure.Database
 
         private static long GetEntityId(TEntity entity)
         {
-            return (long) PrimaryKeyProperty.GetValue(entity);
+            return Convert.ToInt64(PrimaryKeyProperty.GetValue(entity));
         }
     }
 }

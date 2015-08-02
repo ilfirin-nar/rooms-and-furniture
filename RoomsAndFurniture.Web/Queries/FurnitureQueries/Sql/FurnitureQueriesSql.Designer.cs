@@ -70,8 +70,22 @@ namespace RoomsAndFurniture.Web.Queries.FurnitureQueries.Sql {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to insert into Furniture (Date, Type, Count, RoomId) values (@Date, @Type, @Count, @RoomId);
-        ///select last_insert_rowid();.
+        ///   Looks up a localized string similar to begin transaction;
+        ///    create temp table _difference(Value integer);
+        ///    create temp table _createdFurnitureId(Value integer);
+        ///
+        ///    insert into _difference(Value)
+        ///        select coalesce(@Count - Count, @Count)
+        ///            from Furniture
+        ///            where
+        ///                Date &lt;= @Date and
+        ///                Type = @Type and
+        ///                RoomId = @RoomId
+        ///            group by RoomId, Type
+        ///            having max(Date) &lt;= @Date
+        ///            limit 1;
+        ///
+        ///    insert into Furniture (Date, Type, Count, R [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string CreateFurnitureQuery {
             get {
@@ -82,56 +96,38 @@ namespace RoomsAndFurniture.Web.Queries.FurnitureQueries.Sql {
         /// <summary>
         ///   Looks up a localized string similar to select f.*
         ///    from Furniture as f
-        ///    inner join Room as r on r.Id = f.RoomId
+        ///    inner join FurnitureLocation as fl on f.Id = fl.FurnitureId
         ///    where
-        ///        f.Type = @Type and
-        ///        f.Date &lt;= @Date and
-        ///        r.Name = @RoomName
-        ///    order by f.Date desc
-        ///    limit 1.
+        ///        f.CreateDate &lt;= @Date and (
+        ///            f.RemoveDate is null or
+        ///            f.RemoveDate &gt; @Date
+        ///        ) and
+        ///        fl.RoomId = @RoomId and
+        ///        f.Type = @Type and (
+        ///            fl.Date = @Date or (
+        ///                fl.Date &lt; @Date and
+        ///                fl.Id not in (
+        ///                    select fl2.Id from FurnitureLocation as fl2
+        ///                        where
+        ///               [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string GetFurnitureByTypeAndDateAndRoomNameQuery {
+        internal static string GetFurnitureByTypeAndDateAndRoomIdQuery {
             get {
-                return ResourceManager.GetString("GetFurnitureByTypeAndDateAndRoomNameQuery", resourceCulture);
+                return ResourceManager.GetString("GetFurnitureByTypeAndDateAndRoomIdQuery", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to select Id, Type, max(Date), RoomId, Count
-        ///    from Furniture
+        ///   Looks up a localized string similar to select f.CreateDate as Date, f.Type, count(f.Id) as Count, fl.RoomId
+        ///    from Furniture as f
+        ///    inner join FurnitureLocation as fl on f.Id = fl.FurnitureId
         ///    where
-        ///        Date &lt;= @Date and
-        ///        RoomId = @RoomId and
-        ///        Type in (select from @FurnitureTypes)
-        ///    group by RoomId, Type, Count, Id.
-        /// </summary>
-        internal static string GetFurnitureItemsByRoomIdAndDateAndTypesQuery {
-            get {
-                return ResourceManager.GetString("GetFurnitureItemsByRoomIdAndDateAndTypesQuery", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to select Id, max(Date) as Date, Type, RoomId, Count
-        ///    from Furniture
-        ///    where
-        ///        Date &lt;= @Date and
-        ///        RoomId = @RoomId
-        ///    group by Type, Id, Count, RoomId.
-        /// </summary>
-        internal static string GetFurnitureItemsByRoomIdAndDateQuery {
-            get {
-                return ResourceManager.GetString("GetFurnitureItemsByRoomIdAndDateQuery", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to select Id, max(Date) as Date, Type, RoomId, Count
-        ///    from Furniture
-        ///    where
-        ///        Date &lt;= @Date and
-        ///        RoomId = @RoomId
-        ///    group by Type, Id, Count, RoomId.
+        ///        f.CreateDate &lt;= @Date and (
+        ///            f.RemoveDate is null or
+        ///            f.RemoveDate &gt; @Date
+        ///        ) and
+        ///        fl.RoomId in @RoomsIds
+        ///    group by fl.RoomId, f.Type;.
         /// </summary>
         internal static string GetFurnitureItemsByRoomsIdsAndDateQuery {
             get {
@@ -140,13 +136,22 @@ namespace RoomsAndFurniture.Web.Queries.FurnitureQueries.Sql {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to update Furniture
-        ///    set
-        ///        Type = @Type,
-        ///        Date = @Date,
-        ///        Count = @Count,
-        ///        RoomId = @RoomId
-        ///    where Id = @Id.
+        ///   Looks up a localized string similar to begin transaction;
+        ///    create temp table _difference(Value integer);
+        ///
+        ///    insert into _difference(Value) select @Count - Count from Furniture where Id = @Id;
+        ///
+        ///    update Furniture set Count = @Count where Id = @Id;
+        ///
+        ///    update Furniture
+        ///        set Count = Count + (select Value from _difference)
+        ///        where 
+        ///            Type = @Type and
+        ///            Date &gt; @Date and
+        ///            RoomId = @RoomId;
+        ///
+        ///    drop table _difference;
+        ///end transaction;.
         /// </summary>
         internal static string UpdateFurnitureQuery {
             get {

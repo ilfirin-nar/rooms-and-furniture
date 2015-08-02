@@ -13,5 +13,7 @@ namespace RoomsAndFurniture.Web.Infrastructure.CommonInterfaces
         dynamic Save(TEntity entity);
 
         bool Remove(TEntity entity);
+
+        void Save(IEnumerable<TEntity> entities);
     }
 }

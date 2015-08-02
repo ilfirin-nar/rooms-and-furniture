@@ -1,91 +1,59 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using RoomsAndFurniture.Web.Business.FurnitureLocations;
 using RoomsAndFurniture.Web.Business.Furnitures.Exceptions;
-using RoomsAndFurniture.Web.Business.RoomEvents;
 using RoomsAndFurniture.Web.Business.Rooms;
-using RoomsAndFurniture.Web.Business.Rooms.Exceptions;
 using RoomsAndFurniture.Web.Domain;
+using RoomsAndFurniture.Web.Infrastructure.Attributes;
+using RoomsAndFurniture.Web.Infrastructure.CommonInterfaces;
 
 namespace RoomsAndFurniture.Web.Business.Furnitures
 {
     internal class FurnitureMover : IFurnitureMover 
     {
-        private readonly IFurnitureReader reader;
-        private readonly IFurnitureCreator creator;
-        private readonly IFurnitureUpdater updater;
+        private readonly IFurnitureLocationReader locationReader;
         private readonly IRoomReader roomReader;
-        private readonly IRoomChecker roomChecker;
-        private readonly IRoomEventLogger roomEventLogger;
+        private readonly IRepository<FurnitureLocation> locationRepository;
 
         public FurnitureMover(
-            IFurnitureReader reader,
-            IFurnitureCreator creator,
-            IFurnitureUpdater updater,
+            IFurnitureLocationReader locationReader,
             IRoomReader roomReader,
-            IRoomChecker roomChecker,
-            IRoomEventLogger roomEventLogger)
+            IRepository<FurnitureLocation> locationRepository)
         {
-            this.reader = reader;
-            this.creator = creator;
-            this.updater = updater;
+            this.locationReader = locationReader;
             this.roomReader = roomReader;
-            this.roomChecker = roomChecker;
-            this.roomEventLogger = roomEventLogger;
+            this.locationRepository = locationRepository;
         }
 
-        public FurnitureState Move(string type, string roomNameFrom, string roomNameTo, DateTime date)
+        [Transactional]
+        public void Move(string type, string roomNameFrom, string roomNameTo, DateTime date)
+        {
+            CheckRooms(roomNameFrom, roomNameTo);
+            var roomFrom = roomReader.Get(roomNameFrom, date);
+            var roomTo = roomReader.Get(roomNameTo, date);
+            var oldLocations = locationReader.Get(type, roomFrom.Id, date);
+            var newLocations = new List<FurnitureLocation>();
+            foreach (var oldLocation in oldLocations)
+            {
+                oldLocation.EndDate = date;
+                newLocations.Add(new FurnitureLocation
+                {
+                    BeginDate = date,
+                    RoomId = roomTo.Id,
+                    FurnitureId = oldLocation.FurnitureId
+                });
+            }
+            locationRepository.Save(oldLocations);
+            locationRepository.Save(newLocations);
+        }
+
+        private static void CheckRooms(string roomNameFrom, string roomNameTo)
         {
             if (roomNameFrom == roomNameTo)
             {
                 throw new InvalidFurnitureMovingException(roomNameFrom, roomNameTo);
-            }
-            var furnitureFrom = reader.Get(type, roomNameFrom, date);
-            CheckRooms(roomNameFrom, roomNameTo, date);
-            var furnitureCount = furnitureFrom.Count;
-            RemoveFurnitureFromFirstRoom(furnitureFrom, date);
-            var furnitureTo = reader.GetClosestLeftByDate(type, date, roomNameTo);
-            var result = SetFurnitureToSecondRoom(furnitureFrom, furnitureTo, date, roomNameTo, furnitureCount);
-            roomEventLogger.LogMoveFurniture(date, roomNameFrom, roomNameTo, furnitureCount, furnitureFrom);
-            return result;
-        }
-
-        private void CheckRooms(string roomNameFrom, string roomNameTo, DateTime date)
-        {
-            if (!roomChecker.IsExists(roomNameFrom, date))
-            {
-                throw new RoomNotFoundException(roomNameFrom, date);
-            }
-            if (!roomChecker.IsExists(roomNameTo, date))
-            {
-                throw new RoomNotFoundException(roomNameTo, date);
-            }
-        }
-
-        private FurnitureState RemoveFurnitureFromFirstRoom(FurnitureState furnitureStateFrom, DateTime date)
-        {
-            if (furnitureStateFrom.Date.Date < date.Date)
-            {
-                return creator.Create(furnitureStateFrom.Type, date, furnitureStateFrom.RoomId, 0);
-            }
-            furnitureStateFrom.Date = date.Date;
-            furnitureStateFrom.Count = 0;
-            return updater.Update(furnitureStateFrom);
-        }
-
-        private FurnitureState SetFurnitureToSecondRoom(
-            FurnitureState furnitureStateFrom, FurnitureState furnitureStateTo, DateTime date, string roomTo, int furnitureFromCount)
-        {
-            if (furnitureStateTo == null)
-            {
-                var roomId = roomReader.Get(roomTo, date).Id;
-                return creator.Create(furnitureStateFrom.Type, date, roomId, furnitureFromCount);
-            }
-            var count = furnitureStateTo.Count + furnitureFromCount;
-            if (furnitureStateTo.Date.Date < date.Date)
-            {
-                return creator.Create(furnitureStateTo.Type, date, furnitureStateTo.RoomId, count);
-            }
-            furnitureStateTo.Count = count;
-            return updater.Update(furnitureStateFrom);
+            }            
         }
     }
 }

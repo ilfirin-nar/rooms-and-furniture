@@ -3,19 +3,19 @@ using RoomsAndFurniture.Web.Infrastructure.CommonInterfaces;
 
 namespace RoomsAndFurniture.Web.Criterions.FurnitureCriterions
 {
-    public class GetFurnitureByTypeAndDateAndRoomNameCriterion : ICriterion
+    public class GetFurnitureByTypeAndDateAndRoomIdCriterion : ICriterion
     {
-        public GetFurnitureByTypeAndDateAndRoomNameCriterion(string type, DateTime date, string roomName)
+        public GetFurnitureByTypeAndDateAndRoomIdCriterion(string type, DateTime date, int roomId)
         {
             Type = type;
             Date = date;
-            RoomName = roomName;
+            RoomId = roomId;
         }
 
         public string Type { get; set; }
 
         public DateTime Date { get; set; }
 
-        public string RoomName { get; set; }
+        public int RoomId { get; set; }
     }
 }

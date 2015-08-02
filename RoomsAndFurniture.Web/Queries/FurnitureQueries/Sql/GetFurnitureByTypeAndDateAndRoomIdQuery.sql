@@ -1,4 +1,4 @@
-select fl.BeginDate as Date, f.Type, count(f.Id) as Count, fl.RoomId
+select f.*
     from Furniture as f
     inner join FurnitureLocation as fl on f.Id = fl.FurnitureId
     where
@@ -6,9 +6,11 @@ select fl.BeginDate as Date, f.Type, count(f.Id) as Count, fl.RoomId
             f.RemoveDate is null or
             f.RemoveDate > @Date
         ) and
+        fl.RoomId = @RoomId and
+        f.Type = @Type and 
         fl.BeginDate <= @Date and (
             fl.EndDate is null or
             fl.EndDate > @Date
-        )  and
-        fl.RoomId in @RoomsIds
-    group by fl.RoomId, f.Type;
+        )      
+    order by fl.Date desc
+    limit 1

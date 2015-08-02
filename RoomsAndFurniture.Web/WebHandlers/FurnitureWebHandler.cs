@@ -41,12 +41,12 @@ namespace RoomsAndFurniture.Web.WebHandlers
         {
             try
             {
-                var furniture = furnitureMover.Move(type, roomNameFrom, roomNameTo, date);
-                return new SuccessResult<FurnitureClientModel>(furniture.MapTo<FurnitureClientModel>());
+                furnitureMover.Move(type, roomNameFrom, roomNameTo, date);
+                return new SuccessResult<FurnitureClientModel>();
             }
             catch (FurnitureNotFoundException e)
             {
-                return new FurnitureNotFoundResult(e.FurnitureType, e.RoomName, e.Date);
+                return new FurnitureNotFoundResult(e.FurnitureType, roomNameFrom, e.Date);
             }
             catch (RoomNotFoundException e)
             {
