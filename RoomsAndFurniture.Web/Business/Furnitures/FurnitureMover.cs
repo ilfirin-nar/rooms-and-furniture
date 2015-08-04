@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using RoomsAndFurniture.Web.Business.FurnitureLocations;
 using RoomsAndFurniture.Web.Business.Furnitures.Exceptions;
+using RoomsAndFurniture.Web.Business.RoomEvents;
 using RoomsAndFurniture.Web.Business.Rooms;
 using RoomsAndFurniture.Web.Domain;
 using RoomsAndFurniture.Web.Infrastructure.Attributes;
@@ -11,18 +13,24 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
 {
     internal class FurnitureMover : IFurnitureMover 
     {
+        private readonly IRepository<Furniture> repository;
         private readonly IFurnitureLocationReader locationReader;
         private readonly IRoomReader roomReader;
         private readonly IRepository<FurnitureLocation> locationRepository;
+        private readonly IRoomEventLogger eventLogger;
 
         public FurnitureMover(
+            IRepository<Furniture> repository,
             IFurnitureLocationReader locationReader,
             IRoomReader roomReader,
-            IRepository<FurnitureLocation> locationRepository)
+            IRepository<FurnitureLocation> locationRepository,
+            IRoomEventLogger eventLogger)
         {
+            this.repository = repository;
             this.locationReader = locationReader;
             this.roomReader = roomReader;
             this.locationRepository = locationRepository;
+            this.eventLogger = eventLogger;
         }
 
         [Transactional]
@@ -56,6 +64,8 @@ namespace RoomsAndFurniture.Web.Business.Furnitures
             }
             locationRepository.Save(oldLocations);
             locationRepository.Save(newLocations);
+            var furniture = repository.Get(oldLocations.First().FurnitureId);
+            eventLogger.LogMoveFurniture(date, roomNameFrom, roomNameTo, oldLocations.Count, furniture.Type);
         }
 
         private static void CheckRooms(string roomNameFrom, string roomNameTo)

@@ -13,7 +13,7 @@ namespace RoomsAndFurniture.Web.Business.RoomEvents
 
         void LogAddFurniture(DateTime date, string roomName, string typeName, int count);
 
-        void LogMoveFurniture(DateTime date, string roomName, string roomTo, int count, FurnitureState furnitureState);
+        void LogMoveFurniture(DateTime date, string roomName, string roomTo, int count, string type);
 
         void LogMoveFurnitureItems(DateTime date, string roomName, string roomTo, IList<FurnitureState> furnitureItems);
     }

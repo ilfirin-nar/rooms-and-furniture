@@ -1,5 +1,5 @@
-﻿using RoomsAndFurniture.Web.Business.Rooms.Exceptions;
-using RoomsAndFurniture.Web.Criterions.RoomCriterions;
+﻿using RoomsAndFurniture.Web.Business.RoomEvents;
+using RoomsAndFurniture.Web.Business.Rooms.Exceptions;
 using RoomsAndFurniture.Web.Domain;
 using RoomsAndFurniture.Web.Infrastructure.CommonInterfaces;
 
@@ -8,12 +8,17 @@ namespace RoomsAndFurniture.Web.Business.Rooms
     internal class RoomCreator : IRoomCreator
     {
         private readonly IRoomChecker checker;
-        private readonly IQueryBuilder queryBuilder;
+        private readonly IRoomEventLogger eventLogger;
+        private readonly IRepository<Room> repository;
 
-        public RoomCreator(IRoomChecker checker, IQueryBuilder queryBuilder)
+        public RoomCreator(
+            IRoomChecker checker,
+            IRoomEventLogger eventLogger,
+            IRepository<Room> repository)
         {
             this.checker = checker;
-            this.queryBuilder = queryBuilder;
+            this.eventLogger = eventLogger;
+            this.repository = repository;
         }
 
         public int Create(Room room)
@@ -22,9 +27,9 @@ namespace RoomsAndFurniture.Web.Business.Rooms
             {
                 throw new RoomAlreadyExistsException(room.Name, room.CreateDate);
             }
-            var criterion = new CreateRoomCriterion(room);
-            var result = queryBuilder.Query<CreateRoomCriterion, int>().Proceed(criterion);
-            return result;
+            repository.Save(room);
+            eventLogger.LogCreateRoom(room);
+            return room.Id;
         }
     }
 }

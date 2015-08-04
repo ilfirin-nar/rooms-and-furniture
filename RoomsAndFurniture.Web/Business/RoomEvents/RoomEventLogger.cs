@@ -37,9 +37,9 @@ namespace RoomsAndFurniture.Web.Business.RoomEvents
             saver.Save(roomEvent);
         }
 
-        public void LogMoveFurniture(DateTime date, string roomName, string roomTo, int count, FurnitureState furnitureState)
+        public void LogMoveFurniture(DateTime date, string roomName, string roomTo, int count, string type)
         {
-            var furnitureDescription = string.Format(RoomEventMessage.FurnitureTemplate, furnitureState.Type, count);
+            var furnitureDescription = string.Format(RoomEventMessage.FurnitureTemplate, type, count);
             var descripton = string.Format(RoomEventMessage.FurnitureWasMoved, furnitureDescription, roomName, roomTo);
             var roomEvent = new RoomEvent(date, RoomEventType.MoveFurnitureOut, descripton);
             saver.Save(roomEvent);

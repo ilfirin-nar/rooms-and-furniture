@@ -24,3 +24,11 @@ create table if not exists FurnitureLocation (
     constraint FK_FurnitureLocation_FurnitureId_Furniture_Id foreign key (FurnitureId) references Furniture(Id),
     constraint FK_FurnitureLocation_RoomId_Room_Id foreign key (RoomId) references Room(Id)
 );
+
+create table if not exists RoomEvent (
+    Id integer not null,
+    Date date not null,
+    Type integer not null,
+    Description varchar(100) not null,
+    constraint PF_RoomEvent primary key (Id)
+);
